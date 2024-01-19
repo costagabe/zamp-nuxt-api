@@ -8,7 +8,7 @@ import lombok.EqualsAndHashCode;
 public class AuthenticationErrorException extends RuntimeException {
   private Integer status;
 
-  public AuthenticationErrorException(String message, Integer status){
+  public AuthenticationErrorException(String message, Integer status) {
     super(message);
 
     this.status = status;

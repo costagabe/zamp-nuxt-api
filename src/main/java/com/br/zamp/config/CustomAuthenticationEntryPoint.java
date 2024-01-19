@@ -33,7 +33,7 @@ public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint 
       } else if (exception instanceof InternalAuthenticationServiceException) {
         throw new AuthenticationErrorException(exception.getMessage(), HttpServletResponse.SC_UNAUTHORIZED);
       }
-    } catch(AuthenticationErrorException e) {
+    } catch (AuthenticationErrorException e) {
       ResponseApi<?> responseData = new ResponseApi<>();
       ErrorResponse error = new ErrorResponse(e.getMessage());
 

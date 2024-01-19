@@ -20,6 +20,14 @@ public class CustomAuthenticationDetailsSource implements AuthenticationDetailsS
   private final JpaUserDetailsService customUserDetailsService;
   private final PasswordEncoder passwordEncoder;
 
+  private static String getAuthFromHeaders(HttpServletRequest context) {
+    return context.getHeader("authorization").replace("Basic ", "");
+  }
+
+  private static String getDecodedAuth(String encodedAuth) {
+    return new String(Base64.getDecoder().decode(encodedAuth), StandardCharsets.UTF_8);
+  }
+
   @Override
   public Object buildDetails(HttpServletRequest context) {
 
@@ -45,16 +53,8 @@ public class CustomAuthenticationDetailsSource implements AuthenticationDetailsS
     return authenticated;
   }
 
-  private static String getAuthFromHeaders(HttpServletRequest context) {
-    return context.getHeader("authorization").replace("Basic ", "");
-  }
-
   private Pair<String, String> extractCredentials(String authData) {
     var splitAuth = authData.split(":");
     return Pair.of(splitAuth[0], splitAuth[1]);
-  }
-
-  private static String getDecodedAuth(String encodedAuth) {
-    return new String(Base64.getDecoder().decode(encodedAuth), StandardCharsets.UTF_8);
   }
 }

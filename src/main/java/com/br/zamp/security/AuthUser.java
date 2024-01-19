@@ -12,7 +12,7 @@ import java.util.Collection;
 
 @Getter
 @RequiredArgsConstructor
-public class AuthUser  implements UserDetails {
+public class AuthUser implements UserDetails {
   private final User user;
 
 
@@ -23,7 +23,7 @@ public class AuthUser  implements UserDetails {
 
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
-   return user.fetchAndFlattenAuthorities();
+    return user.fetchAndFlattenAuthorities();
   }
 
   public Collection<? extends GrantedAuthority> getPermissions() {

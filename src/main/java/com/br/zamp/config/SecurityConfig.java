@@ -68,7 +68,7 @@ public class SecurityConfig {
         )
         .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
         .oauth2ResourceServer(conf -> conf
-                .jwt(jwt -> jwt.decoder(jwtDecoder()))
+            .jwt(jwt -> jwt.decoder(jwtDecoder()))
         )
         .exceptionHandling(ex -> ex.authenticationEntryPoint(customAuthenticationEntryPoint()))
         .userDetailsService(userDetailsService)
