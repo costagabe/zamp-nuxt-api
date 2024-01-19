@@ -48,7 +48,6 @@ public class SecurityConfig {
   private final ObjectMapper objectMapper;
   private final JpaUserDetailsService customUserDetailService;
   private final JpaUserDetailsService userDetailsService;
-
   @Value("${jwt.public.key}")
   private RSAPublicKey publicKey;
   @Value("${jwt.private.key}")

@@ -70,4 +70,14 @@ public class User extends Base {
     return permissions;
   }
 
+  @Override
+  public String toString() {
+    return "User{" +
+        "name='" + name + '\'' +
+        ", email='" + email + '\'' +
+        ", password='" + password + '\'' +
+        ", situation=" + situation +
+        '}';
+  }
+
 }

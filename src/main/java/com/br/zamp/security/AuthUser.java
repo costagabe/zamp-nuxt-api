@@ -3,17 +3,17 @@ package com.br.zamp.security;
 
 import com.br.zamp.domain.User;
 import com.br.zamp.domain.enums.UserSituation;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 
 @Getter
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class AuthUser implements UserDetails {
-  private final User user;
+  private User user;
 
 
   @Override
