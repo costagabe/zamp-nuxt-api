@@ -12,12 +12,12 @@ import java.util.Set;
 @Entity
 @Data
 public class Account extends Base {
-    private String name;
-    private String code;
-    private AccountType type;
-    private Float balance;
+  private String name;
+  private String code;
+  private AccountType type;
+  private Float balance;
 
-    @ManyToMany(mappedBy = "accounts")
-    private Set<Company> companies;
+  @ManyToMany(mappedBy = "accounts")
+  private Set<Company> companies;
 
 }

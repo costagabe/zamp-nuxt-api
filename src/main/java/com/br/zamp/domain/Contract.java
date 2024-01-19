@@ -12,8 +12,8 @@ import java.util.List;
 @Entity
 @Data
 public class Contract extends Base {
-    @ManyToMany
-    private final List<Company> companies = new ArrayList<>();
-    private String test;
+  @ManyToMany
+  private final List<Company> companies = new ArrayList<>();
+  private String test;
 
 }

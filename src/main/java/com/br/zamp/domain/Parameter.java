@@ -15,21 +15,21 @@ import java.util.Set;
 @Data
 public class Parameter extends Base {
 
-    private String key;
+  private String key;
 
 
-    private String value;
+  private String value;
 
-    private String note;
+  private String note;
 
-    @ManyToMany(mappedBy = "parameters", fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+  @ManyToMany(mappedBy = "parameters", fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 
-    private Set<Company> companies = new HashSet<>();
+  private Set<Company> companies = new HashSet<>();
 
-    public void removeCompanies() {
-        this.companies.forEach(company -> company.getParameters().remove(this));
-        this.companies = new HashSet<>();
-    }
+  public void removeCompanies() {
+    this.companies.forEach(company -> company.getParameters().remove(this));
+    this.companies = new HashSet<>();
+  }
 
 
 }

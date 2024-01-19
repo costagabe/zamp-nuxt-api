@@ -4,8 +4,8 @@ import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 public enum UserType {
-    ADMIN("ROLE_ADMIN"),
-    CUSTOMER("ROLE_CUSTOMER");
+  ADMIN("ROLE_ADMIN"),
+  CUSTOMER("ROLE_CUSTOMER");
 
-    private final String name;
+  private final String name;
 }

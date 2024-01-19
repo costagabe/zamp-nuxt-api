@@ -12,12 +12,12 @@ import java.util.List;
 @Entity
 @Data
 public class Routine extends Base {
-    @ManyToMany(mappedBy = "routines")
-    private final List<User> users = new ArrayList<>();
-    @ManyToMany(mappedBy = "routines")
-    private final List<UserProfile> profiles = new ArrayList<>();
-    @ManyToMany(mappedBy = "routines")
-    private final List<Company> companies = new ArrayList<>();
-    private String description;
-    private Integer code;
+  @ManyToMany(mappedBy = "routines")
+  private final List<User> users = new ArrayList<>();
+  @ManyToMany(mappedBy = "routines")
+  private final List<UserProfile> profiles = new ArrayList<>();
+  @ManyToMany(mappedBy = "routines")
+  private final List<Company> companies = new ArrayList<>();
+  private String description;
+  private Integer code;
 }

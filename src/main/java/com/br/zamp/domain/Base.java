@@ -8,11 +8,11 @@ import java.io.Serializable;
 @MappedSuperclass
 @Data
 public class Base implements Serializable {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Long id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  public Long id;
 
-    @Version
-    private int version;
+  @Version
+  private int version;
 
 }

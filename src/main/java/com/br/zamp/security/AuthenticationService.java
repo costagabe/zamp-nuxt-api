@@ -1,17 +1,14 @@
 package com.br.zamp.security;
 
-import org.springframework.security.core.Authentication;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class AuthenticationService {
   private final JwtService jwtService;
 
-  public AuthenticationService(JwtService jwtService) {
-    this.jwtService = jwtService;
-  }
-
-  public String authenticate(Authentication authentication) {
+  public String authenticate(AuthUser authentication) {
     return jwtService.generateToken(authentication);
   }
 }

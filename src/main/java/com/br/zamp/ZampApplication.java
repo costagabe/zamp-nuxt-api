@@ -6,20 +6,20 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication
+@SpringBootApplication()
 @AllArgsConstructor
 public class ZampApplication implements CommandLineRunner {
 
-    public static void main(String[] args) {
-        SpringApplication.run(ZampApplication.class, args);
-    }
+  private final Initializer initializer;
 
-    private final Initializer initializer;
+  public static void main(String[] args) {
+    SpringApplication.run(ZampApplication.class, args);
+  }
 
-    @Override
-    public void run(String... args) {
-        initializer.init();
-    }
+  @Override
+  public void run(String... args) {
+    initializer.init();
+  }
 
 
 }

@@ -13,8 +13,8 @@ import java.util.List;
 @Entity
 @Data
 public class Document extends Base {
-    @ManyToMany
-    private final List<Company> companies = new ArrayList<>();
-    private DocumentType type;
-    private String name;
+  @ManyToMany
+  private final List<Company> companies = new ArrayList<>();
+  private DocumentType type;
+  private String name;
 }

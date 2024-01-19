@@ -2,39 +2,39 @@ package com.br.zamp.domain.enums;
 
 public enum RouteType {
 
-    MENU(1, "Menu"),
-    REQUISICAO(2, "Requisição"),
-    CRUD(3, "CRUD");
+  MENU(1, "Menu"),
+  REQUISICAO(2, "Requisição"),
+  CRUD(3, "CRUD");
 
-    private final Integer cod;
-    private final String description;
+  private final Integer cod;
+  private final String description;
 
-    RouteType(int cod, String description) {
-        this.cod = cod;
-        this.description = description;
+  RouteType(int cod, String description) {
+    this.cod = cod;
+    this.description = description;
+  }
+
+  public static RouteType toEnum(Integer cod) {
+
+    if (cod == null) {
+      return null;
     }
 
-    public static RouteType toEnum(Integer cod) {
-
-        if (cod == null) {
-            return null;
-        }
-
-        for (RouteType x : RouteType.values()) {
-            if (cod.equals(x.getCod())) {
-                return x;
-            }
-        }
-
-        throw new IllegalArgumentException("Id inválido: " + cod);
+    for (RouteType x : RouteType.values()) {
+      if (cod.equals(x.getCod())) {
+        return x;
+      }
     }
 
-    public Integer getCod() {
-        return cod;
-    }
+    throw new IllegalArgumentException("Id inválido: " + cod);
+  }
 
-    public String getDescription() {
-        return description;
-    }
+  public Integer getCod() {
+    return cod;
+  }
+
+  public String getDescription() {
+    return description;
+  }
 
 }

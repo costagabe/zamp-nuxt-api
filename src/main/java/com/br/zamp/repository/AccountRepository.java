@@ -9,6 +9,6 @@ import java.util.Optional;
 
 public interface AccountRepository extends JpaRepository<Account, Long>, JpaSpecificationExecutor<Account> {
 
-    @NonNull
-    Optional<Account> findById(@NonNull Long id);
+  @NonNull
+  Optional<Account> findById(@NonNull Long id);
 }

@@ -13,12 +13,12 @@ import java.util.List;
 @Data
 public class Address extends Base {
 
-    @ManyToMany
-    private final List<Company> companies = new ArrayList<>();
-    private String street;
-    private String neighbourhood;
-    private String city;
-    private String cep;
-    private String number;
-    private String complement;
+  @ManyToMany
+  private final List<Company> companies = new ArrayList<>();
+  private String street;
+  private String neighbourhood;
+  private String city;
+  private String cep;
+  private String number;
+  private String complement;
 }

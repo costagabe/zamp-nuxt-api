@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface CompanyRepository extends JpaRepository<Company, Long>, JpaSpecificationExecutor<Company> {
 
-    @Query("SELECT DISTINCT c FROM User u JOIN u.companies c WHERE u.id = :userId")
-    List<Company> getMenus(@Param("userId") Long userId);
+  @Query("SELECT DISTINCT c FROM User u JOIN u.companies c WHERE u.id = :userId")
+  List<Company> getMenus(@Param("userId") Long userId);
 
 }

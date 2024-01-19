@@ -12,7 +12,7 @@ import java.util.List;
 @Entity
 @Data
 public class Lessee extends Base { // Locatário
-    @ManyToMany(mappedBy = "lessees")
-    private final List<Company> companies = new ArrayList<>();
-    private String name;
+  @ManyToMany(mappedBy = "lessees")
+  private final List<Company> companies = new ArrayList<>();
+  private String name;
 }

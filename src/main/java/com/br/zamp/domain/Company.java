@@ -13,50 +13,50 @@ import java.util.Set;
 @Data
 public class Company extends Base {
 
-    private String name;
+  private String name;
 
-    private String cnpj;
+  private String cnpj;
 
-    @ManyToMany
-    private Set<User> users = new HashSet<>();
+  @ManyToMany
+  private Set<User> users = new HashSet<>();
 
-    @ManyToMany
-    private Set<Account> accounts;
+  @ManyToMany
+  private Set<Account> accounts;
 
-    @ManyToMany
-    private Set<Address> adresses;
+  @ManyToMany
+  private Set<Address> adresses;
 
-    @ManyToMany
-    private Set<Building> buildings;
+  @ManyToMany
+  private Set<Building> buildings;
 
-    @ManyToMany
-    private Set<Contract> contracts;
+  @ManyToMany
+  private Set<Contract> contracts;
 
-    @ManyToMany
-    private Set<Document> documents;
+  @ManyToMany
+  private Set<Document> documents;
 
-    @ManyToMany
-    private Set<Entry> entries;
+  @ManyToMany
+  private Set<Entry> entries;
 
-    @ManyToMany
-    private Set<FileStorage> fileStorages;
+  @ManyToMany
+  private Set<FileStorage> fileStorages;
 
-    @ManyToMany
-    private Set<Lessee> lessees;
+  @ManyToMany
+  private Set<Lessee> lessees;
 
-    @ManyToMany
-    private Set<Lessor> lessors;
+  @ManyToMany
+  private Set<Lessor> lessors;
 
-    @ManyToMany
-    private Set<Parameter> parameters = new HashSet<>();
+  @ManyToMany
+  private Set<Parameter> parameters = new HashSet<>();
 
-    @ManyToMany
-    private Set<Rent> rents;
+  @ManyToMany
+  private Set<Rent> rents;
 
-    @ManyToMany
-    private Set<Routine> routines;
+  @ManyToMany
+  private Set<Routine> routines;
 
-    @ManyToMany
-    private Set<UserProfile> userProfiles;
+  @ManyToMany
+  private Set<UserProfile> userProfiles;
 
 }

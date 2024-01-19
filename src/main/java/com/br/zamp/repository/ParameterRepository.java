@@ -9,6 +9,6 @@ import java.util.Optional;
 
 public interface ParameterRepository extends JpaRepository<Parameter, Long>, JpaSpecificationExecutor<Parameter> {
 
-    @NonNull
-    Optional<Parameter> findById(@NonNull Long id);
+  @NonNull
+  Optional<Parameter> findById(@NonNull Long id);
 }

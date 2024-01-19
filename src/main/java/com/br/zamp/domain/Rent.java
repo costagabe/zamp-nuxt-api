@@ -15,15 +15,15 @@ import java.util.List;
 @Entity
 @Data
 public class Rent extends Base {
-    @ManyToMany(mappedBy = "rents")
-    private final List<Company> companies = new ArrayList<>();
-    private LocalDate paymentDay;
-    private LocalDate contractInitialDay;
-    private LocalDate contractEndDay;
-    private LocalDate firstPaymentDay;
-    private PaymentType paymentType;
-    @ManyToOne
-    private Building building;
-    private Float value;
-    private String assurance; // Garantia
+  @ManyToMany(mappedBy = "rents")
+  private final List<Company> companies = new ArrayList<>();
+  private LocalDate paymentDay;
+  private LocalDate contractInitialDay;
+  private LocalDate contractEndDay;
+  private LocalDate firstPaymentDay;
+  private PaymentType paymentType;
+  @ManyToOne
+  private Building building;
+  private Float value;
+  private String assurance; // Garantia
 }

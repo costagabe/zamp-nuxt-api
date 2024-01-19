@@ -15,17 +15,17 @@ import java.util.List;
 @Entity
 @Data
 public class Entry extends Base {
-    @ManyToMany
-    private final List<Company> companies = new ArrayList<>();
-    private Float value;
-    private EntryType type;
-    private LocalDate date;
-    private String history;
-    @ManyToOne
-    private Account financialAccount;
-    @ManyToOne
-    private Account classificationAccount;
-    @ManyToOne
-    private Company company;
+  @ManyToMany
+  private final List<Company> companies = new ArrayList<>();
+  private Float value;
+  private EntryType type;
+  private LocalDate date;
+  private String history;
+  @ManyToOne
+  private Account financialAccount;
+  @ManyToOne
+  private Account classificationAccount;
+  @ManyToOne
+  private Company company;
 
 }

@@ -2,38 +2,38 @@ package com.br.zamp.domain.enums;
 
 public enum UserSituation {
 
-    ACTIVE(1, "Ativo"),
-    INACTIVE(2, "Inativo");
+  ACTIVE(1, "Ativo"),
+  INACTIVE(2, "Inativo");
 
-    private final Integer cod;
-    private final String description;
+  private final Integer cod;
+  private final String description;
 
-    UserSituation(int cod, String description) {
-        this.cod = cod;
-        this.description = description;
+  UserSituation(int cod, String description) {
+    this.cod = cod;
+    this.description = description;
+  }
+
+  public static UserSituation toEnum(Integer cod) {
+
+    if (cod == null) {
+      return null;
     }
 
-    public static UserSituation toEnum(Integer cod) {
-
-        if (cod == null) {
-            return null;
-        }
-
-        for (UserSituation x : UserSituation.values()) {
-            if (cod.equals(x.getCod())) {
-                return x;
-            }
-        }
-
-        throw new IllegalArgumentException("Id inválido: " + cod);
+    for (UserSituation x : UserSituation.values()) {
+      if (cod.equals(x.getCod())) {
+        return x;
+      }
     }
 
-    public Integer getCod() {
-        return cod;
-    }
+    throw new IllegalArgumentException("Id inválido: " + cod);
+  }
 
-    public String getDescription() {
-        return description;
-    }
+  public Integer getCod() {
+    return cod;
+  }
+
+  public String getDescription() {
+    return description;
+  }
 
 }
