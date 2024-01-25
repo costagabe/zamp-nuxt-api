@@ -2,15 +2,13 @@ package com.br.zamp.config;
 
 import com.br.zamp.config.authentication.AuthenticationErrorException;
 import com.br.zamp.config.dto.ErrorResponse;
-import com.br.zamp.config.dto.ResponseApi;
+import com.br.zamp.config.dto.ApiResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.authentication.AccountExpiredException;
-import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.DisabledException;
-import org.springframework.security.authentication.InternalAuthenticationServiceException;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.authentication.*;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 
@@ -30,12 +28,12 @@ public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint 
         throw new AuthenticationErrorException(exception.getMessage(), HttpServletResponse.SC_UNAUTHORIZED);
       } else if (exception instanceof AccountExpiredException) {
         throw new AuthenticationErrorException(exception.getMessage(), HttpServletResponse.SC_UNAUTHORIZED);
-      } else if (exception instanceof InternalAuthenticationServiceException) {
-        throw new AuthenticationErrorException(exception.getMessage(), HttpServletResponse.SC_UNAUTHORIZED);
+      } else if (exception instanceof InternalAuthenticationServiceException || exception instanceof InsufficientAuthenticationException) {
+        throw new AuthenticationErrorException("Dados de login inválidos", HttpServletResponse.SC_UNAUTHORIZED);
       }
     } catch (AuthenticationErrorException e) {
-      ResponseApi<?> responseData = new ResponseApi<>();
-      ErrorResponse error = new ErrorResponse(e.getMessage());
+      ApiResponse<?> responseData = new ApiResponse<>();
+      ErrorResponse error = new ErrorResponse(e.getMessage(), HttpStatus.UNAUTHORIZED);
 
       responseData.setError(error);
       response.setContentType("application/json");

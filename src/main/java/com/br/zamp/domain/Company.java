@@ -54,9 +54,6 @@ public class Company extends Base {
   private Set<Rent> rents;
 
   @ManyToMany
-  private Set<Routine> routines;
-
-  @ManyToMany
   private Set<UserProfile> userProfiles;
 
 }

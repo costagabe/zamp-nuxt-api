@@ -6,8 +6,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @EqualsAndHashCode(callSuper = true)
 @Entity
@@ -20,36 +20,17 @@ public class Entry extends Base {
   private EntryType type;
   private LocalDate date;
   private String history;
-  @ManyToMany
-  @JoinTable(
-      name = "entry_company",
-      joinColumns = @JoinColumn(name = "entry_id"),
-      inverseJoinColumns = @JoinColumn(name = "company_id")
-  )
-  private final List<Company> companies = new ArrayList<>();
+
+  @ManyToMany(mappedBy = "entries")
+  private final Set<Company> companies = new HashSet<>();
 
   @ManyToOne
-  @JoinTable(
-      name = "entry_financial_account",
-      joinColumns = @JoinColumn(name = "entry_id"),
-      inverseJoinColumns = @JoinColumn(name = "account_id")
-  )
   private Account financialAccount;
 
   @ManyToOne
-  @JoinTable(
-      name = "entry_classification_account",
-      joinColumns = @JoinColumn(name = "entry_id"),
-      inverseJoinColumns = @JoinColumn(name = "account_id")
-  )
   private Account classificationAccount;
 
   @ManyToOne
-  @JoinTable(
-      name = "entry_company_one",
-      joinColumns = @JoinColumn(name = "entry_id"),
-      inverseJoinColumns = @JoinColumn(name = "company_id")
-  )
   private Company company;
 
 }

@@ -1,7 +1,6 @@
 package com.br.zamp.service.impl;
 
 import com.br.zamp.domain.User;
-import com.br.zamp.dto.Filter;
 import com.br.zamp.exceptions.ObjectNotFoundException;
 import com.br.zamp.repository.UserRepository;
 import com.br.zamp.service.UserService;
@@ -35,17 +34,12 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
-  public User findByFilter(Filter filter) {
-    return null;
-  }
-
-  @Override
   public Page<User> findAll(Specification<User> specification, Pageable pageable) {
     return userRepository.findAll(specification, pageable);
   }
 
   @Override
   public void delete(UUID uuid) {
-
+    userRepository.deleteById(uuid);
   }
 }

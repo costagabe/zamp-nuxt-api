@@ -2,8 +2,8 @@ package com.br.zamp.mapper;
 
 import com.br.zamp.domain.User;
 import com.br.zamp.domain.enums.UserSituation;
-import com.br.zamp.dto.CreateUserDTO;
-import com.br.zamp.dto.ReadAndUpdateUserDTO;
+import com.br.zamp.dto.user.CreateUserDTO;
+import com.br.zamp.dto.user.ReadAndUpdateUserDTO;
 import lombok.Setter;
 import org.mapstruct.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;

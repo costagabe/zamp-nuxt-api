@@ -6,25 +6,30 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Data
 @Table(name = "rent_table")
 public class Rent extends Base {
-  @ManyToMany(mappedBy = "rents")
-  private final List<Company> companies = new ArrayList<>();
+
   private LocalDate paymentDay;
   private LocalDate contractInitialDay;
   private LocalDate contractEndDay;
   private LocalDate firstPaymentDay;
   private PaymentType paymentType;
+  private String assurance; // Garantia
+  
   @ManyToOne
   private Building building;
 
   @Column(name = "rent_value")
   private Float value;
-  private String assurance; // Garantia
+
+  @ManyToMany(mappedBy = "rents")
+  private final Set<Company> companies = new HashSet<>();
+
+
 }

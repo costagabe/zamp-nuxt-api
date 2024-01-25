@@ -27,15 +27,11 @@ public class User extends Base {
 
   private UserSituation situation;
 
-  @ManyToMany(mappedBy = "users", fetch = FetchType.LAZY)
+  @ManyToMany(mappedBy = "users")
   private Set<UserProfile> userProfiles = new HashSet<>();
 
-  @ManyToMany(mappedBy = "users", fetch = FetchType.LAZY)
+  @ManyToMany(mappedBy = "users")
   private Set<Company> companies = new HashSet<>();
-
-  @ManyToMany
-  @JoinTable(name = "user_routine", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "routine_id"))
-  private Set<Routine> routines;
 
   public UserProfile getMaxUserProfileLevel() {
     return userProfiles.stream().max(Comparator.comparing(UserProfile::getLevel)).orElse(null);

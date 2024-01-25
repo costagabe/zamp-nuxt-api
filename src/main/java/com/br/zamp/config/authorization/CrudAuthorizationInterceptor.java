@@ -1,7 +1,7 @@
 package com.br.zamp.config.authorization;
 
 import com.br.zamp.enums.Permission;
-import com.br.zamp.exceptions.ProfileLevelExcption;
+import com.br.zamp.exceptions.ProfileLevelException;
 import com.br.zamp.security.annotation.CrudPermission;
 import com.br.zamp.security.annotation.CrudPermissionType;
 import jakarta.servlet.http.HttpServletRequest;
@@ -20,7 +20,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 
-public class CustomInterceptor implements HandlerInterceptor {
+public class CrudAuthorizationInterceptor implements HandlerInterceptor {
 
   @Override
   public boolean preHandle(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response, @NonNull Object handler) {
@@ -65,7 +65,7 @@ public class CustomInterceptor implements HandlerInterceptor {
         .map(v -> v.getAuthority().replace("LEVEL_", ""))
         .map(Integer::valueOf)
         .findFirst()
-        .orElseThrow(() -> new ProfileLevelExcption("Conta sem nível no perfil."));
+        .orElseThrow(() -> new ProfileLevelException("Conta sem nível no perfil."));
   }
 
   private Set<String> populatePermissionSet(String method, CrudPermission crudAnnotation, Integer userLevel) {

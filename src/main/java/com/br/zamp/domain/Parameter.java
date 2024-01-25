@@ -21,6 +21,6 @@ public class Parameter extends Base {
 
   private String note;
 
-  @ManyToMany(mappedBy = "parameters", fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+  @ManyToMany(mappedBy = "parameters", cascade = CascadeType.MERGE)
   private Set<Company> companies = new HashSet<>();
 }

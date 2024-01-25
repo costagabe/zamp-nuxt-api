@@ -1,7 +1,7 @@
 package com.br.zamp.controller;
 
 import com.br.zamp.domain.Base;
-import com.br.zamp.dto.CustomPage;
+import com.br.zamp.dto.utils.CustomPage;
 import com.br.zamp.mapper.BaseMapper;
 import com.br.zamp.service.CrudService;
 import lombok.Setter;

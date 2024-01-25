@@ -1,6 +1,6 @@
 package com.br.zamp.config;
 
-import com.br.zamp.config.authorization.CustomInterceptor;
+import com.br.zamp.config.authorization.CrudAuthorizationInterceptor;
 import net.kaczmarzyk.spring.data.jpa.web.SpecificationArgumentResolver;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
@@ -14,7 +14,7 @@ public class MvcConfig implements WebMvcConfigurer {
 
   @Override
   public void addInterceptors(InterceptorRegistry registry) {
-    registry.addInterceptor(new CustomInterceptor());
+    registry.addInterceptor(new CrudAuthorizationInterceptor());
   }
 
   @Override

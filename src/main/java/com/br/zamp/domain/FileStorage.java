@@ -6,15 +6,15 @@ import jakarta.persistence.ManyToMany;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Data
 public class FileStorage extends Base {
-  @ManyToMany(mappedBy = "fileStorages")
-  private final List<Company> companies = new ArrayList<>();
+  private String contentType;
+  private Long size;
 
   @Column(unique = true, nullable = false)
   private String uuid;
@@ -25,8 +25,6 @@ public class FileStorage extends Base {
   @Column(nullable = false, length = 10)
   private String extension;
 
-  private String contentType;
-
-  private Long size;
-
+  @ManyToMany(mappedBy = "fileStorages")
+  private final Set<Company> companies = new HashSet<>();
 }

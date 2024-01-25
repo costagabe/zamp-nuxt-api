@@ -5,14 +5,18 @@ import jakarta.persistence.ManyToMany;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Data
 public class Lessee extends Base { // Locatário
-  @ManyToMany(mappedBy = "lessees")
-  private final List<Company> companies = new ArrayList<>();
   private String name;
+
+  @ManyToMany
+  private final Set<Building> buildings = new HashSet<>();
+
+  @ManyToMany(mappedBy = "lessees")
+  private final Set<Company> companies = new HashSet<>();
 }

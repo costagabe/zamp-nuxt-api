@@ -18,15 +18,10 @@ public class UserProfile extends Base {
   private Integer level;
 
   @ManyToMany
-  @JoinTable(name = "profile_routine", joinColumns = @JoinColumn(name = "profile_id"), inverseJoinColumns = @JoinColumn(name = "routine_id"))
-  private Set<Routine> routines;
-
-  @ManyToMany
   @JoinTable(name = "profile_user", joinColumns = @JoinColumn(name = "profile_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
   private Set<User> users = new HashSet<>();
 
-  @ManyToMany
-  @JoinTable(name = "company_user_profile", joinColumns = @JoinColumn(name = "profile_id"), inverseJoinColumns = @JoinColumn(name = "company_id"))
+  @ManyToMany(mappedBy = "userProfiles")
   private Set<Company> companies;
 
   @CollectionTable(joinColumns = {@JoinColumn(name = "user_profile_id", referencedColumnName = "id", nullable = false)}, name = "user_profile_permission")

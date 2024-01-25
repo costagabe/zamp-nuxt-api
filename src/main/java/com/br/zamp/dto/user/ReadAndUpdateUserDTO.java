@@ -1,4 +1,4 @@
-package com.br.zamp.dto;
+package com.br.zamp.dto.user;
 
 import com.br.zamp.domain.enums.UserSituation;
 

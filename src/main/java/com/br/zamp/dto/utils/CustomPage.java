@@ -1,4 +1,4 @@
-package com.br.zamp.dto;
+package com.br.zamp.dto.utils;
 
 import lombok.Data;
 import org.springframework.data.domain.Page;

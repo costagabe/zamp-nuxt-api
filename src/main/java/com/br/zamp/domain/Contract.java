@@ -5,15 +5,15 @@ import jakarta.persistence.ManyToMany;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Data
 public class Contract extends Base {
-  @ManyToMany
-  private final List<Company> companies = new ArrayList<>();
+  @ManyToMany(mappedBy = "contracts")
+  private final Set<Company> companies = new HashSet<>();
   private String test;
 
 }
