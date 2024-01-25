@@ -4,13 +4,14 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.UUID;
 
 @MappedSuperclass
 @Data
 public class Base implements Serializable {
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  public Long id;
+  @GeneratedValue(strategy = GenerationType.UUID)
+  public UUID id;
 
   @Version
   private int version;

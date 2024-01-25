@@ -2,16 +2,17 @@ package com.br.zamp.domain;
 
 
 import com.br.zamp.domain.enums.UserSituation;
-import com.br.zamp.domain.enums.UserType;
 import com.br.zamp.enums.Permission;
 import com.br.zamp.security.UserAuthAuthority;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import java.util.Comparator;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -39,11 +40,6 @@ public class User extends Base {
   @JoinTable(name = "user_routine", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "routine_id"))
   private Set<Routine> routines;
 
-  @Column(length = 20, nullable = false)
-  @Enumerated(EnumType.STRING)
-  private UserType type;
-
-
   public UserProfile getMaxUserProfileLevel() {
     return userProfiles.stream().max(Comparator.comparing(UserProfile::getLevel)).orElse(null);
   }
@@ -63,11 +59,15 @@ public class User extends Base {
 
     var hasAllPermission = permissions.stream().anyMatch(permission -> permission == Permission.ALL);
 
+    Set<GrantedAuthority> ret = new HashSet<>(permissions);
+
     if (hasAllPermission) {
-      return Set.of(Permission.values());
+      ret = new HashSet<>(List.of(Permission.values()));
     }
 
-    return permissions;
+    ret.add(new SimpleGrantedAuthority(String.format("LEVEL_%s", getMaxUserProfileLevel().getLevel())));
+
+    return ret;
   }
 
   @Override

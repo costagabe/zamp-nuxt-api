@@ -10,20 +10,26 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
-public interface UserRepository extends JpaRepository<User, Long>, JpaSpecificationExecutor<User> {
+@Repository
+public interface UserRepository extends JpaRepository<User, UUID>, JpaSpecificationExecutor<User> {
+
+//  Page<User> findAll(@NonNull Specification<User> specification, @NonNull Pageable pageable);
+
   @EntityGraph(attributePaths = {"userProfiles"})
   Optional<User> findByEmail(String email);
 
   @Query("SELECT up FROM User u join u.userProfiles up WHERE u.id = :userId")
-  List<UserProfile> getUserProfilesByUserId(@Param("userId") Long id);
+  List<UserProfile> getUserProfilesByUserId(@Param("userId") UUID id);
 
   @Query("SELECT x FROM User u join u.userProfiles x WHERE u.id = :userId")
-  Page<UserProfile> getUserProfilesByUserIdAndPage(@Param("userId") Long id, Pageable pageRequest);
+  Page<UserProfile> getUserProfilesByUserIdAndPage(@Param("userId") UUID id, Pageable pageRequest);
 
   @Query("SELECT c FROM User u join u.companies c WHERE u.id = :userId")
-  Page<Company> getUserCompanies(@Param("userId") Long id, Pageable pageable);
+  Page<Company> getUserCompanies(@Param("userId") UUID id, Pageable pageable);
 }

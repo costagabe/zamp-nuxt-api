@@ -3,12 +3,11 @@ package com.br.zamp.repository;
 import com.br.zamp.domain.Parameter;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
-import org.springframework.lang.NonNull;
+import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
+import java.util.UUID;
 
-public interface ParameterRepository extends JpaRepository<Parameter, Long>, JpaSpecificationExecutor<Parameter> {
+@Repository
+public interface ParameterRepository extends JpaRepository<Parameter, UUID>, JpaSpecificationExecutor<Parameter> {
 
-  @NonNull
-  Optional<Parameter> findById(@NonNull Long id);
 }

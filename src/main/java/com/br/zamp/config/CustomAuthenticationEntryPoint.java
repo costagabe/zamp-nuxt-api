@@ -1,6 +1,6 @@
 package com.br.zamp.config;
 
-import com.br.zamp.config.auth.AuthenticationErrorException;
+import com.br.zamp.config.authentication.AuthenticationErrorException;
 import com.br.zamp.config.dto.ErrorResponse;
 import com.br.zamp.config.dto.ResponseApi;
 import com.fasterxml.jackson.databind.ObjectMapper;

@@ -1,4 +1,4 @@
-package com.br.zamp.web;
+package com.br.zamp.controller.auth;
 
 import com.br.zamp.security.AuthDTO;
 import com.br.zamp.security.AuthUser;

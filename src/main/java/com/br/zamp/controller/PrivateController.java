@@ -1,4 +1,4 @@
-package com.br.zamp.web;
+package com.br.zamp.controller;
 
 import com.br.zamp.security.AuthenticatedUser;
 import lombok.RequiredArgsConstructor;

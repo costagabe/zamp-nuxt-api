@@ -1,4 +1,4 @@
-package com.br.zamp.config.auth;
+package com.br.zamp.config.authentication;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;

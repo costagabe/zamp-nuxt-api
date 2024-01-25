@@ -1,4 +1,4 @@
-package com.br.zamp.config.auth;
+package com.br.zamp.config.authentication;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.config.Customizer;

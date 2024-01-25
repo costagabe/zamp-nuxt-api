@@ -1,7 +1,7 @@
 package com.br.zamp.config;
 
-import com.br.zamp.config.auth.CustomAuthenticationDetailsSource;
-import com.br.zamp.config.auth.CustomBasicHttpAuthConfigurer;
+import com.br.zamp.config.authentication.CustomAuthenticationDetailsSource;
+import com.br.zamp.config.authentication.CustomBasicHttpAuthConfigurer;
 import com.br.zamp.security.JpaUserDetailsService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nimbusds.jose.jwk.JWK;
@@ -14,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -43,6 +44,7 @@ import java.security.interfaces.RSAPublicKey;
 @EnableWebSecurity
 @EnableMethodSecurity
 @RequiredArgsConstructor
+@EnableAspectJAutoProxy
 public class SecurityConfig {
 
   private final ObjectMapper objectMapper;

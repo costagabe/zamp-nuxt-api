@@ -1,9 +1,7 @@
 package com.br.zamp.domain;
 
 import com.br.zamp.domain.enums.PaymentType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -14,6 +12,7 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Data
+@Table(name = "rent_table")
 public class Rent extends Base {
   @ManyToMany(mappedBy = "rents")
   private final List<Company> companies = new ArrayList<>();
@@ -24,6 +23,8 @@ public class Rent extends Base {
   private PaymentType paymentType;
   @ManyToOne
   private Building building;
+
+  @Column(name = "rent_value")
   private Float value;
   private String assurance; // Garantia
 }

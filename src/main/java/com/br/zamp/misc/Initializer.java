@@ -4,7 +4,6 @@ import com.br.zamp.domain.Company;
 import com.br.zamp.domain.User;
 import com.br.zamp.domain.UserProfile;
 import com.br.zamp.domain.enums.UserSituation;
-import com.br.zamp.domain.enums.UserType;
 import com.br.zamp.enums.Permission;
 import com.br.zamp.repository.CompanyRepository;
 import com.br.zamp.repository.ParameterRepository;
@@ -32,7 +31,15 @@ public class Initializer {
     user.setPassword(pe.encode("admin"));
     user.setSituation(UserSituation.ACTIVE);
     user.setUserProfiles(new HashSet<>());
-    user.setType(UserType.ADMIN);
+
+    User user3 = new User();
+    user3.setName("Juliana");
+    user3.setEmail("a3dmin");
+    user3.setPassword(pe.encode("admin"));
+    user3.setSituation(UserSituation.ACTIVE);
+    user3.setUserProfiles(new HashSet<>());
+
+    userRepository.save(user3);
 
 
     User user2 = new User();
@@ -41,7 +48,6 @@ public class Initializer {
     user2.setPassword(pe.encode("admin"));
     user2.setSituation(UserSituation.ACTIVE);
     user2.setUserProfiles(new HashSet<>());
-    user2.setType(UserType.CUSTOMER);
 
     userRepository.save(user);
     userRepository.save(user2);
@@ -59,7 +65,7 @@ public class Initializer {
     p.getUsers().add(user);
 
     UserProfile p2 = new UserProfile();
-    p2.setName("Administrador2");
+    p2.setName("OutroAdministrador");
     p2.setLevel(2);
     p2.getPermissions().add(Permission.COMPANIES_MENU);
     p2.getUsers().add(user2);
