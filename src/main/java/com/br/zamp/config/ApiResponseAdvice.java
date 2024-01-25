@@ -30,14 +30,12 @@ public class ApiResponseAdvice implements ResponseBodyAdvice<Object> {
       @NonNull ServerHttpRequest request,
       @NonNull ServerHttpResponse response
   ) {
-    // If the response body is already of type ApiResponse, return it as it is
     if (body instanceof ApiResponse) {
       return body;
     }
     if(body instanceof ErrorResponse) {
       return new ApiResponse<>(null, (ErrorResponse) body);
     }
-    // Else, wrap it inside ApiResponse
     return new ApiResponse<>(body, null);
   }
 }
