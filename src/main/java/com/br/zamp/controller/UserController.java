@@ -16,11 +16,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/users")
 @CrudPermission({
-    @CrudPermissionType(permission = Permission.CREATE_USER, method = CrudMethod.CREATE),
-    @CrudPermissionType(permission = Permission.UPDATE_USER, method = CrudMethod.UPDATE),
-    @CrudPermissionType(permission = Permission.READ_USER, method = CrudMethod.READ),
-    @CrudPermissionType(permission = Permission.READ_ALL_USER, method = CrudMethod.READ_ALL),
-    @CrudPermissionType(permission = Permission.DELETE_USER, method = CrudMethod.DELETE)
+    @CrudPermissionType(permission = Permission.CREATE_USERS, method = CrudMethod.CREATE),
+    @CrudPermissionType(permission = Permission.UPDATE_USERS, method = CrudMethod.UPDATE),
+    @CrudPermissionType(permission = Permission.READ_USERS, method = CrudMethod.READ),
+    @CrudPermissionType(permission = Permission.READ_ALL_USERS, method = CrudMethod.READ_ALL),
+    @CrudPermissionType(permission = Permission.DELETE_USERS, method = CrudMethod.DELETE)
 })
 public class UserController extends CrudController<User, CreateUserDTO, ReadAndUpdateUserDTO, UserSpecification> {
 }
