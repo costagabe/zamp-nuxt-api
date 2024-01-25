@@ -22,10 +22,11 @@ public abstract class CrudController<Entity extends Base, CreateDTO, ReadAndUpda
   protected BaseMapper<Entity, CreateDTO, ReadAndUpdateDTO> dtoMapper;
 
   @PostMapping
-  public ResponseEntity<?> create(@RequestBody CreateDTO dto) {
+  public ResponseEntity<ReadAndUpdateDTO> create(@RequestBody CreateDTO dto) {
     Entity mapped = dtoMapper.createDTOToEntity(dto);
     Entity created = service.create(mapped);
-    return ResponseEntity.status(HttpStatus.CREATED).body(created);
+    ReadAndUpdateDTO response = dtoMapper.toReadAndUpdateDTO(created);
+    return ResponseEntity.status(HttpStatus.CREATED).body(response);
   }
 
   @PutMapping

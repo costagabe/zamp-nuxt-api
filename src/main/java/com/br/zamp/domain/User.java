@@ -10,10 +10,7 @@ import lombok.EqualsAndHashCode;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
-import java.util.Comparator;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @EqualsAndHashCode(callSuper = true, exclude = {"userProfiles"})
@@ -65,7 +62,7 @@ public class User extends Base {
       ret = new HashSet<>(List.of(Permission.values()));
     }
 
-    ret.add(new SimpleGrantedAuthority(String.format("LEVEL_%s", getMaxUserProfileLevel().getLevel())));
+    ret.add(new SimpleGrantedAuthority(String.format("LEVEL_%s", Optional.ofNullable(getMaxUserProfileLevel()).map(UserProfile::getLevel).orElse(0))));
 
     return ret;
   }
