@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("private")
 @RequiredArgsConstructor
 public class PrivateController {
-  private final AuthenticatedUser authenticatedUser;
   @GetMapping
   @PreAuthorize("hasAuthority('PERM_ENTRIES_MENU')")
   public String getMessage() {
@@ -19,7 +18,7 @@ public class PrivateController {
   }
 
   @GetMapping("/a")
-  public String getMessagea() {
+  public String getMessagea(AuthenticatedUser authenticatedUser) {
     var auth = authenticatedUser.getUser();
     return "Hello from private API controller" + auth.getName();
   }

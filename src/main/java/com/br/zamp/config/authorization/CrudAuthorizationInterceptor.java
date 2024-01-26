@@ -16,6 +16,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import java.lang.annotation.Annotation;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -25,14 +26,11 @@ public class CrudAuthorizationInterceptor implements HandlerInterceptor {
   @Override
   public boolean preHandle(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response, @NonNull Object handler) {
     try {
-      Class<?> clazz = ((HandlerMethod) handler).getBean().getClass();
+      Optional<CrudPermission> crudAnnotation = getHandlerCrudPermission(handler);
 
-      CrudPermission crudAnnotation = findAnnotation(clazz, CrudPermission.class);
-      String method = ((HandlerMethod) handler).getMethod().getName();
-
-      if (crudAnnotation != null) {
+      if (crudAnnotation.isPresent() && !shouldSkipAnnotationCheck(handler, crudAnnotation.get())) {
         Integer level = getUserLevel();
-        Set<String> permissionSet = populatePermissionSet(method, crudAnnotation, level);
+        Set<String> permissionSet = populatePermissionSet(((HandlerMethod) handler).getMethod().getName(), crudAnnotation.get(), level);
 
         if (canContinue(permissionSet)) {
           return true;
@@ -46,7 +44,26 @@ public class CrudAuthorizationInterceptor implements HandlerInterceptor {
     }
   }
 
-  private static boolean canContinue(Set<String> permissionSet) {
+  private boolean shouldSkipAnnotationCheck(Object handler, CrudPermission crudAnnotation) {
+    String method = ((HandlerMethod) handler).getMethod().getName();
+    return isMethodListed(method, crudAnnotation);
+  }
+
+  private Optional<CrudPermission> getHandlerCrudPermission(Object handler) {
+    Class<?> clazz = ((HandlerMethod) handler).getBean().getClass();
+    return Optional.ofNullable(findAnnotation(clazz, CrudPermission.class));
+  }
+
+private boolean isMethodListed(String method, CrudPermission crudAnnotation){
+  List<CrudPermissionType> permissionTypes = Arrays.stream(crudAnnotation.value()).toList();
+
+  return permissionTypes
+      .stream()
+      .noneMatch(v -> v.method().getDescription().equals(method));
+
+}
+
+  private boolean canContinue(Set<String> permissionSet) {
     return SecurityContextHolder
         .getContext()
         .getAuthentication()
@@ -55,7 +72,7 @@ public class CrudAuthorizationInterceptor implements HandlerInterceptor {
         .anyMatch(v -> permissionSet.contains(v.getAuthority()));
   }
 
-  private static Integer getUserLevel() {
+  private Integer getUserLevel() {
     return SecurityContextHolder
         .getContext()
         .getAuthentication()

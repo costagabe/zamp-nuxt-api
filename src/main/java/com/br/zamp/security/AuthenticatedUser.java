@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 @Scope("prototype")
 public class AuthenticatedUser {
+
   private final UserRepository userRepository;
 
   public User getUser() {

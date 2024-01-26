@@ -3,8 +3,11 @@ package com.br.zamp.domain;
 
 import com.br.zamp.domain.enums.UserSituation;
 import com.br.zamp.enums.Permission;
+import com.br.zamp.enums.PermissionType;
 import com.br.zamp.security.UserAuthAuthority;
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.springframework.security.core.GrantedAuthority;
@@ -45,10 +48,7 @@ public class User extends Base {
   }
 
   public Set<GrantedAuthority> fetchAndFlattenPermissions() {
-    Set<GrantedAuthority> permissions = userProfiles
-        .stream()
-        .flatMap(userProfile -> userProfile.getPermissions().stream())
-        .collect(Collectors.toSet());
+    Set<Permission> permissions = getPermissionsFromUserProfile();
 
     var hasAllPermission = permissions.stream().anyMatch(permission -> permission == Permission.ALL);
 
@@ -61,6 +61,28 @@ public class User extends Base {
     ret.add(new SimpleGrantedAuthority(String.format("LEVEL_%s", Optional.ofNullable(getMaxUserProfileLevel()).map(UserProfile::getLevel).orElse(0))));
 
     return ret;
+  }
+
+  private Set<Permission> getPermissionsFromUserProfile() {
+    return userProfiles
+        .stream()
+        .flatMap(userProfile -> userProfile.getPermissions().stream())
+        .collect(Collectors.toSet());
+  }
+
+  public Set<Permission> getUserMenus() {
+    Set<Permission> permissions = getPermissionsFromUserProfile();
+
+    var hasAllPermission = permissions.stream().anyMatch(permission -> permission == Permission.ALL);
+
+    Set<Permission> ret = new HashSet<>(permissions);
+
+    if (hasAllPermission) {
+      ret = new HashSet<>(List.of(Permission.values()));
+    }
+    return ret.stream()
+        .filter(permission -> permission.getType().equals(PermissionType.MENU))
+        .collect(Collectors.toSet());
   }
 
   @Override

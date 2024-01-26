@@ -15,7 +15,6 @@ import java.util.Collection;
 public class AuthUser implements UserDetails {
   private User user;
 
-
   @Override
   public String getUsername() {
     return user.getEmail();

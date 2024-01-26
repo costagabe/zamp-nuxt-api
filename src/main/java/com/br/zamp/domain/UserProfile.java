@@ -1,12 +1,14 @@
 package com.br.zamp.domain;
 
 import com.br.zamp.enums.Permission;
+import com.br.zamp.enums.PermissionType;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @EqualsAndHashCode(callSuper = true, exclude = {"users"})
 @Entity
@@ -32,5 +34,11 @@ public class UserProfile extends Base {
 
   public String getName() {
     return String.format("ROLE_%s", name);
+  }
+
+  public Set<Permission> getMenus() {
+    return permissions.stream()
+        .filter(permission -> permission.getType() == PermissionType.MENU)
+        .collect(Collectors.toSet());
   }
 }
