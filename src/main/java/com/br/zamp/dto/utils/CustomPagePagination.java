@@ -1,8 +1,8 @@
 package com.br.zamp.dto.utils;
 
 public record CustomPagePagination(
-    Integer pageNumber,
-    Integer pageSize,
+    Integer page,
+    Integer size,
     Long totalItems,
     Integer totalPages,
     Boolean sorted,

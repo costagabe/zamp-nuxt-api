@@ -35,6 +35,9 @@ public class UserProfile extends Base {
   public String getName() {
     return String.format("ROLE_%s", name);
   }
+  public String getOriginalName() {
+    return name;
+  }
 
   public Set<Permission> getMenus() {
     return permissions.stream()

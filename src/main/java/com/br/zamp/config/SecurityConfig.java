@@ -2,6 +2,7 @@ package com.br.zamp.config;
 
 import com.br.zamp.config.authentication.CustomAuthenticationDetailsSource;
 import com.br.zamp.config.authentication.CustomBasicHttpAuthConfigurer;
+import com.br.zamp.config.authorization.JwtAthenticationFilter;
 import com.br.zamp.security.JpaUserDetailsService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nimbusds.jose.jwk.JWK;
@@ -36,6 +37,7 @@ import org.springframework.security.oauth2.server.resource.authentication.JwtAut
 import org.springframework.security.oauth2.server.resource.authentication.JwtGrantedAuthoritiesConverter;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.access.channel.ChannelProcessingFilter;
 
 import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
@@ -50,6 +52,8 @@ public class SecurityConfig {
   private final ObjectMapper objectMapper;
   private final JpaUserDetailsService customUserDetailService;
   private final JpaUserDetailsService userDetailsService;
+  private final JwtAthenticationFilter jwtAthenticationFilter;
+
   @Value("${jwt.public.key}")
   private RSAPublicKey publicKey;
   @Value("${jwt.private.key}")
@@ -69,6 +73,7 @@ public class SecurityConfig {
             .anyRequest().authenticated()
         )
         .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+        .addFilterBefore(jwtAthenticationFilter, ChannelProcessingFilter.class)
         .oauth2ResourceServer(conf -> conf
             .jwt(jwt -> jwt.decoder(jwtDecoder()))
         )

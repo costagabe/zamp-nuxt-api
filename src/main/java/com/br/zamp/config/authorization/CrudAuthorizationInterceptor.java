@@ -60,7 +60,6 @@ private boolean isMethodListed(String method, CrudPermission crudAnnotation){
   return permissionTypes
       .stream()
       .noneMatch(v -> v.method().getDescription().equals(method));
-
 }
 
   private boolean canContinue(Set<String> permissionSet) {

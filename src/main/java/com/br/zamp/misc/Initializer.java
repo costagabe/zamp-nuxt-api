@@ -32,16 +32,6 @@ public class Initializer {
     user.setSituation(UserSituation.ACTIVE);
     user.setUserProfiles(new HashSet<>());
 
-    User user3 = new User();
-    user3.setName("Juliana");
-    user3.setEmail("a3dmin");
-    user3.setPassword(pe.encode("admin"));
-    user3.setSituation(UserSituation.ACTIVE);
-    user3.setUserProfiles(new HashSet<>());
-
-    userRepository.save(user3);
-
-
     User user2 = new User();
     user2.setName("Gabriel2");
     user2.setEmail("admin2");
@@ -49,8 +39,25 @@ public class Initializer {
     user2.setSituation(UserSituation.ACTIVE);
     user2.setUserProfiles(new HashSet<>());
 
+    User user3 = new User();
+    user3.setName("Juliana");
+    user3.setEmail("a3dmin");
+    user3.setPassword(pe.encode("admin"));
+    user3.setSituation(UserSituation.ACTIVE);
+    user3.setUserProfiles(new HashSet<>());
+
+    User user4 = new User();
+    user4.setName("Teste");
+    user4.setEmail("emailTeste@gmail.com");
+    user4.setPassword(pe.encode("admin"));
+    user4.setSituation(UserSituation.INACTIVE);
+    user4.setUserProfiles(new HashSet<>());
+
+
     userRepository.save(user);
     userRepository.save(user2);
+    userRepository.save(user3);
+    userRepository.save(user4);
 
     Company c = new Company();
     c.setName("Zamp");

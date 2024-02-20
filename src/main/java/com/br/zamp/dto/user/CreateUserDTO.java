@@ -1,4 +1,6 @@
 package com.br.zamp.dto.user;
 
-public record CreateUserDTO(String name, String email, String password) {
+import java.util.UUID;
+
+public record CreateUserDTO(String name, String email, UUID profileId) {
 }
