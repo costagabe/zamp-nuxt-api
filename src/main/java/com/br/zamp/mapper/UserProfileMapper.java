@@ -4,9 +4,16 @@ import com.br.zamp.domain.UserProfile;
 import com.br.zamp.dto.profile.CreateUserProfileDTO;
 import com.br.zamp.dto.profile.ReadAndUpdateUserProfileDTO;
 import org.mapstruct.Mapper;
-import org.mapstruct.factory.Mappers;
 
 @Mapper(componentModel = "spring")
-public interface UserProfileMapper extends BaseMapper<UserProfile, CreateUserProfileDTO, ReadAndUpdateUserProfileDTO> {
-  UserProfileMapper INSTANCE = Mappers.getMapper(UserProfileMapper.class);
+public abstract class UserProfileMapper implements BaseMapper<UserProfile, CreateUserProfileDTO, ReadAndUpdateUserProfileDTO> {
+  @Override
+  public ReadAndUpdateUserProfileDTO toReadAndUpdateDTO(UserProfile profile) {
+
+    return new ReadAndUpdateUserProfileDTO(
+      profile.getId(),
+      profile.getOriginalName(),
+      profile.getLevel()
+    );
+  }
 }
