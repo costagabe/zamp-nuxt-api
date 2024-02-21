@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.UUID;
 
 @Setter(onMethod_ = @Autowired)
-public abstract class CrudController<Entity extends Base, CreateDTO, ReadAndUpdateDTO, Spec extends Specification<Entity>> {
+public abstract class CrudController<Entity extends Base, CreateDTO, ReadAndUpdateDTO, SpecQuery extends Specification<Entity>> {
 
   protected CrudService<Entity> service;
   protected BaseMapper<Entity, CreateDTO, ReadAndUpdateDTO> dtoMapper;
@@ -45,11 +45,14 @@ public abstract class CrudController<Entity extends Base, CreateDTO, ReadAndUpda
   }
 
   @GetMapping
-  ResponseEntity<CustomPage<ReadAndUpdateDTO>> findAllBySpec(Spec spec, Pageable pageable){
+  ResponseEntity<CustomPage<ReadAndUpdateDTO>> findAllBySpec(
+    SpecQuery spec,
+    Pageable pageable
+  ) {
     Page<Entity> entities = service.findAll(spec, pageable);
     Page<ReadAndUpdateDTO> page = entities.map(dtoMapper::toReadAndUpdateDTO);
     CustomPage<ReadAndUpdateDTO> response = new CustomPage<>(page);
-    return ResponseEntity.ok(response) ;
+    return ResponseEntity.ok(response);
   }
 
   @DeleteMapping("/{id}")
