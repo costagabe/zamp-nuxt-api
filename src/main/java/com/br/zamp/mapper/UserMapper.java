@@ -69,7 +69,6 @@ public abstract class UserMapper implements BaseMapper<User, CreateUserDTO, Read
       ids,
       user.getMaxUserProfileLevel().getOriginalName()
     );
-
   }
 
   private User createUserWithProfile(Set<UUID> profileIds) {
