@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 public enum EntryType {
-  ENTRADA("Entrada"),
-  SAIDA("Saída");
+  IN("Entrada"),
+  OUT("Saída");
   private final String name;
 }

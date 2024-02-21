@@ -40,6 +40,11 @@ public class EntryServiceImpl implements EntryService {
   }
 
   @Override
+  public Page<Entry> findAll(Pageable pageable, UUID accountId) {
+    return repository.findAllByAccountId(accountId, pageable);
+  }
+
+  @Override
   public void delete(UUID uuid) {
     repository.deleteById(uuid);
   }

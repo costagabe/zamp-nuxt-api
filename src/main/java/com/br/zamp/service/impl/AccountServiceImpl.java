@@ -24,14 +24,14 @@ public class AccountServiceImpl implements AccountService {
   }
 
   @Override
-  public Account update(Account entity) {
-    return null;
+  public Account update(Account account) {
+    return repository.save(account);
   }
 
   @Override
   public Account findById(UUID uuid) {
     return repository.findById(uuid)
-        .orElseThrow(() -> new ObjectNotFoundException("Não encontrado (Account)."));
+      .orElseThrow(() -> new ObjectNotFoundException("Não encontrado (Account)."));
   }
 
   @Override
