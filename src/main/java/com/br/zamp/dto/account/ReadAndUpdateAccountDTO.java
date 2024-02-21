@@ -1,4 +1,14 @@
 package com.br.zamp.dto.account;
 
-public record ReadAndUpdateAccountDTO() {
+import com.br.zamp.domain.enums.AccountType;
+
+import java.util.UUID;
+
+public record ReadAndUpdateAccountDTO(
+  UUID id,
+  String name,
+  String code,
+  AccountType type,
+  Float balance
+) {
 }

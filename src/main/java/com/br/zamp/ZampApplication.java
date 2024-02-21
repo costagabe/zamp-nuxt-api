@@ -18,7 +18,7 @@ public class ZampApplication implements CommandLineRunner {
 
   @Override
   public void run(String... args) {
-    initializer.init();
+//    initializer.init();
   }
 
 

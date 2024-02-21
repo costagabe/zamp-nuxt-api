@@ -14,9 +14,13 @@ public interface BaseMapper<Entity, CreateDTO, ReadAndUpdateDTO> {
 
   Entity createDTOToEntity(CreateDTO dto);
 
-  Entity readAndUpdateDTOToEntity(ReadAndUpdateDTO dto, UUID uuid);
+  Entity readAndUpdateDTOToEntity(ReadAndUpdateDTO dto);
+
+  void readAndUpdateDTOToEntity(ReadAndUpdateDTO dto, @MappingTarget Entity entity);
 
   void toEntity(ReadAndUpdateDTO dto, @MappingTarget Entity entity);
+
+  void createDTOToEntity(CreateDTO dto, @MappingTarget Entity entity);
 
   ReadAndUpdateDTO toDTO(Entity entity);
 }

@@ -6,6 +6,7 @@ import com.br.zamp.domain.UserProfile;
 import com.br.zamp.domain.enums.UserSituation;
 import com.br.zamp.dto.user.CreateUserDTO;
 import com.br.zamp.dto.user.ReadAndUpdateUserDTO;
+import com.br.zamp.repository.UserProfileRepository;
 import com.br.zamp.service.UserProfileService;
 import com.br.zamp.service.UserService;
 import lombok.Setter;
@@ -29,6 +30,9 @@ public abstract class UserMapper implements BaseMapper<User, CreateUserDTO, Read
   @Setter(onMethod_ = @Autowired)
   UserService userService;
 
+  @Setter(onMethod_ = @Autowired)
+  UserProfileRepository userProfileRepository;
+
   @Override
   public User createDTOToEntity(CreateUserDTO dto) {
     User user = createUserWithProfile(dto.profileIds());
@@ -42,15 +46,12 @@ public abstract class UserMapper implements BaseMapper<User, CreateUserDTO, Read
   }
 
   @Override
-  public User readAndUpdateDTOToEntity(ReadAndUpdateUserDTO dto, UUID uuid) {
+  public void readAndUpdateDTOToEntity(ReadAndUpdateUserDTO dto, User user) {
     Set<UserProfile> profiles = userProfileService.findByIdIn(dto.profileIds());
-    User user = userService.findById(uuid);
 
     toEntity(dto, user);
 
     user.setUserProfiles(profiles);
-
-    return user;
   }
 
   @Override

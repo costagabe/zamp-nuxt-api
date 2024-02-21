@@ -32,7 +32,8 @@ public abstract class CrudController<Entity extends Base, CreateDTO, ReadAndUpda
 
   @PutMapping("/{id}")
   public ResponseEntity<?> update(@Valid @RequestBody ReadAndUpdateDTO dto, @PathVariable UUID id) {
-    Entity mapped = dtoMapper.readAndUpdateDTOToEntity(dto, id);
+    Entity mapped = service.findById(id);
+    dtoMapper.readAndUpdateDTOToEntity(dto, mapped);
     service.update(mapped);
     return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
   }
