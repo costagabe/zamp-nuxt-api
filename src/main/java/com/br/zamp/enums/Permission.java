@@ -52,11 +52,11 @@ public enum Permission implements GrantedAuthority {
   READ_ALL_ENTRIES("Listagem de entradas em contas", PermissionType.REQUISICAO),
   DELETE_ENTRIES("Remoção de entradas em contas", PermissionType.REQUISICAO),
 
-  CREATE_FILE_STORAGES("Criação de contas", PermissionType.REQUISICAO),
-  UPDATE_FILE_STORAGES("Atualização de contas", PermissionType.REQUISICAO),
-  READ_FILE_STORAGES("Listagem de contas", PermissionType.REQUISICAO),
-  READ_ALL_FILE_STORAGES("Listagem de contas", PermissionType.REQUISICAO),
-  DELETE_FILE_STORAGES("Remoção de contas", PermissionType.REQUISICAO),
+  CREATE_FILE_STORAGES("Criação de arquivos", PermissionType.REQUISICAO),
+  UPDATE_FILE_STORAGES("Atualização de arquivos", PermissionType.REQUISICAO),
+  READ_FILE_STORAGES("Listagem de arquivos", PermissionType.REQUISICAO),
+  READ_ALL_FILE_STORAGES("Listagem de arquivos", PermissionType.REQUISICAO),
+  DELETE_FILE_STORAGES("Remoção de arquivos", PermissionType.REQUISICAO),
 
   CREATE_LESSEES("Criação de locatários", PermissionType.REQUISICAO),
   UPDATE_LESSEES("Atualização de locatários", PermissionType.REQUISICAO),
