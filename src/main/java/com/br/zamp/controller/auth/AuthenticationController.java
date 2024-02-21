@@ -1,9 +1,6 @@
 package com.br.zamp.controller.auth;
 
-import com.br.zamp.security.AuthDTO;
-import com.br.zamp.security.AuthUser;
-import com.br.zamp.security.AuthenticationService;
-import com.br.zamp.security.SecurityUtil;
+import com.br.zamp.security.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -25,6 +22,7 @@ import java.time.Duration;
 public class AuthenticationController {
   private final AuthenticationService authService;
   private final AuthenticationManager authenticationManager;
+  private final AuthenticatedUser authenticatedUser;
 
   @GetMapping
   public ResponseEntity<?> isAuth(HttpServletRequest request) {
@@ -33,7 +31,7 @@ public class AuthenticationController {
     if (token == null) {
       return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
     }
-    return ResponseEntity.ok(true);
+    return ResponseEntity.ok(authenticatedUser.getUser().getMaxUserProfileLevel().getLevel());
   }
 
   @PostMapping
