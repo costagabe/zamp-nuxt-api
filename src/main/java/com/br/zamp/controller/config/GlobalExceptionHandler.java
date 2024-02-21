@@ -21,7 +21,7 @@ public class GlobalExceptionHandler {
 
   @ExceptionHandler({AuthorizationServiceException.class, ProfileLevelException.class})
   @ResponseBody
-  public ErrorResponse handleAuthorizationServiceException(AuthorizationServiceException ex, HttpServletResponse response) {
+  public ErrorResponse handleAuthorizationServiceException(Exception ex, HttpServletResponse response) {
     response.setStatus(HttpStatus.FORBIDDEN.value());
     return new ErrorResponse(ex.getMessage(), HttpStatus.FORBIDDEN);
   }
