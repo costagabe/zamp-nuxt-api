@@ -69,19 +69,20 @@ public class Initializer {
     p.setName("Administrador");
     p.setLevel(20);
     p.getPermissions().add(Permission.ALL);
-    p.getUsers().add(user);
+    user.getUserProfiles().add(p);
 
     UserProfile p2 = new UserProfile();
     p2.setName("OutroAdministrador");
     p2.setLevel(2);
     p2.getPermissions().add(Permission.COMPANIES_MENU);
-    p2.getUsers().add(user2);
+    user2.getUserProfiles().add(p);
+
 
     userProfileRepository.save(p);
     userProfileRepository.save(p2);
 
-    user.getUserProfiles().add(p);
-    user2.getUserProfiles().add(p2);
+    userRepository.save(user);
+    userRepository.save(user2);
 
 
     c.getUsers().add(user);

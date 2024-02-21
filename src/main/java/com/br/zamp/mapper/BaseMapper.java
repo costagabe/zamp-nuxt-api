@@ -1,6 +1,9 @@
 package com.br.zamp.mapper;
 
+import org.mapstruct.MappingTarget;
 import org.mapstruct.factory.Mappers;
+
+import java.util.UUID;
 
 public interface BaseMapper<Entity, CreateDTO, ReadAndUpdateDTO> {
   BaseMapper<?, ?, ?> INSTANCE = Mappers.getMapper(BaseMapper.class);
@@ -11,5 +14,9 @@ public interface BaseMapper<Entity, CreateDTO, ReadAndUpdateDTO> {
 
   Entity createDTOToEntity(CreateDTO dto);
 
-  Entity readAndUpdateDTOToEntity(ReadAndUpdateDTO dto);
+  Entity readAndUpdateDTOToEntity(ReadAndUpdateDTO dto, UUID uuid);
+
+  void toEntity(ReadAndUpdateDTO dto, @MappingTarget Entity entity);
+
+  ReadAndUpdateDTO toDTO(Entity entity);
 }

@@ -34,7 +34,7 @@ public class UserProfileServiceImpl implements UserProfileService {
   @Override
   public UserProfile findById(UUID uuid) {
     return userProfileRepository.findById(uuid)
-      .orElseThrow(() -> new ObjectNotFoundException("Usuário não encontrado."));
+      .orElseThrow(() -> new ObjectNotFoundException("Erro ao encontrar perfil.", "profileId", "Perfil não encontrado."));
   }
 
   @Override
@@ -59,5 +59,10 @@ public class UserProfileServiceImpl implements UserProfileService {
           .build()
       )
       .collect(Collectors.toSet());
+  }
+
+  @Override
+  public Set<UserProfile> findByIdIn(Set<UUID> ids) {
+    return userProfileRepository.findByIdIn(ids);
   }
 }

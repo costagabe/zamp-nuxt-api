@@ -9,4 +9,5 @@ import java.util.UUID;
 
 public interface UserProfileService extends CrudService<UserProfile>{
   Set<SelectOption<UUID>> getUserProfileSelectList(User user);
+  Set<UserProfile> findByIdIn(Set<UUID> userProfileIds);
 }

@@ -29,16 +29,17 @@ public abstract class CrudController<Entity extends Base, CreateDTO, ReadAndUpda
     return ResponseEntity.status(HttpStatus.CREATED).body(response);
   }
 
-  @PutMapping
-  public ResponseEntity<?> update(@RequestBody ReadAndUpdateDTO dto) {
-    Entity mapped = dtoMapper.readAndUpdateDTOToEntity(dto);
-    Entity updated = service.create(mapped);
-    return ResponseEntity.status(HttpStatus.OK).body(updated);
+  @PutMapping("/{id}")
+  public ResponseEntity<?> update(@RequestBody ReadAndUpdateDTO dto, @PathVariable UUID id) {
+    Entity mapped = dtoMapper.readAndUpdateDTOToEntity(dto, id);
+    service.update(mapped);
+    return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
   }
 
   @GetMapping("/{id}")
   public ResponseEntity<ReadAndUpdateDTO> findById(@PathVariable UUID id) {
-    ReadAndUpdateDTO response = dtoMapper.toReadAndUpdateDTO(service.findById(id));
+    Entity entity = service.findById(id);
+    ReadAndUpdateDTO response = dtoMapper.toReadAndUpdateDTO(entity);
     return ResponseEntity.ok(response);
   }
 

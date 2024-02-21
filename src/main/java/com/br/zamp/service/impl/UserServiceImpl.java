@@ -3,7 +3,9 @@ package com.br.zamp.service.impl;
 import com.br.zamp.domain.User;
 import com.br.zamp.exceptions.DuplicatedObjectException;
 import com.br.zamp.exceptions.ObjectNotFoundException;
+import com.br.zamp.exceptions.ProfileLevelException;
 import com.br.zamp.repository.UserRepository;
+import com.br.zamp.security.AuthenticatedUser;
 import com.br.zamp.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -17,6 +19,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
   private final UserRepository userRepository;
+  private final AuthenticatedUser authenticatedUser;
 
   @Override
   public User create(User user) {
@@ -28,7 +31,9 @@ public class UserServiceImpl implements UserService {
 
   @Override
   public User update(User user) {
-    return null;
+    validateUserProfiles(user);
+
+    return userRepository.save(user);
   }
 
   @Override
@@ -45,5 +50,12 @@ public class UserServiceImpl implements UserService {
   @Override
   public void delete(UUID uuid) {
     userRepository.deleteById(uuid);
+  }
+
+  private void validateUserProfiles(User user) {
+    if(authenticatedUser.getUser().getMaxUserProfileLevel().getLevel() < user.getMaxUserProfileLevel().getLevel()) {
+      throw new ProfileLevelException("Usuário não pode ter um perfil com nível maior que o seu.");
+    }
+
   }
 }

@@ -6,6 +6,7 @@ import com.br.zamp.enums.Permission;
 import com.br.zamp.enums.PermissionType;
 import com.br.zamp.security.UserAuthAuthority;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
@@ -30,21 +31,21 @@ public class User extends Base {
 
   private UserSituation situation;
 
-  @ManyToMany(mappedBy = "users")
+  @ManyToMany(fetch = FetchType.EAGER)
   private Set<UserProfile> userProfiles = new HashSet<>();
 
   @ManyToMany(mappedBy = "users")
   private Set<Company> companies = new HashSet<>();
 
   public UserProfile getMaxUserProfileLevel() {
-    return userProfiles.stream().max(Comparator.comparing(UserProfile::getLevel)).orElse(null);
+    return userProfiles.stream().max(Comparator.comparing(UserProfile::getLevel)).orElse(new UserProfile());
   }
 
   public Set<UserAuthAuthority> fetchAndFlattenAuthorities() {
     return userProfiles
-        .stream()
-        .map(up -> new UserAuthAuthority(up.getName().toUpperCase()))
-        .collect(Collectors.toSet());
+      .stream()
+      .map(up -> new UserAuthAuthority(up.getName().toUpperCase()))
+      .collect(Collectors.toSet());
   }
 
   public Set<GrantedAuthority> fetchAndFlattenPermissions() {
@@ -65,9 +66,9 @@ public class User extends Base {
 
   private Set<Permission> getPermissionsFromUserProfile() {
     return userProfiles
-        .stream()
-        .flatMap(userProfile -> userProfile.getPermissions().stream())
-        .collect(Collectors.toSet());
+      .stream()
+      .flatMap(userProfile -> userProfile.getPermissions().stream())
+      .collect(Collectors.toSet());
   }
 
   public Set<Permission> getUserMenus() {
@@ -81,18 +82,18 @@ public class User extends Base {
       ret = new HashSet<>(List.of(Permission.values()));
     }
     return ret.stream()
-        .filter(permission -> permission.getType().equals(PermissionType.MENU))
-        .collect(Collectors.toSet());
+      .filter(permission -> permission.getType().equals(PermissionType.MENU))
+      .collect(Collectors.toSet());
   }
 
   @Override
   public String toString() {
     return "User{" +
-        "name='" + name + '\'' +
-        ", email='" + email + '\'' +
-        ", password='" + password + '\'' +
-        ", situation=" + situation +
-        '}';
+      "name='" + name + '\'' +
+      ", email='" + email + '\'' +
+      ", password='" + password + '\'' +
+      ", situation=" + situation +
+      '}';
   }
 
 }

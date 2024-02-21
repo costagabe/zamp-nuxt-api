@@ -19,8 +19,7 @@ public class UserProfile extends Base {
 
   private Integer level;
 
-  @ManyToMany
-  @JoinTable(name = "profile_user", joinColumns = @JoinColumn(name = "profile_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
+  @ManyToMany(mappedBy = "userProfiles")
   private Set<User> users = new HashSet<>();
 
   @ManyToMany(mappedBy = "userProfiles")
