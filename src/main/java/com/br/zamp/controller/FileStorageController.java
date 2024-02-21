@@ -1,4 +1,4 @@
-package com.br.zamp;
+package com.br.zamp.controller;
 
 import com.br.zamp.controller.CrudController;
 import com.br.zamp.controller.specifications.FileStorageSpecification;

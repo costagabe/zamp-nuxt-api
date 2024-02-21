@@ -36,7 +36,7 @@ public class EntryController {
 
   @PostMapping
   public ResponseEntity<ReadAndUpdateEntryDTO> create(@PathVariable UUID accountId, @Valid @RequestBody CreateEntryDTO dto) {
-    Entry mapped = mapper.createDTOToEntity(dto);
+    Entry mapped = mapper.createDTOToEntity(dto, accountId);
     Entry created = service.create(mapped);
     ReadAndUpdateEntryDTO response = mapper.toReadAndUpdateDTO(created);
     return ResponseEntity.status(HttpStatus.CREATED).body(response);
