@@ -19,8 +19,6 @@ import java.util.UUID;
 @Repository
 public interface UserRepository extends JpaRepository<User, UUID>, JpaSpecificationExecutor<User> {
 
-//  Page<User> findAll(@NonNull Specification<User> specification, @NonNull Pageable pageable);
-
   @EntityGraph(attributePaths = {"userProfiles"})
   Optional<User> findByEmail(String email);
 
