@@ -3,6 +3,7 @@ package com.br.zamp.service.impl;
 import com.br.zamp.domain.Entry;
 import com.br.zamp.exceptions.ObjectNotFoundException;
 import com.br.zamp.repository.EntryRepository;
+import com.br.zamp.security.AuthenticatedUser;
 import com.br.zamp.service.EntryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -17,6 +18,7 @@ import java.util.UUID;
 public class EntryServiceImpl implements EntryService {
 
   private final EntryRepository repository;
+  private final AuthenticatedUser authenticatedUser;
 
   @Override
   public Entry create(Entry entity) {
@@ -25,13 +27,13 @@ public class EntryServiceImpl implements EntryService {
 
   @Override
   public Entry update(Entry entity) {
-    return null;
+    return repository.save(entity);
   }
 
   @Override
   public Entry findById(UUID uuid) {
     return repository.findById(uuid)
-        .orElseThrow(() -> new ObjectNotFoundException("Não encontrado (Entry)."));
+      .orElseThrow(() -> new ObjectNotFoundException("Não encontrado (Entry)."));
   }
 
   @Override
@@ -48,4 +50,5 @@ public class EntryServiceImpl implements EntryService {
   public void delete(UUID uuid) {
     repository.deleteById(uuid);
   }
+
 }

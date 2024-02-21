@@ -56,6 +56,5 @@ public class UserServiceImpl implements UserService {
     if(authenticatedUser.getUser().getMaxUserProfileLevel().getLevel() < user.getMaxUserProfileLevel().getLevel()) {
       throw new ProfileLevelException("Usuário não pode ter um perfil com nível maior que o seu.");
     }
-
   }
 }
