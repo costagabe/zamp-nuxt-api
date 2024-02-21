@@ -67,7 +67,7 @@ public abstract class UserMapper implements BaseMapper<User, CreateUserDTO, Read
       user.getEmail(),
       user.getSituation(),
       ids,
-      user.getMaxUserProfileLevel().getName()
+      user.getMaxUserProfileLevel().getOriginalName()
     );
 
   }

@@ -4,6 +4,7 @@ import com.br.zamp.domain.Base;
 import com.br.zamp.dto.utils.CustomPage;
 import com.br.zamp.mapper.BaseMapper;
 import com.br.zamp.service.CrudService;
+import jakarta.validation.Valid;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -22,7 +23,7 @@ public abstract class CrudController<Entity extends Base, CreateDTO, ReadAndUpda
   protected BaseMapper<Entity, CreateDTO, ReadAndUpdateDTO> dtoMapper;
 
   @PostMapping
-  public ResponseEntity<ReadAndUpdateDTO> create(@RequestBody CreateDTO dto) {
+  public ResponseEntity<ReadAndUpdateDTO> create(@Valid @RequestBody CreateDTO dto) {
     Entity mapped = dtoMapper.createDTOToEntity(dto);
     Entity created = service.create(mapped);
     ReadAndUpdateDTO response = dtoMapper.toReadAndUpdateDTO(created);
@@ -30,7 +31,7 @@ public abstract class CrudController<Entity extends Base, CreateDTO, ReadAndUpda
   }
 
   @PutMapping("/{id}")
-  public ResponseEntity<?> update(@RequestBody ReadAndUpdateDTO dto, @PathVariable UUID id) {
+  public ResponseEntity<?> update(@Valid @RequestBody ReadAndUpdateDTO dto, @PathVariable UUID id) {
     Entity mapped = dtoMapper.readAndUpdateDTOToEntity(dto, id);
     service.update(mapped);
     return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
