@@ -1,5 +1,7 @@
 package com.br.zamp.service.impl;
 
+import com.br.zamp.config.dto.SelectOption;
+import com.br.zamp.controller.specifications.AccountSpecification;
 import com.br.zamp.domain.Account;
 import com.br.zamp.exceptions.ObjectNotFoundException;
 import com.br.zamp.repository.AccountRepository;
@@ -10,7 +12,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -42,5 +47,15 @@ public class AccountServiceImpl implements AccountService {
   @Override
   public void delete(UUID uuid) {
     repository.deleteById(uuid);
+  }
+
+  @Override
+  public Set<SelectOption<UUID>> getAccountsSelect(AccountSpecification spec) {
+    List<Account> accountEntities = repository.findAll(spec);
+
+    return accountEntities
+      .stream()
+      .map(account -> new SelectOption<>(account.getId(), account.getName()))
+      .collect(Collectors.toSet());
   }
 }

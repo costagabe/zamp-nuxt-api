@@ -7,6 +7,7 @@ import com.br.zamp.dto.entry.ReadAndUpdateEntryDTO;
 import com.br.zamp.service.AccountService;
 import lombok.Setter;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDate;
@@ -14,21 +15,43 @@ import java.util.UUID;
 
 @Mapper(componentModel = "spring")
 public abstract class EntryMapper implements BaseMapper<Entry, CreateEntryDTO, ReadAndUpdateEntryDTO> {
-    @Setter(onMethod_ = @Autowired)
-    AccountService accountService;
+  @Setter(onMethod_ = @Autowired)
+  AccountService accountService;
 
-    public Entry createDTOToEntity(CreateEntryDTO dto, UUID accountId) {
-        Account account = accountService.findById(accountId);
-        Account otherAccount = accountService.findById(dto.otherAccountId());
+  @Mapping(target = "classificationAccount", source = "classificationAccount.id")
+  @Mapping(target = "financialAccount", source = "financialAccount.id")
+  @Mapping(target = "financialAccountName", source = "financialAccount.name")
+  @Mapping(target = "classificationAccountName", source = "classificationAccount.name")
+  public abstract ReadAndUpdateEntryDTO toReadAndUpdateDTO(Entry entity);
 
-        Entry entry = new Entry();
-        entry.setDate(LocalDate.now());
-        entry.setType(dto.type());
-        entry.setHistory(dto.history());
-        entry.setValue(dto.value());
-        entry.setFinancialAccount(account);
-        entry.setClassificationAccount(otherAccount);
+  @Mapping(target = "classificationAccount", source = "classificationAccount.id")
+  @Mapping(target = "financialAccount", source = "financialAccount.id")
+  @Mapping(target = "date", ignore = true)
+  @Mapping(target = "financialAccountName", ignore = true)
+  @Mapping(target = "classificationAccountName", ignore = true)
+  public abstract ReadAndUpdateEntryDTO toDTO(Entry entity);
 
-        return entry;
-    }
+  @Mapping(target = "date", ignore = true)
+  @Mapping(target = "company", ignore = true)
+  @Mapping(target = "version", ignore = true)
+  public abstract Entry readAndUpdateDTOToEntity(ReadAndUpdateEntryDTO dto);
+
+  public Account map(UUID classificationAccountId) {
+    return accountService.findById(classificationAccountId);
+  }
+
+  public Entry createDTOToEntity(CreateEntryDTO dto, UUID accountId) {
+    Account account = accountService.findById(accountId);
+    Account classificationAccount = accountService.findById(dto.classificationAccount());
+
+    Entry entry = new Entry();
+    entry.setDate(LocalDate.now());
+    entry.setType(dto.type());
+    entry.setHistory(dto.history());
+    entry.setValue(dto.value());
+    entry.setFinancialAccount(account);
+    entry.setClassificationAccount(classificationAccount);
+
+    return entry;
+  }
 }

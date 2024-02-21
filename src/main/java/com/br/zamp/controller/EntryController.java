@@ -11,6 +11,7 @@ import com.br.zamp.security.annotation.CrudPermission;
 import com.br.zamp.security.annotation.CrudPermissionType;
 import com.br.zamp.service.EntryService;
 import jakarta.validation.Valid;
+import jakarta.validation.ValidationException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -43,10 +44,15 @@ public class EntryController {
   }
 
   @PutMapping("/{id}")
-  public ResponseEntity<?> update(@Valid @RequestBody ReadAndUpdateEntryDTO dto, @PathVariable UUID id) {
-    Entry mapped = service.findById(id);
-    mapper.readAndUpdateDTOToEntity(dto, mapped);
-    service.update(mapped);
+  public ResponseEntity<?> update(@PathVariable UUID accountId, @Valid @RequestBody ReadAndUpdateEntryDTO dto, @PathVariable UUID id) {
+    Entry found = service.findById(id);
+
+    if (!found.getId().equals(accountId)) {
+      throw new ValidationException("Houve um erro ao tentar atualizar o registro: a conta financeira não coincide com a recebida na requisição atual.");
+    }
+
+    mapper.readAndUpdateDTOToEntity(dto, found);
+    service.update(found);
     return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
   }
 
