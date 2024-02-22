@@ -5,12 +5,11 @@ import com.br.zamp.domain.enums.UserSituation;
 import com.br.zamp.enums.Permission;
 import com.br.zamp.enums.PermissionType;
 import com.br.zamp.security.UserAuthAuthority;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.SQLRestriction;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
@@ -21,6 +20,8 @@ import java.util.stream.Collectors;
 @Entity
 @Table(name = "users")
 @Data
+@SQLDelete(sql = "UPDATE users SET is_deleted = true WHERE id=?")
+@SQLRestriction("is_deleted is false")
 public class User extends Base {
 
   private String name;
@@ -29,6 +30,7 @@ public class User extends Base {
 
   private String password;
 
+  @Enumerated(EnumType.STRING)
   private UserSituation situation;
 
   @ManyToMany(fetch = FetchType.EAGER)

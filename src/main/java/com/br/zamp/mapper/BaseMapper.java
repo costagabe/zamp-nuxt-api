@@ -1,5 +1,6 @@
 package com.br.zamp.mapper;
 
+import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.factory.Mappers;
 
@@ -19,4 +20,10 @@ public interface BaseMapper<Entity, CreateDTO, ReadAndUpdateDTO> {
   void createDTOToEntity(CreateDTO dto, @MappingTarget Entity entity);
 
   ReadAndUpdateDTO toDTO(Entity entity);
+
+  @Mapping(target = "id", ignore = true)
+  @Mapping(target = "companies", ignore = true)
+  Entity copy(Entity entity);
+
+  Entity update(Entity oldEntity, @MappingTarget Entity newEntity);
 }

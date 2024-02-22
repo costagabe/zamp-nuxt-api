@@ -9,4 +9,6 @@ import java.util.UUID;
 
 public interface AccountService extends CrudService<Account> {
   Set<SelectOption<UUID>> getAccountsSelect(AccountSpecification user);
+
+  Float getBalance(UUID accountId);
 }

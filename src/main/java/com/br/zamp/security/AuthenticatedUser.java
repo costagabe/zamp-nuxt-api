@@ -2,20 +2,26 @@ package com.br.zamp.security;
 
 import com.br.zamp.domain.User;
 import com.br.zamp.repository.UserRepository;
-import lombok.RequiredArgsConstructor;
+import lombok.Getter;
 import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.WebApplicationContext;
 
 @Component
-@RequiredArgsConstructor
-@Scope("prototype")
+@Scope(value = WebApplicationContext.SCOPE_REQUEST, proxyMode = ScopedProxyMode.TARGET_CLASS)
+@Getter
 public class AuthenticatedUser {
+  private final User user;
 
-  private final UserRepository userRepository;
-
-  public User getUser() {
+  public AuthenticatedUser(UserRepository userRepository) {
+    if (SecurityContextHolder.getContext().getAuthentication() == null) {
+      user = userRepository.findByEmail("admin").orElseThrow();
+      return;
+    }
     String email = SecurityContextHolder.getContext().getAuthentication().getName();
-    return userRepository.findByEmail(email).orElseThrow();
+    user = userRepository.findByEmail(email).orElseThrow();
   }
+
 }

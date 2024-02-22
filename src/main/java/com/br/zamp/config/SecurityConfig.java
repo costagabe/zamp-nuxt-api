@@ -2,7 +2,7 @@ package com.br.zamp.config;
 
 import com.br.zamp.config.authentication.CustomAuthenticationDetailsSource;
 import com.br.zamp.config.authentication.CustomBasicHttpAuthConfigurer;
-import com.br.zamp.config.authorization.JwtAthenticationFilter;
+import com.br.zamp.config.authorization.JwtAuthenticationFilter;
 import com.br.zamp.security.JpaUserDetailsService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nimbusds.jose.jwk.JWK;
@@ -52,7 +52,7 @@ public class SecurityConfig {
   private final ObjectMapper objectMapper;
   private final JpaUserDetailsService customUserDetailService;
   private final JpaUserDetailsService userDetailsService;
-  private final JwtAthenticationFilter jwtAthenticationFilter;
+  private final JwtAuthenticationFilter jwtAuthenticationFilter;
 
   @Value("${jwt.public.key}")
   private RSAPublicKey publicKey;
@@ -73,7 +73,7 @@ public class SecurityConfig {
             .anyRequest().authenticated()
         )
         .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-        .addFilterBefore(jwtAthenticationFilter, ChannelProcessingFilter.class)
+        .addFilterBefore(jwtAuthenticationFilter, ChannelProcessingFilter.class)
         .oauth2ResourceServer(conf -> conf
             .jwt(jwt -> jwt.decoder(jwtDecoder()))
         )

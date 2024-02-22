@@ -58,4 +58,9 @@ public class AccountServiceImpl implements AccountService {
       .map(account -> new SelectOption<>(account.getId(), account.getName()))
       .collect(Collectors.toSet());
   }
+
+  @Override
+  public Float getBalance(UUID accountId) {
+    return repository.getBalance(accountId);
+  }
 }

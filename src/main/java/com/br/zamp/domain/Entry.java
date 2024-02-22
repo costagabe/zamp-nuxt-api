@@ -4,6 +4,8 @@ import com.br.zamp.domain.enums.EntryType;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.SQLRestriction;
 
 import java.time.LocalDate;
 import java.util.HashSet;
@@ -13,10 +15,13 @@ import java.util.Set;
 @Entity
 @Table(name = "entries")
 @Data
+@SQLDelete(sql = "UPDATE entries SET is_deleted = true WHERE id=?")
+@SQLRestriction("is_deleted is false")
 public class Entry extends Base {
 
   @Column(name = "entry_value")
   private Float value;
+  @Enumerated(EnumType.STRING)
   private EntryType type;
   private LocalDate date;
   private String history;

@@ -76,6 +76,7 @@ public class Initializer {
     p2.setLevel(2);
     p2.getPermissions().add(Permission.COMPANIES_MENU);
     user2.getUserProfiles().add(p);
+    user4.getUserProfiles().add(p);
 
 
     userProfileRepository.save(p);
@@ -83,6 +84,7 @@ public class Initializer {
 
     userRepository.save(user);
     userRepository.save(user2);
+    userRepository.save(user4);
 
 
     c.getUsers().add(user);

@@ -17,7 +17,7 @@ import java.io.IOException;
 
 @Component
 @Setter(onMethod_ = @Autowired)
-public class JwtAthenticationFilter extends OncePerRequestFilter {
+public class JwtAuthenticationFilter extends OncePerRequestFilter {
   JpaUserDetailsService userDetailsServiceImpl;
 
   private static final String AUTH_URL = "/auth";

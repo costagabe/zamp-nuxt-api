@@ -5,6 +5,8 @@ import com.br.zamp.enums.PermissionType;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.SQLRestriction;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -13,6 +15,8 @@ import java.util.stream.Collectors;
 @EqualsAndHashCode(callSuper = true, exclude = {"users"})
 @Entity
 @Data
+@SQLDelete(sql = "UPDATE user_profile SET is_deleted = true WHERE id=?")
+@SQLRestriction("is_deleted is false")
 public class UserProfile extends Base {
 
   private String name;

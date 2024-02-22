@@ -4,6 +4,8 @@ import com.br.zamp.domain.enums.PaymentType;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.SQLRestriction;
 
 import java.time.LocalDate;
 import java.util.HashSet;
@@ -13,12 +15,15 @@ import java.util.Set;
 @Entity
 @Data
 @Table(name = "rent_table")
+@SQLDelete(sql = "UPDATE rent_table SET is_deleted = true WHERE id=?")
+@SQLRestriction("is_deleted is false")
 public class Rent extends Base {
 
   private LocalDate paymentDay;
   private LocalDate contractInitialDay;
   private LocalDate contractEndDay;
   private LocalDate firstPaymentDay;
+  @Enumerated(EnumType.STRING)
   private PaymentType paymentType;
   private String assurance; // Garantia
   

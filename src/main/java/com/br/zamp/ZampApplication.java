@@ -1,25 +1,16 @@
 package com.br.zamp;
 
-import com.br.zamp.misc.Initializer;
 import lombok.AllArgsConstructor;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication()
+@EnableJpaRepositories(basePackages = "com.br.zamp.repository")
 @AllArgsConstructor
-public class ZampApplication implements CommandLineRunner {
-
-  private final Initializer initializer;
-
+public class ZampApplication {
   public static void main(String[] args) {
     SpringApplication.run(ZampApplication.class, args);
   }
-
-  @Override
-  public void run(String... args) {
-//    initializer.init();
-  }
-
 
 }
