@@ -11,6 +11,7 @@ import com.br.zamp.service.UserProfileService;
 import com.br.zamp.service.UserService;
 import lombok.Setter;
 import org.mapstruct.Mapper;
+import org.mapstruct.ReportingPolicy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -18,7 +19,7 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.WARN)
 public abstract class UserMapper implements BaseMapper<User, CreateUserDTO, ReadAndUpdateUserDTO> {
 
   @Setter(onMethod_ = @Autowired)

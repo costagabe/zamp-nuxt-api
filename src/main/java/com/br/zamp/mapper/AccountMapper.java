@@ -6,11 +6,12 @@ import com.br.zamp.dto.account.ReadAndUpdateAccountDTO;
 import com.br.zamp.service.AccountService;
 import lombok.Setter;
 import org.mapstruct.Mapper;
+import org.mapstruct.ReportingPolicy;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Optional;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.WARN)
 public abstract class AccountMapper implements BaseMapper<Account, CreateAccountDTO, ReadAndUpdateAccountDTO> {
   @Setter(onMethod_ = @Autowired)
   private AccountService accountService;

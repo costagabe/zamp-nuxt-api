@@ -4,8 +4,9 @@ import com.br.zamp.domain.UserProfile;
 import com.br.zamp.dto.profile.CreateUserProfileDTO;
 import com.br.zamp.dto.profile.ReadAndUpdateUserProfileDTO;
 import org.mapstruct.Mapper;
+import org.mapstruct.ReportingPolicy;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.WARN)
 public abstract class UserProfileMapper implements BaseMapper<UserProfile, CreateUserProfileDTO, ReadAndUpdateUserProfileDTO> {
   @Override
   public ReadAndUpdateUserProfileDTO toReadAndUpdateDTO(UserProfile profile) {
