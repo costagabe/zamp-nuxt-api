@@ -16,11 +16,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/addresses")
 @CrudPermission({
-    @CrudPermissionType(permission = Permission.CREATE_ADDRESSES, method = CrudMethod.CREATE),
-    @CrudPermissionType(permission = Permission.UPDATE_ADDRESSES, method = CrudMethod.UPDATE),
-    @CrudPermissionType(permission = Permission.READ_ADDRESSES, method = CrudMethod.READ),
-    @CrudPermissionType(permission = Permission.READ_ALL_ADDRESSES, method = CrudMethod.READ_ALL),
-    @CrudPermissionType(permission = Permission.DELETE_ADDRESSES, method = CrudMethod.DELETE)
+  @CrudPermissionType(permission = Permission.CREATE_ADDRESSES, method = CrudMethod.CREATE),
+  @CrudPermissionType(permission = Permission.UPDATE_ADDRESSES, method = CrudMethod.UPDATE),
+  @CrudPermissionType(permission = Permission.READ_ADDRESSES, method = CrudMethod.READ),
+  @CrudPermissionType(permission = Permission.READ_ALL_ADDRESSES, method = CrudMethod.READ_ALL),
+  @CrudPermissionType(permission = Permission.DELETE_ADDRESSES, method = CrudMethod.DELETE)
 })
 public class AddressController extends CrudController<Address, CreateAddressDTO, ReadAndUpdateAddressDTO, AddressSpecification> {
 }

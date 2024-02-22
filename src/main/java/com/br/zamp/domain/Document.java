@@ -19,11 +19,9 @@ import java.util.List;
 @SQLDelete(sql = "UPDATE document SET is_deleted = true WHERE id=?")
 @SQLRestriction("is_deleted is false")
 public class Document extends Base {
-  @Enumerated(EnumType.STRING)
-  private DocumentType type;
-
-  private String name;
-
   @ManyToMany(mappedBy = "documents")
   private final List<Company> companies = new ArrayList<>();
+  @Enumerated(EnumType.STRING)
+  private DocumentType type;
+  private String name;
 }

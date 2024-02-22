@@ -15,8 +15,8 @@ public class CustomBasicHttpAuthConfigurer implements Customizer<HttpBasicConfig
   @Override
   public void customize(HttpBasicConfigurer<HttpSecurity> config) {
     config
-        .authenticationDetailsSource(customAuthenticationDetailsSource)
-        .authenticationEntryPoint(customAuthenticationEntryPoint);
+      .authenticationDetailsSource(customAuthenticationDetailsSource)
+      .authenticationEntryPoint(customAuthenticationEntryPoint);
   }
 
 }

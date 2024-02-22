@@ -13,7 +13,7 @@ public class CustomPermissionEvaluator implements PermissionEvaluator {
 
   @Override
   public boolean hasPermission(Authentication auth, Object targetDomainObject, Object permission) {
-    if ((auth == null) || (targetDomainObject == null) || !(permission instanceof String)){
+    if ((auth == null) || (targetDomainObject == null) || !(permission instanceof String)) {
       return false;
     }
     try {
@@ -24,6 +24,7 @@ public class CustomPermissionEvaluator implements PermissionEvaluator {
     }
 
   }
+
   private Method getMethodFromClassPath(String classAndMethodPath) throws ClassNotFoundException, NoSuchMethodException {
     int lastDotIndex = classAndMethodPath.lastIndexOf(".");
     if (lastDotIndex == -1 || lastDotIndex == classAndMethodPath.length() - 1) {
@@ -55,6 +56,9 @@ public class CustomPermissionEvaluator implements PermissionEvaluator {
   }
 
   private boolean hasPrivilege(Authentication auth, Method method, String permission) {
+    if (method == null) {
+      return false;
+    }
     // Logic for checking permissions and roles
     SimpleGrantedAuthority authority = new SimpleGrantedAuthority(permission);
     return auth.getAuthorities().contains(authority);

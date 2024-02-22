@@ -31,7 +31,7 @@ public class LesseeServiceImpl implements LesseeService {
   @Override
   public Lessee findById(UUID uuid) {
     return repository.findById(uuid)
-        .orElseThrow(() -> new ObjectNotFoundException("Não encontrado (Lessee)."));
+      .orElseThrow(() -> new ObjectNotFoundException("Não encontrado (Lessee)."));
   }
 
   @Override

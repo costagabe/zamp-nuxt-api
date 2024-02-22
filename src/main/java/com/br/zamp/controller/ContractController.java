@@ -16,11 +16,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/contracts")
 @CrudPermission({
-    @CrudPermissionType(permission = Permission.CREATE_CONTRACTS, method = CrudMethod.CREATE),
-    @CrudPermissionType(permission = Permission.UPDATE_CONTRACTS, method = CrudMethod.UPDATE),
-    @CrudPermissionType(permission = Permission.READ_CONTRACTS, method = CrudMethod.READ),
-    @CrudPermissionType(permission = Permission.READ_ALL_CONTRACTS, method = CrudMethod.READ_ALL),
-    @CrudPermissionType(permission = Permission.DELETE_CONTRACTS, method = CrudMethod.DELETE)
+  @CrudPermissionType(permission = Permission.CREATE_CONTRACTS, method = CrudMethod.CREATE),
+  @CrudPermissionType(permission = Permission.UPDATE_CONTRACTS, method = CrudMethod.UPDATE),
+  @CrudPermissionType(permission = Permission.READ_CONTRACTS, method = CrudMethod.READ),
+  @CrudPermissionType(permission = Permission.READ_ALL_CONTRACTS, method = CrudMethod.READ_ALL),
+  @CrudPermissionType(permission = Permission.DELETE_CONTRACTS, method = CrudMethod.DELETE)
 })
 public class ContractController extends CrudController<Contract, CreateContractDTO, ReadAndUpdateContractDTO, ContractSpecification> {
 }

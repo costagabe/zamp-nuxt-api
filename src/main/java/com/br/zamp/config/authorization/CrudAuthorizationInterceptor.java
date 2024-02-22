@@ -54,47 +54,48 @@ public class CrudAuthorizationInterceptor implements HandlerInterceptor {
     return Optional.ofNullable(findAnnotation(clazz, CrudPermission.class));
   }
 
-private boolean isMethodListed(String method, CrudPermission crudAnnotation){
-  List<CrudPermissionType> permissionTypes = Arrays.stream(crudAnnotation.value()).toList();
+  private boolean isMethodListed(String method, CrudPermission crudAnnotation) {
+    List<CrudPermissionType> permissionTypes = Arrays.stream(crudAnnotation.value()).toList();
 
-  return permissionTypes
+    return permissionTypes
       .stream()
       .noneMatch(v -> v.method().getDescription().equals(method));
-}
+  }
 
   private boolean canContinue(Set<String> permissionSet) {
     return SecurityContextHolder
-        .getContext()
-        .getAuthentication()
-        .getAuthorities()
-        .stream()
-        .anyMatch(v -> permissionSet.contains(v.getAuthority()));
+      .getContext()
+      .getAuthentication()
+      .getAuthorities()
+      .stream()
+      .anyMatch(v -> permissionSet.contains(v.getAuthority()));
   }
 
   private Integer getUserLevel() {
     return SecurityContextHolder
-        .getContext()
-        .getAuthentication()
-        .getAuthorities()
-        .stream()
-        .filter(v -> v.getAuthority().contains("LEVEL_"))
-        .map(v -> v.getAuthority().replace("LEVEL_", ""))
-        .map(Integer::valueOf)
-        .findFirst()
-        .orElseThrow(() -> new ProfileLevelException("Conta sem nível no perfil."));
+      .getContext()
+      .getAuthentication()
+      .getAuthorities()
+      .stream()
+      .filter(v -> v.getAuthority().contains("LEVEL_"))
+      .map(v -> v.getAuthority().replace("LEVEL_", ""))
+      .map(Integer::valueOf)
+      .findFirst()
+      .orElseThrow(() -> new ProfileLevelException("Conta sem nível no perfil."));
   }
 
   private Set<String> populatePermissionSet(String method, CrudPermission crudAnnotation, Integer userLevel) {
     List<CrudPermissionType> permissionTypes = Arrays.stream(crudAnnotation.value()).toList();
 
     return permissionTypes
-        .stream()
-        .filter(v -> v.level() < userLevel)
-        .filter(v -> v.method().getDescription().equals(method))
-        .flatMap(v -> Arrays.stream(v.permission()).map(Permission::getAuthority))
-        .collect(Collectors.toSet());
+      .stream()
+      .filter(v -> v.level() < userLevel)
+      .filter(v -> v.method().getDescription().equals(method))
+      .flatMap(v -> Arrays.stream(v.permission()).map(Permission::getAuthority))
+      .collect(Collectors.toSet());
   }
 
+  @SuppressWarnings("all")
   private <A extends Annotation> A findAnnotation(Class<?> targetClass, @NonNull Class<A> annotationClass) {
     return AnnotationUtils.findAnnotation(targetClass, annotationClass);
   }

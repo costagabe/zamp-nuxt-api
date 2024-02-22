@@ -16,11 +16,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/lesees")
 @CrudPermission({
-    @CrudPermissionType(permission = Permission.CREATE_LESSEES, method = CrudMethod.CREATE),
-    @CrudPermissionType(permission = Permission.UPDATE_LESSEES, method = CrudMethod.UPDATE),
-    @CrudPermissionType(permission = Permission.READ_LESSEES, method = CrudMethod.READ),
-    @CrudPermissionType(permission = Permission.READ_ALL_LESSEES, method = CrudMethod.READ_ALL),
-    @CrudPermissionType(permission = Permission.DELETE_LESSEES, method = CrudMethod.DELETE)
+  @CrudPermissionType(permission = Permission.CREATE_LESSEES, method = CrudMethod.CREATE),
+  @CrudPermissionType(permission = Permission.UPDATE_LESSEES, method = CrudMethod.UPDATE),
+  @CrudPermissionType(permission = Permission.READ_LESSEES, method = CrudMethod.READ),
+  @CrudPermissionType(permission = Permission.READ_ALL_LESSEES, method = CrudMethod.READ_ALL),
+  @CrudPermissionType(permission = Permission.DELETE_LESSEES, method = CrudMethod.DELETE)
 })
 public class LesseeController extends CrudController<Lessee, CreateLesseeDTO, ReadAndUpdateLesseeDTO, LesseeSpecification> {
 }

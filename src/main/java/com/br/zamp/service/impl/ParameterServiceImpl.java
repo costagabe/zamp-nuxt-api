@@ -31,7 +31,7 @@ public class ParameterServiceImpl implements ParameterService {
   @Override
   public Parameter findById(UUID uuid) {
     return repository.findById(uuid)
-        .orElseThrow(() -> new ObjectNotFoundException("Não encontrado (Parameter)."));
+      .orElseThrow(() -> new ObjectNotFoundException("Não encontrado (Parameter)."));
   }
 
   @Override

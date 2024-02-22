@@ -31,7 +31,7 @@ public class ContractServiceImpl implements ContractService {
   @Override
   public Contract findById(UUID uuid) {
     return repository.findById(uuid)
-        .orElseThrow(() -> new ObjectNotFoundException("Não encontrado (Contract)."));
+      .orElseThrow(() -> new ObjectNotFoundException("Não encontrado (Contract)."));
   }
 
   @Override

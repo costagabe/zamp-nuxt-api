@@ -31,7 +31,7 @@ public class BuildingServiceImpl implements BuildingService {
   @Override
   public Building findById(UUID uuid) {
     return repository.findById(uuid)
-        .orElseThrow(() -> new ObjectNotFoundException("Não encontrado (Building)."));
+      .orElseThrow(() -> new ObjectNotFoundException("Não encontrado (Building)."));
   }
 
   @Override

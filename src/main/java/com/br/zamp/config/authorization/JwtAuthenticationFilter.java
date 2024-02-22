@@ -18,14 +18,13 @@ import java.io.IOException;
 @Component
 @Setter(onMethod_ = @Autowired)
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
-  JpaUserDetailsService userDetailsServiceImpl;
-
   private static final String AUTH_URL = "/auth";
   private static final String AUTHORIZATION = "Authorization";
+  JpaUserDetailsService userDetailsServiceImpl;
 
   @Override
-  protected void doFilterInternal (HttpServletRequest request, @NonNull HttpServletResponse
-      response, @NonNull FilterChain filterChain) throws ServletException, IOException {
+  protected void doFilterInternal(HttpServletRequest request, @NonNull HttpServletResponse
+    response, @NonNull FilterChain filterChain) throws ServletException, IOException {
 
     if (request.getRequestURI().equals(AUTH_URL) && request.getMethod().equals("POST")) {
       filterChain.doFilter(request, response);

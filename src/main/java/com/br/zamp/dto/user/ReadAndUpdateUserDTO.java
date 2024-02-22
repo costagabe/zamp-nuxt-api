@@ -11,6 +11,6 @@ public record ReadAndUpdateUserDTO(
   String name,
   String email,
   UserSituation situation,
-  @NotEmpty(message = "O usuário deve possuir ao menos um perfil.")  Set<UUID> profileIds,
+  @NotEmpty(message = "O usuário deve possuir ao menos um perfil.") Set<UUID> profileIds,
   String profile) {
 }

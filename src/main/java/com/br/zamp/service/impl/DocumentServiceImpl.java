@@ -31,7 +31,7 @@ public class DocumentServiceImpl implements DocumentService {
   @Override
   public Document findById(UUID uuid) {
     return repository.findById(uuid)
-        .orElseThrow(() -> new ObjectNotFoundException("Não encontrado (Document)."));
+      .orElseThrow(() -> new ObjectNotFoundException("Não encontrado (Document)."));
   }
 
   @Override

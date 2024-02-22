@@ -31,7 +31,7 @@ public class LessorServiceImpl implements LessorService {
   @Override
   public Lessor findById(UUID uuid) {
     return repository.findById(uuid)
-        .orElseThrow(() -> new ObjectNotFoundException("Não encontrado (Lessor)."));
+      .orElseThrow(() -> new ObjectNotFoundException("Não encontrado (Lessor)."));
   }
 
   @Override

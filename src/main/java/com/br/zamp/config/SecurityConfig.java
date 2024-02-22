@@ -62,24 +62,24 @@ public class SecurityConfig {
   @Bean
   SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
     http
-        .csrf(AbstractHttpConfigurer::disable)
+      .csrf(AbstractHttpConfigurer::disable)
 //        .cors(AbstractHttpConfigurer::disable)
-        .headers(httpSecurityHeadersConfigurer -> httpSecurityHeadersConfigurer
-            .frameOptions(HeadersConfigurer.FrameOptionsConfig::disable)
-        )
-        .authorizeHttpRequests(auth -> auth
-            .requestMatchers("/h2-console/**").permitAll()
-            .requestMatchers("/auth").permitAll()
-            .anyRequest().authenticated()
-        )
-        .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-        .addFilterBefore(jwtAuthenticationFilter, ChannelProcessingFilter.class)
-        .oauth2ResourceServer(conf -> conf
-            .jwt(jwt -> jwt.decoder(jwtDecoder()))
-        )
-        .exceptionHandling(ex -> ex.authenticationEntryPoint(customAuthenticationEntryPoint()))
-        .userDetailsService(userDetailsService)
-        .httpBasic(Customizer.withDefaults());
+      .headers(httpSecurityHeadersConfigurer -> httpSecurityHeadersConfigurer
+        .frameOptions(HeadersConfigurer.FrameOptionsConfig::disable)
+      )
+      .authorizeHttpRequests(auth -> auth
+        .requestMatchers("/h2-console/**").permitAll()
+        .requestMatchers("/auth").permitAll()
+        .anyRequest().authenticated()
+      )
+      .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+      .addFilterBefore(jwtAuthenticationFilter, ChannelProcessingFilter.class)
+      .oauth2ResourceServer(conf -> conf
+        .jwt(jwt -> jwt.decoder(jwtDecoder()))
+      )
+      .exceptionHandling(ex -> ex.authenticationEntryPoint(customAuthenticationEntryPoint()))
+      .userDetailsService(userDetailsService)
+      .httpBasic(Customizer.withDefaults());
     return http.build();
   }
 

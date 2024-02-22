@@ -8,8 +8,7 @@ import lombok.Getter;
 public enum PermissionType {
   REQUISICAO("Requisição", 1),
   MENU("Menu", 2),
-  GERAL("Geral", 3)
-  ;
+  GERAL("Geral", 3);
 
   private final String descricao;
   private final Integer id;

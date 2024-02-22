@@ -1,8 +1,8 @@
 package com.br.zamp.config;
 
 import com.br.zamp.config.authentication.AuthenticationErrorException;
-import com.br.zamp.config.dto.ErrorResponse;
 import com.br.zamp.config.dto.ApiResponse;
+import com.br.zamp.config.dto.ErrorResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

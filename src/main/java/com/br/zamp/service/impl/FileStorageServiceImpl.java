@@ -31,7 +31,7 @@ public class FileStorageServiceImpl implements FileStorageService {
   @Override
   public FileStorage findById(UUID uuid) {
     return repository.findById(uuid)
-        .orElseThrow(() -> new ObjectNotFoundException("Não encontrado (FileStorage)."));
+      .orElseThrow(() -> new ObjectNotFoundException("Não encontrado (FileStorage)."));
   }
 
   @Override

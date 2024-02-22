@@ -31,7 +31,7 @@ public class AddressServiceImpl implements AddressService {
   @Override
   public Address findById(UUID uuid) {
     return repository.findById(uuid)
-        .orElseThrow(() -> new ObjectNotFoundException("Não encontrado (Address)."));
+      .orElseThrow(() -> new ObjectNotFoundException("Não encontrado (Address)."));
   }
 
   @Override

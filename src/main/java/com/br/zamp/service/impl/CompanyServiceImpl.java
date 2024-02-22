@@ -31,7 +31,7 @@ public class CompanyServiceImpl implements CompanyService {
   @Override
   public Company findById(UUID uuid) {
     return repository.findById(uuid)
-        .orElseThrow(() -> new ObjectNotFoundException("Não encontrado (Company)."));
+      .orElseThrow(() -> new ObjectNotFoundException("Não encontrado (Company)."));
   }
 
   @Override

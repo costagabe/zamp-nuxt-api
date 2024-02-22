@@ -6,7 +6,7 @@ import jakarta.servlet.http.HttpServletRequest;
 public class SecurityUtil {
   private static final String ACCESS_TOKEN = "accessToken";
 
-  public static String extractTokenFromCookies (HttpServletRequest request){
+  public static String extractTokenFromCookies(HttpServletRequest request) {
     if (request.getCookies() != null) {
       for (Cookie cookie : request.getCookies()) {
         if (cookie.getName().equals(ACCESS_TOKEN)) {

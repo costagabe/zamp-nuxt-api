@@ -31,7 +31,7 @@ public class RentServiceImpl implements RentService {
   @Override
   public Rent findById(UUID uuid) {
     return repository.findById(uuid)
-        .orElseThrow(() -> new ObjectNotFoundException("Não encontrado (Rent)."));
+      .orElseThrow(() -> new ObjectNotFoundException("Não encontrado (Rent)."));
   }
 
   @Override

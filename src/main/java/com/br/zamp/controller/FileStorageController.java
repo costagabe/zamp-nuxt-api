@@ -1,6 +1,5 @@
 package com.br.zamp.controller;
 
-import com.br.zamp.controller.CrudController;
 import com.br.zamp.controller.specifications.FileStorageSpecification;
 import com.br.zamp.domain.FileStorage;
 import com.br.zamp.dto.file.CreateFileStorageDTO;
@@ -17,11 +16,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/file-storages")
 @CrudPermission({
-    @CrudPermissionType(permission = Permission.CREATE_FILE_STORAGES, method = CrudMethod.CREATE),
-    @CrudPermissionType(permission = Permission.UPDATE_FILE_STORAGES, method = CrudMethod.UPDATE),
-    @CrudPermissionType(permission = Permission.READ_FILE_STORAGES, method = CrudMethod.READ),
-    @CrudPermissionType(permission = Permission.READ_ALL_FILE_STORAGES, method = CrudMethod.READ_ALL),
-    @CrudPermissionType(permission = Permission.DELETE_FILE_STORAGES, method = CrudMethod.DELETE)
+  @CrudPermissionType(permission = Permission.CREATE_FILE_STORAGES, method = CrudMethod.CREATE),
+  @CrudPermissionType(permission = Permission.UPDATE_FILE_STORAGES, method = CrudMethod.UPDATE),
+  @CrudPermissionType(permission = Permission.READ_FILE_STORAGES, method = CrudMethod.READ),
+  @CrudPermissionType(permission = Permission.READ_ALL_FILE_STORAGES, method = CrudMethod.READ_ALL),
+  @CrudPermissionType(permission = Permission.DELETE_FILE_STORAGES, method = CrudMethod.DELETE)
 })
 public class FileStorageController extends CrudController<FileStorage, CreateFileStorageDTO, ReadAndUpdateFileStorageDTO, FileStorageSpecification> {
 }

@@ -16,11 +16,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/rents")
 @CrudPermission({
-    @CrudPermissionType(permission = Permission.CREATE_RENTS, method = CrudMethod.CREATE),
-    @CrudPermissionType(permission = Permission.UPDATE_RENTS, method = CrudMethod.UPDATE),
-    @CrudPermissionType(permission = Permission.READ_RENTS, method = CrudMethod.READ),
-    @CrudPermissionType(permission = Permission.READ_ALL_RENTS, method = CrudMethod.READ_ALL),
-    @CrudPermissionType(permission = Permission.DELETE_RENTS, method = CrudMethod.DELETE)
+  @CrudPermissionType(permission = Permission.CREATE_RENTS, method = CrudMethod.CREATE),
+  @CrudPermissionType(permission = Permission.UPDATE_RENTS, method = CrudMethod.UPDATE),
+  @CrudPermissionType(permission = Permission.READ_RENTS, method = CrudMethod.READ),
+  @CrudPermissionType(permission = Permission.READ_ALL_RENTS, method = CrudMethod.READ_ALL),
+  @CrudPermissionType(permission = Permission.DELETE_RENTS, method = CrudMethod.DELETE)
 })
 public class RentController extends CrudController<Rent, CreateRentDTO, ReadAndUpdateRentDTO, RentSpecification> {
 }

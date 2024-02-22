@@ -19,16 +19,14 @@ import java.util.Set;
 @SQLRestriction("is_deleted is false")
 public class Entry extends Base {
 
+  @ManyToMany(mappedBy = "entries")
+  private final Set<Company> companies = new HashSet<>();
   @Column(name = "entry_value")
   private Float value;
   @Enumerated(EnumType.STRING)
   private EntryType type;
   private LocalDate date;
   private String history;
-
-  @ManyToMany(mappedBy = "entries")
-  private final Set<Company> companies = new HashSet<>();
-
   @ManyToOne
   private Account financialAccount;
 

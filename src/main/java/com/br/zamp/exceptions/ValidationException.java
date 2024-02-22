@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 @Getter
-public class ValidationException extends RuntimeException{
+public class ValidationException extends RuntimeException {
   protected Map<String, List<String>> validations = new HashMap<>();
 
   public ValidationException(String message) {

@@ -16,11 +16,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/buildings")
 @CrudPermission({
-    @CrudPermissionType(permission = Permission.CREATE_BUILDINGS, method = CrudMethod.CREATE),
-    @CrudPermissionType(permission = Permission.UPDATE_BUILDINGS, method = CrudMethod.UPDATE),
-    @CrudPermissionType(permission = Permission.READ_BUILDINGS, method = CrudMethod.READ),
-    @CrudPermissionType(permission = Permission.READ_ALL_BUILDINGS, method = CrudMethod.READ_ALL),
-    @CrudPermissionType(permission = Permission.DELETE_BUILDINGS, method = CrudMethod.DELETE)
+  @CrudPermissionType(permission = Permission.CREATE_BUILDINGS, method = CrudMethod.CREATE),
+  @CrudPermissionType(permission = Permission.UPDATE_BUILDINGS, method = CrudMethod.UPDATE),
+  @CrudPermissionType(permission = Permission.READ_BUILDINGS, method = CrudMethod.READ),
+  @CrudPermissionType(permission = Permission.READ_ALL_BUILDINGS, method = CrudMethod.READ_ALL),
+  @CrudPermissionType(permission = Permission.DELETE_BUILDINGS, method = CrudMethod.DELETE)
 })
 public class BuildingController extends CrudController<Building, CreateBuildingDTO, ReadAndUpdateBuildingDTO, BuildingSpecification> {
 }

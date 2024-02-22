@@ -16,8 +16,7 @@ import java.util.List;
 @SQLDelete(sql = "UPDATE lessor SET is_deleted = true WHERE id=?")
 @SQLRestriction("is_deleted is false")
 public class Lessor extends Base { // Locador (dono do imóvel)
-  private String name;
-
   @ManyToMany(mappedBy = "lessors")
   private final List<Company> companies = new ArrayList<>();
+  private String name;
 }

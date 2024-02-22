@@ -29,22 +29,21 @@ public class UserProfile extends Base {
   @ManyToMany(mappedBy = "userProfiles")
   private Set<Company> companies;
 
-  @CollectionTable(joinColumns = {@JoinColumn(name = "user_profile_id", referencedColumnName = "id", nullable = false)}, name = "user_profile_permission")
-  @Column(name = "permission", nullable = false)
-  @ElementCollection(fetch = FetchType.LAZY)
+  @ElementCollection(targetClass = Permission.class, fetch = FetchType.LAZY)
   @Enumerated(EnumType.STRING)
   private Set<Permission> permissions = new HashSet<>();
 
   public String getName() {
     return String.format("ROLE_%s", name);
   }
+
   public String getOriginalName() {
     return name;
   }
 
   public Set<Permission> getMenus() {
     return permissions.stream()
-        .filter(permission -> permission.getType() == PermissionType.MENU)
-        .collect(Collectors.toSet());
+      .filter(permission -> permission.getType() == PermissionType.MENU)
+      .collect(Collectors.toSet());
   }
 }

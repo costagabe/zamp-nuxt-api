@@ -19,6 +19,8 @@ import java.util.Set;
 @SQLRestriction("is_deleted is false")
 public class Rent extends Base {
 
+  @ManyToMany(mappedBy = "rents")
+  private final Set<Company> companies = new HashSet<>();
   private LocalDate paymentDay;
   private LocalDate contractInitialDay;
   private LocalDate contractEndDay;
@@ -26,15 +28,10 @@ public class Rent extends Base {
   @Enumerated(EnumType.STRING)
   private PaymentType paymentType;
   private String assurance; // Garantia
-  
   @ManyToOne
   private Building building;
-
   @Column(name = "rent_value")
   private Float value;
-
-  @ManyToMany(mappedBy = "rents")
-  private final Set<Company> companies = new HashSet<>();
 
 
 }

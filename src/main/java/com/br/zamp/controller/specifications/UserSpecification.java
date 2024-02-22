@@ -8,8 +8,8 @@ import org.springframework.data.jpa.domain.Specification;
 
 
 @Or({
-    @Spec(path = "name", spec = Like.class),
-    @Spec(path = "email", spec = Like.class)
+  @Spec(path = "name", spec = Like.class),
+  @Spec(path = "email", spec = Like.class)
 })
 public interface UserSpecification extends Specification<User> {
 }

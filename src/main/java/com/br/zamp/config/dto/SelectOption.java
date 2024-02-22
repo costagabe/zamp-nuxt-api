@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class SelectOption <T> {
+public class SelectOption<T> {
   private T value;
   private String label;
 }

@@ -16,11 +16,9 @@ import java.util.Set;
 @SQLDelete(sql = "UPDATE lessee SET is_deleted = true WHERE id=?")
 @SQLRestriction("is_deleted is false")
 public class Lessee extends Base { // Locatário
-  private String name;
-
   @ManyToMany
   private final Set<Building> buildings = new HashSet<>();
-
   @ManyToMany(mappedBy = "lessees")
   private final Set<Company> companies = new HashSet<>();
+  private String name;
 }

@@ -16,8 +16,8 @@ public class JpaUserDetailsService implements UserDetailsService {
   @Override
   public AuthUser loadUserByUsername(String username) throws UsernameNotFoundException {
     return userRepository.findByEmail(username)
-        .map(AuthUser::new)
-        .orElseThrow(() -> new BadCredentialsException("Usuário inexistente ou senha inválida"));
+      .map(AuthUser::new)
+      .orElseThrow(() -> new BadCredentialsException("Usuário inexistente ou senha inválida"));
   }
 
 }

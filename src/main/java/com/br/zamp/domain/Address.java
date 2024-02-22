@@ -14,13 +14,12 @@ import java.util.Set;
 public class Address extends Base {
 
 
+  @ManyToMany(mappedBy = "adresses")
+  private final Set<Company> companies = new HashSet<>();
   private String street;
   private String neighbourhood;
   private String city;
   private String cep;
   private String number;
   private String complement;
-
-  @ManyToMany(mappedBy = "adresses")
-  private final Set<Company> companies = new HashSet<>();
 }

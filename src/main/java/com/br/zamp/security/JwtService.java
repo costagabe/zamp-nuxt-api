@@ -27,21 +27,21 @@ public class JwtService {
     rolesAndPermissions.addAll(user.getPermissions());
 
     String scope = rolesAndPermissions.stream()
-        .map(GrantedAuthority::getAuthority)
-        .collect(Collectors
-            .joining(" "));
+      .map(GrantedAuthority::getAuthority)
+      .collect(Collectors
+        .joining(" "));
 
     JwtClaimsSet claims = JwtClaimsSet.builder()
-        .issuer("spring-security-jwt")
-        .issuedAt(now)
-        .expiresAt(now.plusSeconds(expiry))
-        .subject(user.getUsername())
-        .claim("scope", scope)
-        .build();
+      .issuer("spring-security-jwt")
+      .issuedAt(now)
+      .expiresAt(now.plusSeconds(expiry))
+      .subject(user.getUsername())
+      .claim("scope", scope)
+      .build();
 
     return encoder.encode(
-            JwtEncoderParameters.from(claims))
-        .getTokenValue();
+        JwtEncoderParameters.from(claims))
+      .getTokenValue();
   }
 
 }

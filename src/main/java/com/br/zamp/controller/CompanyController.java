@@ -16,11 +16,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/companies")
 @CrudPermission({
-    @CrudPermissionType(permission = Permission.CREATE_COMPANIES, method = CrudMethod.CREATE),
-    @CrudPermissionType(permission = Permission.UPDATE_COMPANIES, method = CrudMethod.UPDATE),
-    @CrudPermissionType(permission = Permission.READ_COMPANIES, method = CrudMethod.READ),
-    @CrudPermissionType(permission = Permission.READ_ALL_COMPANIES, method = CrudMethod.READ_ALL),
-    @CrudPermissionType(permission = Permission.DELETE_COMPANIES, method = CrudMethod.DELETE)
+  @CrudPermissionType(permission = Permission.CREATE_COMPANIES, method = CrudMethod.CREATE),
+  @CrudPermissionType(permission = Permission.UPDATE_COMPANIES, method = CrudMethod.UPDATE),
+  @CrudPermissionType(permission = Permission.READ_COMPANIES, method = CrudMethod.READ),
+  @CrudPermissionType(permission = Permission.READ_ALL_COMPANIES, method = CrudMethod.READ_ALL),
+  @CrudPermissionType(permission = Permission.DELETE_COMPANIES, method = CrudMethod.DELETE)
 })
 public class CompanyController extends CrudController<Company, CreateCompanyDTO, ReadAndUpdateCompanyDTO, CompanySpecification> {
 }

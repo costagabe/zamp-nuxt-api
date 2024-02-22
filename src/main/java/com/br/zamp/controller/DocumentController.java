@@ -16,11 +16,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/documents")
 @CrudPermission({
-    @CrudPermissionType(permission = Permission.CREATE_DOCUMENTS, method = CrudMethod.CREATE),
-    @CrudPermissionType(permission = Permission.UPDATE_DOCUMENTS, method = CrudMethod.UPDATE),
-    @CrudPermissionType(permission = Permission.READ_DOCUMENTS, method = CrudMethod.READ),
-    @CrudPermissionType(permission = Permission.READ_ALL_DOCUMENTS, method = CrudMethod.READ_ALL),
-    @CrudPermissionType(permission = Permission.DELETE_DOCUMENTS, method = CrudMethod.DELETE)
+  @CrudPermissionType(permission = Permission.CREATE_DOCUMENTS, method = CrudMethod.CREATE),
+  @CrudPermissionType(permission = Permission.UPDATE_DOCUMENTS, method = CrudMethod.UPDATE),
+  @CrudPermissionType(permission = Permission.READ_DOCUMENTS, method = CrudMethod.READ),
+  @CrudPermissionType(permission = Permission.READ_ALL_DOCUMENTS, method = CrudMethod.READ_ALL),
+  @CrudPermissionType(permission = Permission.DELETE_DOCUMENTS, method = CrudMethod.DELETE)
 })
 public class DocumentController extends CrudController<Document, CreateDocumentDTO, ReadAndUpdateDocumentDTO, DocumentSpecification> {
 }

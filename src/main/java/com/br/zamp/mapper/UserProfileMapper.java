@@ -7,13 +7,13 @@ import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
 public abstract class UserProfileMapper implements BaseMapper<UserProfile, CreateUserProfileDTO, ReadAndUpdateUserProfileDTO> {
-    @Override
-    public ReadAndUpdateUserProfileDTO toReadAndUpdateDTO(UserProfile profile) {
+  @Override
+  public ReadAndUpdateUserProfileDTO toReadAndUpdateDTO(UserProfile profile) {
 
-        return new ReadAndUpdateUserProfileDTO(
-                profile.getId(),
-                profile.getOriginalName(),
-                profile.getLevel()
-        );
-    }
+    return new ReadAndUpdateUserProfileDTO(
+      profile.getId(),
+      profile.getOriginalName(),
+      profile.getLevel()
+    );
+  }
 }

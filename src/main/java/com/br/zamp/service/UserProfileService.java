@@ -7,7 +7,8 @@ import com.br.zamp.domain.UserProfile;
 import java.util.Set;
 import java.util.UUID;
 
-public interface UserProfileService extends CrudService<UserProfile>{
+public interface UserProfileService extends CrudService<UserProfile> {
   Set<SelectOption<UUID>> getUserProfileSelectList(User user);
+
   Set<UserProfile> findByIdIn(Set<UUID> userProfileIds);
 }

@@ -37,11 +37,11 @@ public class AuthenticationController {
   @PostMapping
   public ResponseEntity<?> login(@RequestBody AuthDTO.LoginRequest userLogin, HttpServletResponse response) {
     Authentication authentication =
-        authenticationManager
-            .authenticate(new UsernamePasswordAuthenticationToken(
-                userLogin.username(),
-                userLogin.password())
-            );
+      authenticationManager
+        .authenticate(new UsernamePasswordAuthenticationToken(
+          userLogin.username(),
+          userLogin.password())
+        );
 
     SecurityContextHolder.getContext().setAuthentication(authentication);
 
@@ -52,11 +52,11 @@ public class AuthenticationController {
     AuthDTO.Response responseDTO = new AuthDTO.Response("User logged in successfully", token);
 
     ResponseCookie cookie = ResponseCookie.from("accessToken", token)
-        .httpOnly(true)
-        .secure(false)
-        .path("/")
-        .maxAge(Duration.ofDays(1))
-        .build();
+      .httpOnly(true)
+      .secure(false)
+      .path("/")
+      .maxAge(Duration.ofDays(1))
+      .build();
 
     response.addHeader(HttpHeaders.SET_COOKIE, cookie.toString());
 

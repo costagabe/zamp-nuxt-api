@@ -16,11 +16,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/lessors")
 @CrudPermission({
-    @CrudPermissionType(permission = Permission.CREATE_LESSORS, method = CrudMethod.CREATE),
-    @CrudPermissionType(permission = Permission.UPDATE_LESSORS, method = CrudMethod.UPDATE),
-    @CrudPermissionType(permission = Permission.READ_LESSORS, method = CrudMethod.READ),
-    @CrudPermissionType(permission = Permission.READ_ALL_LESSORS, method = CrudMethod.READ_ALL),
-    @CrudPermissionType(permission = Permission.DELETE_LESSORS, method = CrudMethod.DELETE)
+  @CrudPermissionType(permission = Permission.CREATE_LESSORS, method = CrudMethod.CREATE),
+  @CrudPermissionType(permission = Permission.UPDATE_LESSORS, method = CrudMethod.UPDATE),
+  @CrudPermissionType(permission = Permission.READ_LESSORS, method = CrudMethod.READ),
+  @CrudPermissionType(permission = Permission.READ_ALL_LESSORS, method = CrudMethod.READ_ALL),
+  @CrudPermissionType(permission = Permission.DELETE_LESSORS, method = CrudMethod.DELETE)
 })
 public class LessorController extends CrudController<Lessor, CreateLessorDTO, ReadAndUpdateLessorDTO, LessorSpecification> {
 }

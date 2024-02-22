@@ -1,6 +1,9 @@
 package com.br.zamp.domain;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -13,17 +16,13 @@ import java.util.Set;
 @Data
 public class Building extends Base {
 
-  private LocalDate capitationDate;
-
   @ManyToMany(mappedBy = "buildings")
   private final Set<Lessee> lessees = new HashSet<>();
-
   @OneToMany
   private final Set<Rent> rents = new HashSet<>();
-
   @OneToMany
   private final Set<FileStorage> photos = new HashSet<>();
-
+  private LocalDate capitationDate;
   @ManyToOne
   private Address address;
 
