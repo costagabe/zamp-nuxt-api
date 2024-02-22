@@ -58,17 +58,11 @@ public enum Permission implements GrantedAuthority {
   READ_ALL_FILE_STORAGES("Listagem de arquivos", PermissionType.REQUISICAO),
   DELETE_FILE_STORAGES("Remoção de arquivos", PermissionType.REQUISICAO),
 
-  CREATE_LESSEES("Criação de locatários", PermissionType.REQUISICAO),
-  UPDATE_LESSEES("Atualização de locatários", PermissionType.REQUISICAO),
-  READ_LESSEES("Listagem de locatários", PermissionType.REQUISICAO),
-  READ_ALL_LESSEES("Listagem de locatários", PermissionType.REQUISICAO),
-  DELETE_LESSEES("Remoção de locatários", PermissionType.REQUISICAO),
-
-  CREATE_LESSORS("Criação de locadores", PermissionType.REQUISICAO),
-  UPDATE_LESSORS("Atualização de locadores", PermissionType.REQUISICAO),
-  READ_LESSORS("Listagem de locadores", PermissionType.REQUISICAO),
-  READ_ALL_LESSORS("Listagem de locadores", PermissionType.REQUISICAO),
-  DELETE_LESSORS("Remoção de locadores", PermissionType.REQUISICAO),
+  CREATE_CLIENTS("Criação de clientes", PermissionType.REQUISICAO),
+  UPDATE_CLIENTS("Atualização de clientes", PermissionType.REQUISICAO),
+  READ_CLIENTS("Listagem de clientes", PermissionType.REQUISICAO),
+  READ_ALL_CLIENTS("Listagem de clientes", PermissionType.REQUISICAO),
+  DELETE_CLIENTS("Remoção de clientes", PermissionType.REQUISICAO),
 
   CREATE_PARAMETERS("Criação de parâmetros", PermissionType.REQUISICAO),
   UPDATE_PARAMETERS("Atualização de parâmetros", PermissionType.REQUISICAO),

@@ -15,14 +15,20 @@ import java.util.Set;
 @Entity
 @Data
 public class Building extends Base {
+  private LocalDate capitationDate;
+
+  @ManyToOne
+  private Client client;
 
   @ManyToMany(mappedBy = "buildings")
-  private final Set<Lessee> lessees = new HashSet<>();
+  private final Set<Client> clients = new HashSet<>();
+
   @OneToMany
   private final Set<Rent> rents = new HashSet<>();
+
   @OneToMany
   private final Set<FileStorage> photos = new HashSet<>();
-  private LocalDate capitationDate;
+
   @ManyToOne
   private Address address;
 

@@ -1,10 +1,7 @@
 package com.br.zamp.domain;
 
 import com.br.zamp.domain.enums.DocumentType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.SQLDelete;
@@ -19,9 +16,14 @@ import java.util.List;
 @SQLDelete(sql = "UPDATE document SET is_deleted = true WHERE id=?")
 @SQLRestriction("is_deleted is false")
 public class Document extends Base {
+  private String name;
+
+  @ManyToOne
+  private Client client;
+
   @ManyToMany(mappedBy = "documents")
   private final List<Company> companies = new ArrayList<>();
+
   @Enumerated(EnumType.STRING)
   private DocumentType type;
-  private String name;
 }

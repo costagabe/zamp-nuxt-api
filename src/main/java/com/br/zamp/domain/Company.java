@@ -42,10 +42,7 @@ public class Company extends Base {
   private Set<FileStorage> fileStorages;
 
   @ManyToMany
-  private Set<Lessee> lessees;
-
-  @ManyToMany
-  private Set<Lessor> lessors;
+  private Set<Client> clients;
 
   @ManyToMany
   private Set<Parameter> parameters = new HashSet<>();

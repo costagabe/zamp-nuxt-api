@@ -1,9 +1,9 @@
 package com.br.zamp.service.impl;
 
-import com.br.zamp.domain.Lessor;
+import com.br.zamp.domain.Client;
 import com.br.zamp.exceptions.ObjectNotFoundException;
-import com.br.zamp.repository.LessorRepository;
-import com.br.zamp.service.LessorService;
+import com.br.zamp.repository.ClientRepository;
+import com.br.zamp.service.ClientService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -14,28 +14,28 @@ import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
-public class LessorServiceImpl implements LessorService {
+public class ClientServiceImpl implements ClientService {
 
-  private final LessorRepository repository;
+  private final ClientRepository repository;
 
   @Override
-  public Lessor create(Lessor entity) {
+  public Client create(Client entity) {
     return repository.save(entity);
   }
 
   @Override
-  public void update(Lessor entity) {
+  public void update(Client entity) {
     repository.save(entity);
   }
 
   @Override
-  public Lessor findById(UUID uuid) {
+  public Client findById(UUID uuid) {
     return repository.findById(uuid)
-      .orElseThrow(() -> new ObjectNotFoundException("Não encontrado (Lessor)."));
+      .orElseThrow(() -> new ObjectNotFoundException("Não encontrado (Client)."));
   }
 
   @Override
-  public Page<Lessor> findAll(Specification<Lessor> specification, Pageable pageable) {
+  public Page<Client> findAll(Specification<Client> specification, Pageable pageable) {
     return repository.findAll(specification, pageable);
   }
 
