@@ -24,8 +24,8 @@ public class LessorServiceImpl implements LessorService {
   }
 
   @Override
-  public Lessor update(Lessor entity) {
-    return null;
+  public void update(Lessor entity) {
+    repository.save(entity);
   }
 
   @Override

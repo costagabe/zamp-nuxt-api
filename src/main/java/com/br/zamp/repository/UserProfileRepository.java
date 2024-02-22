@@ -17,13 +17,4 @@ public interface UserProfileRepository extends JpaRepository<UserProfile, UUID>,
   Set<UserProfile> findUserProfileByUserProfileLevel(@Param("level") Integer level);
 
   Set<UserProfile> findByIdIn(Set<UUID> ids);
-
-//  @Query("SELECT u FROM User u WHERE u NOT IN (SELECT u2 FROM UserProfile p JOIN p.users u2 WHERE p.id = :profileId)")
-//  Page<User> findUnlinkedUsers(@Param("profileId") Long id, Pageable pageable);
-//
-//  @Query("SELECT p from UserProfile p WHERE p.id IN (:ids)")
-//  List<UserProfile> findByIds(@Param("ids") List<Long> ids);
-//
-//  @Query("SELECT u from User u join u.userProfiles p WHERE p.id = :id")
-//  Page<User> findLinkedUsers(@Param("id") Long id, Pageable pageable);
 }

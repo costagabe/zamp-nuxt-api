@@ -1,5 +1,8 @@
 package com.br.zamp.domain.enums;
 
+import lombok.Getter;
+
+@Getter
 public enum Profile {
 
   ADMIN(1, "ROLE_ADMIN"),
@@ -26,14 +29,6 @@ public enum Profile {
     }
 
     throw new IllegalArgumentException("Id inválido: " + cod);
-  }
-
-  public int getCod() {
-    return cod;
-  }
-
-  public String getDescription() {
-    return description;
   }
 
 }

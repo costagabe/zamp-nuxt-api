@@ -24,9 +24,8 @@ public class AddressServiceImpl implements AddressService {
   }
 
   @Override
-  public Address update(Address entity) {
-    return null;
-  }
+  public void update(Address entity) {
+    repository.save(entity);  }
 
   @Override
   public Address findById(UUID uuid) {

@@ -24,8 +24,8 @@ public class FileStorageServiceImpl implements FileStorageService {
   }
 
   @Override
-  public FileStorage update(FileStorage entity) {
-    return null;
+  public void update(FileStorage entity) {
+    repository.save(entity);
   }
 
   @Override

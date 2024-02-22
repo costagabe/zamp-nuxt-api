@@ -24,8 +24,8 @@ public class LesseeServiceImpl implements LesseeService {
   }
 
   @Override
-  public Lessee update(Lessee entity) {
-    return null;
+  public void update(Lessee entity) {
+    repository.save(entity);
   }
 
   @Override

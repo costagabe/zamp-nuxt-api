@@ -1,5 +1,8 @@
 package com.br.zamp.domain.enums;
 
+import lombok.Getter;
+
+@Getter
 public enum UserSituation {
 
   ACTIVE(1, "Ativo"),
@@ -26,14 +29,6 @@ public enum UserSituation {
     }
 
     throw new IllegalArgumentException("Id inválido: " + cod);
-  }
-
-  public Integer getCod() {
-    return cod;
-  }
-
-  public String getDescription() {
-    return description;
   }
 
 }

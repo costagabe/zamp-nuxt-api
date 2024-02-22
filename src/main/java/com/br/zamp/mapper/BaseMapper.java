@@ -25,5 +25,5 @@ public interface BaseMapper<Entity, CreateDTO, ReadAndUpdateDTO> {
   @Mapping(target = "companies", ignore = true)
   Entity copy(Entity entity);
 
-  Entity update(Entity oldEntity, @MappingTarget Entity newEntity);
+  void update(Entity oldEntity, @MappingTarget Entity newEntity);
 }

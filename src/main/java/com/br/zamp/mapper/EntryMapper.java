@@ -33,6 +33,7 @@ public abstract class EntryMapper implements BaseMapper<Entry, CreateEntryDTO, R
 
   @Mapping(target = "date", ignore = true)
   @Mapping(target = "company", ignore = true)
+  @SuppressWarnings("UnmappedTargetProperties")
   public abstract Entry readAndUpdateDTOToEntity(ReadAndUpdateEntryDTO dto);
 
   public Account map(UUID classificationAccountId) {

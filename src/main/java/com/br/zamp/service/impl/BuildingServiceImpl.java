@@ -24,8 +24,8 @@ public class BuildingServiceImpl implements BuildingService {
   }
 
   @Override
-  public Building update(Building entity) {
-    return null;
+  public void update(Building entity) {
+    repository.save(entity);
   }
 
   @Override

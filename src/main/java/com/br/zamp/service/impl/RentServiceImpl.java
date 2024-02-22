@@ -24,8 +24,8 @@ public class RentServiceImpl implements RentService {
   }
 
   @Override
-  public Rent update(Rent entity) {
-    return null;
+  public void update(Rent entity) {
+    repository.save(entity);
   }
 
   @Override

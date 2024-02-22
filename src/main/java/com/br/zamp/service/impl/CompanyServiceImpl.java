@@ -24,8 +24,8 @@ public class CompanyServiceImpl implements CompanyService {
   }
 
   @Override
-  public Company update(Company entity) {
-    return null;
+  public void update(Company entity) {
+    repository.save(entity);
   }
 
   @Override

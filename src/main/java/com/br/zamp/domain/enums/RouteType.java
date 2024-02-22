@@ -1,5 +1,8 @@
 package com.br.zamp.domain.enums;
 
+import lombok.Getter;
+
+@Getter
 public enum RouteType {
 
   MENU(1, "Menu"),
@@ -27,14 +30,6 @@ public enum RouteType {
     }
 
     throw new IllegalArgumentException("Id inválido: " + cod);
-  }
-
-  public Integer getCod() {
-    return cod;
-  }
-
-  public String getDescription() {
-    return description;
   }
 
 }

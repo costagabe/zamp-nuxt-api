@@ -26,8 +26,8 @@ public class EntryServiceImpl implements EntryService {
   }
 
   @Override
-  public Entry update(Entry entity) {
-    return repository.save(entity);
+  public void update(Entry entity) {
+     repository.save(entity);
   }
 
   @Override

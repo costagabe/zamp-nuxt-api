@@ -56,6 +56,7 @@ public class EntryController {
     return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
   }
 
+  @SuppressWarnings("MVCPathVariableInspection")
   @GetMapping("/{id}")
   public ResponseEntity<ReadAndUpdateEntryDTO> findById(@PathVariable UUID id) {
     Entry entity = service.findById(id);
@@ -75,6 +76,7 @@ public class EntryController {
   }
 
   @DeleteMapping("/{id}")
+  @SuppressWarnings("MVCPathVariableInspection")
   ResponseEntity<?> delete(@PathVariable UUID id) {
     service.delete(id);
     return ResponseEntity.noContent().build();

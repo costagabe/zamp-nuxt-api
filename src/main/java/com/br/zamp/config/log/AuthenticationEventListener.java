@@ -1,6 +1,7 @@
 package com.br.zamp.config.log;
 
 
+import lombok.NonNull;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.context.ApplicationListener;
@@ -13,10 +14,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class AuthenticationEventListener implements ApplicationListener<AbstractAuthenticationEvent> {
 
-  private static Logger logger = LogManager.getLogger(AuthenticationEventListener.class);
+  private static final Logger logger = LogManager.getLogger(AuthenticationEventListener.class);
 
   @Override
-  public void onApplicationEvent(AbstractAuthenticationEvent authenticationEvent) {
+  public void onApplicationEvent(@NonNull AbstractAuthenticationEvent authenticationEvent) {
     if (authenticationEvent instanceof InteractiveAuthenticationSuccessEvent) {
       // ignores to prevent duplicate logging with AuthenticationSuccessEvent
       return;

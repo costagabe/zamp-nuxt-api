@@ -24,8 +24,8 @@ public class ContractServiceImpl implements ContractService {
   }
 
   @Override
-  public Contract update(Contract entity) {
-    return null;
+  public void update(Contract entity) {
+    repository.save(entity);
   }
 
   @Override

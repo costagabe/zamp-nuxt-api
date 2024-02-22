@@ -31,10 +31,9 @@ public class UserProfileServiceImpl implements UserProfileService {
   }
 
   @Override
-  public UserProfile update(UserProfile profile) {
+  public void update(UserProfile profile) {
     validateUserProfiles(profile);
-
-    return userProfileRepository.save(profile);
+    userProfileRepository.save(profile);
   }
 
   @Override

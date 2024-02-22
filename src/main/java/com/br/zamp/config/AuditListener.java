@@ -37,6 +37,7 @@ public class AuditListener {
     object.setCreatedBy(user == null ? null : user.getId());
   }
 
+  @SuppressWarnings("unchecked")
   @PreUpdate
   private <T extends Base> void beforeUpdate(T object) {
     if (object.isDeleted()) {

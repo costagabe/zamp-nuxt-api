@@ -24,8 +24,8 @@ public class ParameterServiceImpl implements ParameterService {
   }
 
   @Override
-  public Parameter update(Parameter entity) {
-    return null;
+  public void update(Parameter entity) {
+    repository.save(entity);
   }
 
   @Override

@@ -30,10 +30,10 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
-  public User update(User user) {
+  public void update(User user) {
     validateUserProfiles(user);
 
-    return userRepository.save(user);
+    userRepository.save(user);
   }
 
   @Override
