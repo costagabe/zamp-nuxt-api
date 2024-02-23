@@ -10,6 +10,6 @@ public enum PermissionType {
   MENU("Menu", 2),
   GERAL("Geral", 3);
 
-  private final String descricao;
+  private final String description;
   private final Integer id;
 }

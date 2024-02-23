@@ -50,16 +50,23 @@ public class User extends Base {
       .collect(Collectors.toSet());
   }
 
-  public Set<GrantedAuthority> fetchAndFlattenPermissions() {
+  public Set<Permission> fetchAndFlattenPermissions() {
     Set<Permission> permissions = getPermissionsFromUserProfile();
 
     var hasAllPermission = permissions.stream().anyMatch(permission -> permission == Permission.ALL);
 
-    Set<GrantedAuthority> ret = new HashSet<>(permissions);
+    Set<Permission> ret = new HashSet<>(permissions);
 
     if (hasAllPermission) {
       ret = new HashSet<>(List.of(Permission.values()));
     }
+
+    return ret;
+  }
+
+  public Set<GrantedAuthority> fetchAndFlattenGrantedAuthorities() {
+    Set<Permission> permissions = fetchAndFlattenPermissions();
+    Set<GrantedAuthority> ret = new HashSet<>(permissions);
 
     ret.add(new SimpleGrantedAuthority(String.format("LEVEL_%s", Optional.ofNullable(getMaxUserProfileLevel()).map(UserProfile::getLevel).orElse(0))));
 
@@ -74,15 +81,10 @@ public class User extends Base {
   }
 
   public Set<Permission> getUserMenus() {
-    Set<Permission> permissions = getPermissionsFromUserProfile();
-
-    var hasAllPermission = permissions.stream().anyMatch(permission -> permission == Permission.ALL);
+    Set<Permission> permissions = fetchAndFlattenPermissions();
 
     Set<Permission> ret = new HashSet<>(permissions);
 
-    if (hasAllPermission) {
-      ret = new HashSet<>(List.of(Permission.values()));
-    }
     return ret.stream()
       .filter(permission -> permission.getType().equals(PermissionType.MENU))
       .collect(Collectors.toSet());

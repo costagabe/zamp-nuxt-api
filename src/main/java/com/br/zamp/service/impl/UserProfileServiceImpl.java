@@ -1,7 +1,9 @@
 package com.br.zamp.service.impl;
 
 import com.br.zamp.config.dto.SelectOption;
+import com.br.zamp.domain.User;
 import com.br.zamp.domain.UserProfile;
+import com.br.zamp.dto.permission.PermissionDTO;
 import com.br.zamp.exceptions.ObjectNotFoundException;
 import com.br.zamp.exceptions.ProfileLevelException;
 import com.br.zamp.repository.UserProfileRepository;
@@ -81,6 +83,14 @@ public class UserProfileServiceImpl implements UserProfileService {
   @Override
   public Set<UserProfile> findByIdIn(Set<UUID> ids) {
     return userProfileRepository.findByIdIn(ids);
+  }
+
+  @Override
+  public Set<PermissionDTO> getUserProfilePermissionList(User user) {
+    return user.fetchAndFlattenPermissions()
+      .stream()
+      .map(v -> new PermissionDTO(v.toString(), v.getDescription(), v.getType().getDescription()))
+      .collect(Collectors.toSet());
   }
 
   private void validateUserProfiles(UserProfile profile) {

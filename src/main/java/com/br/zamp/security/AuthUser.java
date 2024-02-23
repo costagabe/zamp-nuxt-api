@@ -26,7 +26,7 @@ public class AuthUser implements UserDetails {
   }
 
   public Collection<? extends GrantedAuthority> getPermissions() {
-    return user.fetchAndFlattenPermissions();
+    return user.fetchAndFlattenGrantedAuthorities();
   }
 
   @Override
