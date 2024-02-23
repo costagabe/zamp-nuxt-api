@@ -35,7 +35,11 @@ public class CrudAuthorizationInterceptor implements HandlerInterceptor {
         if (canContinue(permissionSet)) {
           return true;
         } else {
-          throw new AuthorizationServiceException("Usuário sem autorização.");
+          Permission p = Permission.valueOf(permissionSet.stream()
+            .findFirst()
+            .map(v -> v.replace("PERM_", ""))
+            .orElseThrow());
+          throw new AuthorizationServiceException(String.format("Usuário sem autorização (%s)", p.getDescription()));
         }
       }
       return true;
@@ -46,7 +50,7 @@ public class CrudAuthorizationInterceptor implements HandlerInterceptor {
 
   private boolean shouldSkipAnnotationCheck(Object handler, CrudPermission crudAnnotation) {
     String method = ((HandlerMethod) handler).getMethod().getName();
-    return isMethodListed(method, crudAnnotation);
+    return !isMethodListed(method, crudAnnotation);
   }
 
   private Optional<CrudPermission> getHandlerCrudPermission(Object handler) {
@@ -59,7 +63,7 @@ public class CrudAuthorizationInterceptor implements HandlerInterceptor {
 
     return permissionTypes
       .stream()
-      .noneMatch(v -> v.method().getDescription().equals(method));
+      .anyMatch(v -> v.method().getDescription().equals(method));
   }
 
   private boolean canContinue(Set<String> permissionSet) {
