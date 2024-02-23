@@ -34,7 +34,7 @@ public class Client extends Base {
   private PersonType personType;
 
 
-  @OneToOne
+  @OneToOne(fetch = FetchType.LAZY)
   private Address address;
 
   @OneToMany

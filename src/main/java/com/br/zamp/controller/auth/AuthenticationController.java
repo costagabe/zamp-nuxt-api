@@ -34,6 +34,20 @@ public class AuthenticationController {
     return ResponseEntity.ok(authenticatedUser.getUser().getMaxUserProfileLevel().getLevel());
   }
 
+  @GetMapping("/logout")
+  public ResponseEntity<?> logout(HttpServletResponse response) {
+    ResponseCookie cookie = ResponseCookie.from("accessToken", "")
+      .httpOnly(true)
+      .secure(false)
+      .path("/")
+      .maxAge(Duration.ofDays(1))
+      .build();
+
+    response.addHeader(HttpHeaders.SET_COOKIE, cookie.toString());
+
+    return ResponseEntity.ok("User logged out successfully");
+  }
+
   @PostMapping
   public ResponseEntity<?> login(@RequestBody AuthDTO.LoginRequest userLogin, HttpServletResponse response) {
     Authentication authentication =
