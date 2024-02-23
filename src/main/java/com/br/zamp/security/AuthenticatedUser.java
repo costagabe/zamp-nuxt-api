@@ -19,11 +19,13 @@ import java.util.UUID;
 public class AuthenticatedUser {
   private final UUID userId;
   private final UserRepository userRepository;
+  private final Integer maxLevel;
 
   public AuthenticatedUser(UserRepository userRepository) {
     JwtAuthenticationToken jwtAuth = (JwtAuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
     Jwt jwt = (Jwt) jwtAuth.getPrincipal();
     this.userId = UUID.fromString(jwt.getClaims().get("id").toString());
+    this.maxLevel = ((Long) jwt.getClaims().get("maxLevel")).intValue();
 
     this.userRepository = userRepository;
   }

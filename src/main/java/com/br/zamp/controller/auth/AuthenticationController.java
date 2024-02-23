@@ -31,7 +31,7 @@ public class AuthenticationController {
     if (token == null) {
       return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
     }
-    return ResponseEntity.ok(authenticatedUser.getUser().getMaxUserProfileLevel().getLevel());
+    return ResponseEntity.ok(authenticatedUser.getMaxLevel());
   }
 
   @GetMapping("/logout")

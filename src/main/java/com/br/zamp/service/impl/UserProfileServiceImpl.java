@@ -1,7 +1,6 @@
 package com.br.zamp.service.impl;
 
 import com.br.zamp.config.dto.SelectOption;
-import com.br.zamp.domain.User;
 import com.br.zamp.domain.UserProfile;
 import com.br.zamp.exceptions.ObjectNotFoundException;
 import com.br.zamp.exceptions.ProfileLevelException;
@@ -44,7 +43,7 @@ public class UserProfileServiceImpl implements UserProfileService {
 
   @Override
   public Page<UserProfile> findAll(Specification<UserProfile> specification, Pageable pageable) {
-    var level = authenticatedUser.getUser().getMaxUserProfileLevel().getLevel();
+    var level = authenticatedUser.getMaxLevel();
 
     if (specification == null) {
       specification = (root, query, criteriaBuilder) ->
@@ -66,8 +65,8 @@ public class UserProfileServiceImpl implements UserProfileService {
   }
 
   @Override
-  public Set<SelectOption<UUID>> getUserProfileSelectList(User user) {
-    var profiles = userProfileRepository.findUserProfileByUserProfileLevel(user.getMaxUserProfileLevel().getLevel());
+  public Set<SelectOption<UUID>> getUserProfileSelectList(Integer maxLevel) {
+    var profiles = userProfileRepository.findUserProfileByUserProfileLevel(maxLevel);
 
     return profiles.stream().map(profile ->
         SelectOption
@@ -85,7 +84,7 @@ public class UserProfileServiceImpl implements UserProfileService {
   }
 
   private void validateUserProfiles(UserProfile profile) {
-    if (authenticatedUser.getUser().getMaxUserProfileLevel().getLevel() < profile.getLevel()) {
+    if (authenticatedUser.getMaxLevel() < profile.getLevel()) {
       throw new ProfileLevelException("Usuário não criar/editar ter um perfil com nível maior que o seu próprio.");
     }
 

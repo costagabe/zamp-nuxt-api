@@ -37,6 +37,7 @@ public class JwtService {
       .expiresAt(now.plusSeconds(expiry))
       .subject(user.getUsername())
       .claim("id", user.getUser().getId())
+      .claim("maxLevel", user.getUser().getMaxUserProfileLevel().getLevel())
       .claim("scope", scope)
       .build();
 

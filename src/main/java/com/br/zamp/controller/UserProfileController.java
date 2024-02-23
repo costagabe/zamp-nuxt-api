@@ -37,6 +37,6 @@ public class UserProfileController extends CrudController<UserProfile, CreateUse
 
   @GetMapping("/select-list")
   public ResponseEntity<Set<SelectOption<UUID>>> getUserProfilesSelect() {
-    return ResponseEntity.ok(userProfileService.getUserProfileSelectList(auth.getUser()));
+    return ResponseEntity.ok(userProfileService.getUserProfileSelectList(auth.getMaxLevel()));
   }
 }

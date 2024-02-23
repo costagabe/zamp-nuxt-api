@@ -53,7 +53,7 @@ public class UserServiceImpl implements UserService {
   }
 
   private void validateUserProfiles(User user) {
-    if (authenticatedUser.getUser().getMaxUserProfileLevel().getLevel() < user.getMaxUserProfileLevel().getLevel()) {
+    if (authenticatedUser.getMaxLevel() < user.getMaxUserProfileLevel().getLevel()) {
       throw new ProfileLevelException("Usuário não pode ter um perfil com nível maior que o seu.");
     }
   }
