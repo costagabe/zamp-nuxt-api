@@ -95,6 +95,7 @@ public enum Permission implements GrantedAuthority {
   COMPANIES_MENU("Menu de empresas", PermissionType.MENU),
   ACCOUNTS_MENU("Menu de contas do livro caixa", PermissionType.MENU),
   ENTRIES_MENU("Menu de lançamentos do livro caixa", PermissionType.MENU),
+  CLIENTS_MENU("Menu de clientes", PermissionType.MENU),
 
   ;
   private final String description;

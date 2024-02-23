@@ -3,9 +3,9 @@ package com.br.zamp.domain.enums;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
-public enum ClientType {
-  LESSEE("LESSEE"),
-  LESSOR("LESSOR"),
+public enum PersonType {
+  PF("Pessoa Física"),
+  PJ("Pessoa Jurídica"),
   ;
 
   private final String name;

@@ -1,6 +1,7 @@
 package com.br.zamp.domain;
 
 import com.br.zamp.domain.enums.ClientType;
+import com.br.zamp.domain.enums.PersonType;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -26,7 +27,12 @@ public class Client extends Base {
   private String rg;
 
   @Enumerated(EnumType.STRING)
-  private ClientType type;
+  @ElementCollection(targetClass = ClientType.class, fetch = FetchType.LAZY)
+  private Set<ClientType> types;
+
+  @Enumerated(EnumType.STRING)
+  private PersonType personType;
+
 
   @OneToOne
   private Address address;
