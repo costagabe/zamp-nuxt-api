@@ -27,23 +27,22 @@ public class Client extends Base {
   private String rg;
 
   @Enumerated(EnumType.STRING)
-  @ElementCollection(targetClass = ClientType.class, fetch = FetchType.LAZY)
-  private Set<ClientType> types;
+  @ElementCollection( targetClass = ClientType.class, fetch = FetchType.LAZY)
+  private Set<ClientType> clientTypes = new HashSet<>();
 
   @Enumerated(EnumType.STRING)
   private PersonType personType;
 
-
   @OneToOne(fetch = FetchType.LAZY)
   private Address address;
 
-  @OneToMany
+  @OneToMany(fetch = FetchType.LAZY)
   private Set<Document> documents;
 
-  @ManyToMany(mappedBy = "clients")
+  @ManyToMany(fetch = FetchType.LAZY, mappedBy = "clients")
   private final Set<Company> companies = new HashSet<>();
 
-  @ManyToMany
+  @ManyToMany(fetch = FetchType.LAZY)
   private final Set<Building> buildings = new HashSet<>();
 
 }

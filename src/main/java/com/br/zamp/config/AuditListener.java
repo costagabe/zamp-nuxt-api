@@ -32,9 +32,9 @@ public class AuditListener {
     }
 
     AuthenticatedUser auth = applicationContext.getBean(AuthenticatedUser.class);
-    var user = auth.getUser();
+    var userId = auth.getUserId();
 
-    object.setCreatedBy(user == null ? null : user.getId());
+    object.setCreatedBy(userId);
   }
 
   @SuppressWarnings("unchecked")
@@ -50,9 +50,9 @@ public class AuditListener {
     BaseMapper<T, Object, Object> mapper = applicationContext.getBean(className + "MapperImpl", BaseMapper.class);
     EntityManager entityManager = applicationContext.getBean(EntityManager.class);
     AuthenticatedUser auth = applicationContext.getBean(AuthenticatedUser.class);
-    var user = auth.getUser();
+    var userId = auth.getUserId();
 
-    if (user == null) {
+    if (userId == null) {
       return;
     }
 
@@ -75,13 +75,33 @@ public class AuditListener {
     mapper.update(newObject, entity);
 
     entity.setVersion(entity.getVersion() + 1);
-    entity.setUpdatedBy(auth.getUser().getId());
+    entity.setUpdatedBy(auth.getUserId());
     entity.setLastUpdatedAt(LocalDateTime.now());
   }
 
+  @SuppressWarnings("unchecked")
   @PreRemove
   private <T extends Base> void beforeRemove(T entity) {
-    System.out.println(entity);
+
+    if (entity.isDeleted() || SecurityContextHolder.getContext().getAuthentication() == null) {
+      return;
+    }
+    String className = toCamelCase(entity.getClass().getSimpleName());
+    JpaRepository<T, UUID> repository = applicationContext.getBean(className + "Repository", JpaRepository.class);
+    EntityManager entityManager = applicationContext.getBean(EntityManager.class);
+
+    AuthenticatedUser auth = applicationContext.getBean(AuthenticatedUser.class);
+    var userId = auth.getUserId();
+
+    var id = entity.getId();
+
+    entity.setDeletedBy(userId);
+    repository.save(entity);
+    entityManager.flush();
+    entity.setId(id);
+    entityManager.refresh(entity);
+
+    System.out.println("Deleted: " + entity);
   }
 
   private String toCamelCase(String input) {

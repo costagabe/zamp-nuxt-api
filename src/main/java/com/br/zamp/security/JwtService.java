@@ -36,6 +36,7 @@ public class JwtService {
       .issuedAt(now)
       .expiresAt(now.plusSeconds(expiry))
       .subject(user.getUsername())
+      .claim("id", user.getUser().getId())
       .claim("scope", scope)
       .build();
 
