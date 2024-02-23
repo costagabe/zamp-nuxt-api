@@ -69,7 +69,7 @@ public class SecurityConfig {
       )
       .authorizeHttpRequests(auth -> auth
         .requestMatchers("/h2-console/**").permitAll()
-        .requestMatchers("/auth").permitAll()
+        .requestMatchers("/auth/**").permitAll()
         .anyRequest().authenticated()
       )
       .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
