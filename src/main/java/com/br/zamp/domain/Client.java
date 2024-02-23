@@ -27,7 +27,7 @@ public class Client extends Base {
   private String rg;
 
   @Enumerated(EnumType.STRING)
-  @ElementCollection( targetClass = ClientType.class, fetch = FetchType.LAZY)
+  @ElementCollection(targetClass = ClientType.class, fetch = FetchType.LAZY)
   private Set<ClientType> clientTypes = new HashSet<>();
 
   @Enumerated(EnumType.STRING)
@@ -40,9 +40,17 @@ public class Client extends Base {
   private Set<Document> documents;
 
   @ManyToMany(fetch = FetchType.LAZY, mappedBy = "clients")
-  private final Set<Company> companies = new HashSet<>();
+  private Set<Company> companies = new HashSet<>();
 
   @ManyToMany(fetch = FetchType.LAZY)
-  private final Set<Building> buildings = new HashSet<>();
+  private Set<Building> buildings = new HashSet<>();
+
+  @Override
+  public void beforeUpdate() {
+    address = null;
+    documents = null;
+    companies = null;
+    buildings = null;
+  }
 
 }

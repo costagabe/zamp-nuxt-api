@@ -25,5 +25,9 @@ public class Base implements Serializable {
 
   private int version = 1;
   private boolean isDeleted = false;
+
+  public void beforeUpdate() {
+
+  }
   
 }

@@ -67,15 +67,17 @@ public class AuditListener {
 
     var copy = mapper.copy(entity);
     copy.setDeleted(true);
+    copy.setId(null);
 
     if (!ObjectUtil.isEqual(newObject, oldEntity)) {
+      copy.beforeUpdate();
       repository.save(copy);
     }
 
     mapper.update(newObject, entity);
 
     entity.setVersion(entity.getVersion() + 1);
-    entity.setUpdatedBy(auth.getUserId());
+    entity.setUpdatedBy(userId);
     entity.setLastUpdatedAt(LocalDateTime.now());
   }
 
