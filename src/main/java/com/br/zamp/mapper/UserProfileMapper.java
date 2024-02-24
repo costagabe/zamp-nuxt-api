@@ -14,7 +14,11 @@ public abstract class UserProfileMapper implements BaseMapper<UserProfile, Creat
     return new ReadAndUpdateUserProfileDTO(
       profile.getId(),
       profile.getOriginalName(),
-      profile.getLevel()
+      profile.getLevel(),
+      profile.getPermissions()
+        .stream()
+        .map(Enum::toString)
+        .collect(java.util.stream.Collectors.toSet())
     );
   }
 }

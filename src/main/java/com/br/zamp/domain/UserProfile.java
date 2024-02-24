@@ -41,6 +41,11 @@ public class UserProfile extends Base {
     return name;
   }
 
+  public Set<Permission> getPermissions() {
+    var hasAllPermission = permissions.stream().anyMatch(permission -> permission == Permission.ALL);
+    return hasAllPermission ? Set.of(Permission.values()) : permissions;
+  }
+
   public Set<Permission> getMenus() {
     return permissions.stream()
       .filter(permission -> permission.getType() == PermissionType.MENU)
