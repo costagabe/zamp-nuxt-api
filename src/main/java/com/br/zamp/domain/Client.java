@@ -36,7 +36,7 @@ public class Client extends Base {
   @OneToOne(fetch = FetchType.LAZY)
   private Address address;
 
-  @OneToMany(fetch = FetchType.LAZY)
+  @OneToMany(fetch = FetchType.LAZY, mappedBy = "client")
   private Set<Document> documents;
 
   @ManyToMany(fetch = FetchType.LAZY, mappedBy = "clients")

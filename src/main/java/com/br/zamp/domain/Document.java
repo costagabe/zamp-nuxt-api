@@ -7,9 +7,6 @@ import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.SQLRestriction;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Data
@@ -21,9 +18,8 @@ public class Document extends Base {
   @ManyToOne
   private Client client;
 
-  @ManyToMany(mappedBy = "documents")
-  private final List<Company> companies = new ArrayList<>();
-
   @Enumerated(EnumType.STRING)
   private DocumentType type;
+
+  private String publicPath;
 }

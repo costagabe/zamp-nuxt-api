@@ -64,6 +64,12 @@ public enum Permission implements GrantedAuthority {
   READ_ALL_CLIENTS("Listagem de clientes", PermissionType.REQUISICAO),
   DELETE_CLIENTS("Remoção de clientes", PermissionType.REQUISICAO),
 
+  CREATE_CLIENT_DOCUMENTS("Criação de documentos de clientes", PermissionType.REQUISICAO),
+  UPDATE_CLIENT_DOCUMENTS("Atualização de documentos de clientes", PermissionType.REQUISICAO),
+  READ_CLIENT_DOCUMENTS("Listagem de documentos de clientes", PermissionType.REQUISICAO),
+  READ_ALL_CLIENT_DOCUMENTS("Listagem de documentos de clientes", PermissionType.REQUISICAO),
+  DELETE_CLIENT_DOCUMENTS("Remoção de documentos de clientes", PermissionType.REQUISICAO),
+
   CREATE_PARAMETERS("Criação de parâmetros", PermissionType.REQUISICAO),
   UPDATE_PARAMETERS("Atualização de parâmetros", PermissionType.REQUISICAO),
   READ_PARAMETERS("Listagem de parâmetros", PermissionType.REQUISICAO),
