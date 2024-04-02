@@ -30,7 +30,6 @@ public class CustomAuthenticationDetailsSource implements AuthenticationDetailsS
 
   @Override
   public Object buildDetails(HttpServletRequest context) {
-
     var encodedAuth = getAuthFromHeaders(context);
 
     String decodedAuth = getDecodedAuth(encodedAuth);

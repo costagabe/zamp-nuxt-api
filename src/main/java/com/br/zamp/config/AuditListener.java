@@ -74,6 +74,4 @@ public class AuditListener {
     entity.setId(id);
     entityManager.refresh(entity);
   }
-
-
 }

@@ -23,12 +23,9 @@ public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint 
     try {
       if (exception instanceof DisabledException) {
         throw new AuthenticationErrorException(exception.getMessage(), HttpServletResponse.SC_FORBIDDEN);
-
-      } else if (exception instanceof BadCredentialsException) {
+      } else if (exception instanceof BadCredentialsException || exception instanceof AccountExpiredException) {
         throw new AuthenticationErrorException(exception.getMessage(), HttpServletResponse.SC_UNAUTHORIZED);
-      } else if (exception instanceof AccountExpiredException) {
-        throw new AuthenticationErrorException(exception.getMessage(), HttpServletResponse.SC_UNAUTHORIZED);
-      } else if (exception instanceof InternalAuthenticationServiceException || exception instanceof InsufficientAuthenticationException) {
+      }  else if (exception instanceof InternalAuthenticationServiceException || exception instanceof InsufficientAuthenticationException) {
         throw new AuthenticationErrorException("Dados de login inválidos", HttpServletResponse.SC_UNAUTHORIZED);
       }
     } catch (AuthenticationErrorException e) {
