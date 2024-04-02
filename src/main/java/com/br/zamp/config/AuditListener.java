@@ -1,9 +1,8 @@
 package com.br.zamp.config;
 
 import com.br.zamp.domain.Base;
-import com.br.zamp.mapper.BaseMapper;
 import com.br.zamp.security.AuthenticatedUser;
-import com.br.zamp.util.ObjectUtil;
+import com.br.zamp.util.StringUtil;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreRemove;
@@ -24,7 +23,6 @@ import java.util.UUID;
 public class AuditListener {
   private final ApplicationContext applicationContext;
 
-
   @PrePersist
   private <T extends Base> void beforeInsert(T object) {
     if (object.isDeleted() || SecurityContextHolder.getContext().getAuthentication() == null) {
@@ -37,18 +35,12 @@ public class AuditListener {
     object.setCreatedBy(userId);
   }
 
-  @SuppressWarnings("unchecked")
   @PreUpdate
   private <T extends Base> void beforeUpdate(T object) {
     if (object.isDeleted()) {
       return;
     }
 
-    String className = toCamelCase(object.getClass().getSimpleName());
-
-    JpaRepository<T, UUID> repository = applicationContext.getBean(className + "Repository", JpaRepository.class);
-    BaseMapper<T, Object, Object> mapper = applicationContext.getBean(className + "MapperImpl", BaseMapper.class);
-    EntityManager entityManager = applicationContext.getBean(EntityManager.class);
     AuthenticatedUser auth = applicationContext.getBean(AuthenticatedUser.class);
     var userId = auth.getUserId();
 
@@ -56,39 +48,18 @@ public class AuditListener {
       return;
     }
 
-    var newObject = mapper.copy(object);
-
-    var entity = repository.findById(object.getId()).orElseThrow();
-
-    entityManager.refresh(entity);
-
-    var oldEntity = mapper.copy(entity);
-    oldEntity.setId(entity.getId());
-
-    var copy = mapper.copy(entity);
-    copy.setDeleted(true);
-    copy.setId(null);
-
-    if (!ObjectUtil.isEqual(newObject, oldEntity)) {
-      copy.beforeUpdate();
-      repository.save(copy);
-    }
-
-    mapper.update(newObject, entity);
-
-    entity.setVersion(entity.getVersion() + 1);
-    entity.setUpdatedBy(userId);
-    entity.setLastUpdatedAt(LocalDateTime.now());
+    object.setVersion(object.getVersion() + 1);
+    object.setUpdatedBy(userId);
+    object.setLastUpdatedAt(LocalDateTime.now());
   }
 
-  @SuppressWarnings("unchecked")
   @PreRemove
+  @SuppressWarnings("unchecked")
   private <T extends Base> void beforeRemove(T entity) {
-
     if (entity.isDeleted() || SecurityContextHolder.getContext().getAuthentication() == null) {
       return;
     }
-    String className = toCamelCase(entity.getClass().getSimpleName());
+    String className = StringUtil.toCamelCase(entity.getClass().getSimpleName());
     JpaRepository<T, UUID> repository = applicationContext.getBean(className + "Repository", JpaRepository.class);
     EntityManager entityManager = applicationContext.getBean(EntityManager.class);
 
@@ -102,15 +73,6 @@ public class AuditListener {
     entityManager.flush();
     entity.setId(id);
     entityManager.refresh(entity);
-
-    System.out.println("Deleted: " + entity);
-  }
-
-  private String toCamelCase(String input) {
-    if (input == null || input.isEmpty()) {
-      return input;
-    }
-    return Character.toLowerCase(input.charAt(0)) + input.substring(1);
   }
 
 
