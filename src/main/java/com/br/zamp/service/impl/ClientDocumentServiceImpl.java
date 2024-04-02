@@ -3,6 +3,7 @@ package com.br.zamp.service.impl;
 import com.br.zamp.domain.Client;
 import com.br.zamp.domain.Document;
 import com.br.zamp.exceptions.ObjectNotFoundException;
+import com.br.zamp.exceptions.ValidationException;
 import com.br.zamp.repository.DocumentRepository;
 import com.br.zamp.service.ClientDocumentService;
 import com.br.zamp.service.ClientService;
@@ -32,7 +33,10 @@ public class ClientDocumentServiceImpl implements ClientDocumentService {
 
   @Override
   public void update(Document document) {
-
+    if(document.getPublicPath() == null || document.getPublicPath().isEmpty() || document.getPublicPath().isBlank()) {
+      throw new ValidationException("Não foi possível encontrar o caminho do arquivo.", "publicPath", "Campo não pode ser vazio.");
+    }
+    documentRepository.save(document);
   }
 
   @Override

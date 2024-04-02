@@ -56,4 +56,12 @@ public class ClientDocumentsController {
     ReadAndUpdateClientDocumentDTO response = clientDocumentMapper.toReadAndUpdateDTO(entity);
     return ResponseEntity.ok(response);
   }
+
+  @PutMapping("/{id}")
+  public ResponseEntity<?> update(@Valid @RequestBody ReadAndUpdateClientDocumentDTO dto, @PathVariable UUID id) {
+    Document mapped = clientDocumentService.findById(id);
+    clientDocumentMapper.readAndUpdateDTOToEntity(dto, mapped);
+    clientDocumentService.update(mapped);
+    return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+  }
 }

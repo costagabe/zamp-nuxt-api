@@ -4,6 +4,7 @@ import com.br.zamp.config.dto.ErrorResponse;
 import com.br.zamp.exceptions.DuplicatedObjectException;
 import com.br.zamp.exceptions.ObjectNotFoundException;
 import com.br.zamp.exceptions.ProfileLevelException;
+import com.br.zamp.exceptions.ValidationException;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.AuthorizationServiceException;
@@ -50,6 +51,13 @@ public class GlobalExceptionHandler {
     }
     response.setStatus(HttpStatus.BAD_REQUEST.value());
     return new ErrorResponse("Erro de validação.", HttpStatus.BAD_REQUEST, validations);
+  }
+
+  @ExceptionHandler({ValidationException.class})
+  @ResponseBody
+  public ErrorResponse handleValidationExceptionException(ValidationException ex, HttpServletResponse response) {
+    response.setStatus(HttpStatus.BAD_REQUEST.value());
+    return new ErrorResponse(ex.getMessage(), HttpStatus.BAD_REQUEST, ex.getValidations());
   }
 
   @ExceptionHandler(ClassCastException.class)
