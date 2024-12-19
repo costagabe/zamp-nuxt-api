@@ -3,7 +3,6 @@ package com.br.zamp.service.impl;
 import com.br.zamp.domain.Entry;
 import com.br.zamp.exceptions.ObjectNotFoundException;
 import com.br.zamp.repository.EntryRepository;
-import com.br.zamp.security.AuthenticatedUser;
 import com.br.zamp.service.EntryService;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +16,6 @@ import org.springframework.stereotype.Service;
 public class EntryServiceImpl implements EntryService {
 
   private final EntryRepository repository;
-  private final AuthenticatedUser authenticatedUser;
 
   @Override
   public Entry create(Entry entity) {

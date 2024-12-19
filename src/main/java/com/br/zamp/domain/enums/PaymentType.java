@@ -6,8 +6,8 @@ import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
 @NoArgsConstructor
-publ@Getter
-ic enum PaymentType {
+@Getter
+public enum PaymentType {
   ADVANCE_PAYMENT("Pagamento antecipado"),
   OVERDUE_PAYMENT("Pagamento vencido");
 
