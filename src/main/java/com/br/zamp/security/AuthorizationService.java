@@ -1,12 +1,11 @@
 package com.br.zamp.security;
 
+import java.lang.reflect.Method;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.PermissionEvaluator;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
-
-import java.lang.reflect.Method;
 
 @Service
 @Setter(onMethod_ = @Autowired)

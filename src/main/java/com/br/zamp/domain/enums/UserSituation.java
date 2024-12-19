@@ -4,7 +4,6 @@ import lombok.Getter;
 
 @Getter
 public enum UserSituation {
-
   ACTIVE(1, "Ativo"),
   INACTIVE(2, "Inativo");
 
@@ -30,5 +29,4 @@ public enum UserSituation {
 
     throw new IllegalArgumentException("Id inválido: " + cod);
   }
-
 }

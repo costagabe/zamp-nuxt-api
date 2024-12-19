@@ -4,7 +4,6 @@ import lombok.Getter;
 
 @Getter
 public enum RouteType {
-
   MENU(1, "Menu"),
   REQUISICAO(2, "Requisição"),
   CRUD(3, "CRUD");
@@ -31,5 +30,4 @@ public enum RouteType {
 
     throw new IllegalArgumentException("Id inválido: " + cod);
   }
-
 }

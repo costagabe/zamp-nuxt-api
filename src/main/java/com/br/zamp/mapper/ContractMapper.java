@@ -8,6 +8,7 @@ import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
 
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.WARN)
-public interface ContractMapper extends BaseMapper<Contract, CreateContractDTO, ReadAndUpdateContractDTO> {
+public interface ContractMapper
+    extends BaseMapper<Contract, CreateContractDTO, ReadAndUpdateContractDTO> {
   ContractMapper INSTANCE = Mappers.getMapper(ContractMapper.class);
 }

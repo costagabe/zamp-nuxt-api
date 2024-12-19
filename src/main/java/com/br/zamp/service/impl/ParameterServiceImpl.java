@@ -4,13 +4,12 @@ import com.br.zamp.domain.Parameter;
 import com.br.zamp.exceptions.ObjectNotFoundException;
 import com.br.zamp.repository.ParameterRepository;
 import com.br.zamp.service.ParameterService;
+import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
-
-import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -30,8 +29,9 @@ public class ParameterServiceImpl implements ParameterService {
 
   @Override
   public Parameter findById(UUID uuid) {
-    return repository.findById(uuid)
-      .orElseThrow(() -> new ObjectNotFoundException("Não encontrado (Parameter)."));
+    return repository
+        .findById(uuid)
+        .orElseThrow(() -> new ObjectNotFoundException("Não encontrado (Parameter)."));
   }
 
   @Override

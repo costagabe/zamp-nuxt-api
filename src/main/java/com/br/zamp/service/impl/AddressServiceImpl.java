@@ -4,13 +4,12 @@ import com.br.zamp.domain.Address;
 import com.br.zamp.exceptions.ObjectNotFoundException;
 import com.br.zamp.repository.AddressRepository;
 import com.br.zamp.service.AddressService;
+import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
-
-import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -25,12 +24,14 @@ public class AddressServiceImpl implements AddressService {
 
   @Override
   public void update(Address entity) {
-    repository.save(entity);  }
+    repository.save(entity);
+  }
 
   @Override
   public Address findById(UUID uuid) {
-    return repository.findById(uuid)
-      .orElseThrow(() -> new ObjectNotFoundException("Não encontrado (Address)."));
+    return repository
+        .findById(uuid)
+        .orElseThrow(() -> new ObjectNotFoundException("Não encontrado (Address)."));
   }
 
   @Override

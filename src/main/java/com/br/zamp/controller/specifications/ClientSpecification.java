@@ -11,5 +11,4 @@ import org.springframework.data.jpa.domain.Specification;
   @Spec(path = "cpf", spec = Like.class),
   @Spec(path = "cnpj", spec = Like.class)
 })
-public interface ClientSpecification extends Specification<Client> {
-}
+public interface ClientSpecification extends Specification<Client> {}

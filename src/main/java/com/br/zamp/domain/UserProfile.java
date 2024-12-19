@@ -3,16 +3,17 @@ package com.br.zamp.domain;
 import com.br.zamp.enums.Permission;
 import com.br.zamp.enums.PermissionType;
 import jakarta.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.stream.Collectors;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.SQLRestriction;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.stream.Collectors;
-
-@EqualsAndHashCode(callSuper = true, exclude = {"users"})
+@EqualsAndHashCode(
+    callSuper = true,
+    exclude = {"users"})
 @Entity
 @Data
 @SQLDelete(sql = "UPDATE user_profile SET is_deleted = true WHERE id=?")
@@ -42,13 +43,14 @@ public class UserProfile extends Base {
   }
 
   public Set<Permission> getPermissions() {
-    var hasAllPermission = permissions.stream().anyMatch(permission -> permission == Permission.ALL);
+    var hasAllPermission =
+        permissions.stream().anyMatch(permission -> permission == Permission.ALL);
     return hasAllPermission ? Set.of(Permission.values()) : permissions;
   }
 
   public Set<Permission> getMenus() {
     return permissions.stream()
-      .filter(permission -> permission.getType() == PermissionType.MENU)
-      .collect(Collectors.toSet());
+        .filter(permission -> permission.getType() == PermissionType.MENU)
+        .collect(Collectors.toSet());
   }
 }

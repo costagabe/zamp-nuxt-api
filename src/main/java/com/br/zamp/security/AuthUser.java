@@ -1,14 +1,12 @@
 package com.br.zamp.security;
 
-
 import com.br.zamp.domain.User;
 import com.br.zamp.domain.enums.UserSituation;
+import java.util.Collection;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
-import java.util.Collection;
 
 @Getter
 @AllArgsConstructor
@@ -53,5 +51,4 @@ public class AuthUser implements UserDetails {
   public boolean isEnabled() {
     return user.getSituation().equals(UserSituation.ACTIVE);
   }
-
 }

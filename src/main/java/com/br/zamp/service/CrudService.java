@@ -1,12 +1,10 @@
 package com.br.zamp.service;
 
 import com.br.zamp.domain.Base;
+import java.util.UUID;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
-
-import java.util.UUID;
-
 
 public interface CrudService<Entity extends Base> {
   Entity create(Entity entity);

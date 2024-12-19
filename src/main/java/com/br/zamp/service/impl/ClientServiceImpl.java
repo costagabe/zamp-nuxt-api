@@ -6,13 +6,12 @@ import com.br.zamp.repository.ClientRepository;
 import com.br.zamp.service.AddressService;
 import com.br.zamp.service.ClientService;
 import jakarta.transaction.Transactional;
+import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
-
-import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -37,8 +36,9 @@ public class ClientServiceImpl implements ClientService {
 
   @Override
   public Client findById(UUID uuid) {
-    return repository.findById(uuid)
-      .orElseThrow(() -> new ObjectNotFoundException("Não encontrado (Client)."));
+    return repository
+        .findById(uuid)
+        .orElseThrow(() -> new ObjectNotFoundException("Não encontrado (Client)."));
   }
 
   @Override

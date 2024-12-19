@@ -9,15 +9,14 @@ import com.br.zamp.exceptions.ProfileLevelException;
 import com.br.zamp.repository.UserProfileRepository;
 import com.br.zamp.security.AuthenticatedUser;
 import com.br.zamp.service.UserProfileService;
+import java.util.Set;
+import java.util.UUID;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
-
-import java.util.Set;
-import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -39,8 +38,12 @@ public class UserProfileServiceImpl implements UserProfileService {
 
   @Override
   public UserProfile findById(UUID uuid) {
-    return userProfileRepository.findById(uuid)
-      .orElseThrow(() -> new ObjectNotFoundException("Erro ao encontrar perfil.", "profileId", "Perfil não encontrado."));
+    return userProfileRepository
+        .findById(uuid)
+        .orElseThrow(
+            () ->
+                new ObjectNotFoundException(
+                    "Erro ao encontrar perfil.", "profileId", "Perfil não encontrado."));
   }
 
   @Override
@@ -48,15 +51,18 @@ public class UserProfileServiceImpl implements UserProfileService {
     var level = authenticatedUser.getMaxLevel();
 
     if (specification == null) {
-      specification = (root, query, criteriaBuilder) ->
-        criteriaBuilder.lessThanOrEqualTo(root.get("level"), criteriaBuilder.literal(level));
+      specification =
+          (root, query, criteriaBuilder) ->
+              criteriaBuilder.lessThanOrEqualTo(root.get("level"), criteriaBuilder.literal(level));
     } else {
-      specification.and((root, query, criteriaBuilder) ->
-        criteriaBuilder.lessThanOrEqualTo(root.get("level"), criteriaBuilder.literal(level)));
+      specification.and(
+          (root, query, criteriaBuilder) ->
+              criteriaBuilder.lessThanOrEqualTo(root.get("level"), criteriaBuilder.literal(level)));
     }
 
-    specification.and((root, query, criteriaBuilder) ->
-      criteriaBuilder.lessThanOrEqualTo(root.get("level"), criteriaBuilder.literal(level)));
+    specification.and(
+        (root, query, criteriaBuilder) ->
+            criteriaBuilder.lessThanOrEqualTo(root.get("level"), criteriaBuilder.literal(level)));
 
     return userProfileRepository.findAll(specification, pageable);
   }
@@ -70,14 +76,14 @@ public class UserProfileServiceImpl implements UserProfileService {
   public Set<SelectOption<UUID>> getUserProfileSelectList(Integer maxLevel) {
     var profiles = userProfileRepository.findUserProfileByUserProfileLevel(maxLevel);
 
-    return profiles.stream().map(profile ->
-        SelectOption
-          .<UUID>builder()
-          .value(profile.getId())
-          .label(profile.getOriginalName())
-          .build()
-      )
-      .collect(Collectors.toSet());
+    return profiles.stream()
+        .map(
+            profile ->
+                SelectOption.<UUID>builder()
+                    .value(profile.getId())
+                    .label(profile.getOriginalName())
+                    .build())
+        .collect(Collectors.toSet());
   }
 
   @Override
@@ -87,16 +93,15 @@ public class UserProfileServiceImpl implements UserProfileService {
 
   @Override
   public Set<PermissionDTO> getUserProfilePermissionList(User user) {
-    return user.fetchAndFlattenPermissions()
-      .stream()
-      .map(v -> new PermissionDTO(v.toString(), v.getDescription(), v.getType().getDescription()))
-      .collect(Collectors.toSet());
+    return user.fetchAndFlattenPermissions().stream()
+        .map(v -> new PermissionDTO(v.toString(), v.getDescription(), v.getType().getDescription()))
+        .collect(Collectors.toSet());
   }
 
   private void validateUserProfiles(UserProfile profile) {
     if (authenticatedUser.getMaxLevel() < profile.getLevel()) {
-      throw new ProfileLevelException("Usuário não criar/editar ter um perfil com nível maior que o seu próprio.");
+      throw new ProfileLevelException(
+          "Usuário não criar/editar ter um perfil com nível maior que o seu próprio.");
     }
-
   }
 }

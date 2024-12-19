@@ -1,12 +1,11 @@
 package com.br.zamp.security;
 
+import java.io.Serializable;
+import java.lang.reflect.Method;
 import org.springframework.security.access.PermissionEvaluator;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
-
-import java.io.Serializable;
-import java.lang.reflect.Method;
 
 @Component
 public class CustomPermissionEvaluator implements PermissionEvaluator {
@@ -22,10 +21,10 @@ public class CustomPermissionEvaluator implements PermissionEvaluator {
     } catch (ClassCastException | ClassNotFoundException | NoSuchMethodException e) {
       return false;
     }
-
   }
 
-  private Method getMethodFromClassPath(String classAndMethodPath) throws ClassNotFoundException, NoSuchMethodException {
+  private Method getMethodFromClassPath(String classAndMethodPath)
+      throws ClassNotFoundException, NoSuchMethodException {
     int lastDotIndex = classAndMethodPath.lastIndexOf(".");
     if (lastDotIndex == -1 || lastDotIndex == classAndMethodPath.length() - 1) {
       throw new IllegalArgumentException("Path must be in the format 'fullClassName.methodName'");
@@ -45,12 +44,13 @@ public class CustomPermissionEvaluator implements PermissionEvaluator {
       }
     }
 
-    throw new NoSuchMethodException(String.format("No such method: %s for class: %s", methodName, className));
+    throw new NoSuchMethodException(
+        String.format("No such method: %s for class: %s", methodName, className));
   }
 
-
   @Override
-  public boolean hasPermission(Authentication auth, Serializable targetId, String targetType, Object permission) {
+  public boolean hasPermission(
+      Authentication auth, Serializable targetId, String targetType, Object permission) {
 
     return true; // Not used in this example
   }

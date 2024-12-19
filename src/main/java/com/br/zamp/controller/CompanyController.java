@@ -22,5 +22,6 @@ import org.springframework.web.bind.annotation.RestController;
   @CrudPermissionType(permission = Permission.READ_ALL_COMPANIES, method = CrudMethod.READ_ALL),
   @CrudPermissionType(permission = Permission.DELETE_COMPANIES, method = CrudMethod.DELETE)
 })
-public class CompanyController extends CrudController<Company, CreateCompanyDTO, ReadAndUpdateCompanyDTO, CompanySpecification> {
-}
+public class CompanyController
+    extends CrudController<
+        Company, CreateCompanyDTO, ReadAndUpdateCompanyDTO, CompanySpecification> {}

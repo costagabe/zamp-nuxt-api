@@ -1,12 +1,11 @@
 package com.br.zamp.config.dto;
 
+import java.util.List;
+import java.util.Map;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-
-import java.util.List;
-import java.util.Map;
 
 @Data
 @RequiredArgsConstructor
@@ -19,5 +18,4 @@ public class ErrorResponse {
   public Integer getStatus() {
     return status.value();
   }
-
 }

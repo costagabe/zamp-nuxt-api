@@ -7,12 +7,11 @@ import com.br.zamp.exceptions.ValidationException;
 import com.br.zamp.repository.DocumentRepository;
 import com.br.zamp.service.ClientDocumentService;
 import com.br.zamp.service.ClientService;
+import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -33,17 +32,22 @@ public class ClientDocumentServiceImpl implements ClientDocumentService {
 
   @Override
   public void update(Document document) {
-    if(document.getPublicPath() == null || document.getPublicPath().isEmpty() || document.getPublicPath().isBlank()) {
-      throw new ValidationException("Não foi possível encontrar o caminho do arquivo.", "publicPath", "Campo não pode ser vazio.");
+    if (document.getPublicPath() == null
+        || document.getPublicPath().isEmpty()
+        || document.getPublicPath().isBlank()) {
+      throw new ValidationException(
+          "Não foi possível encontrar o caminho do arquivo.",
+          "publicPath",
+          "Campo não pode ser vazio.");
     }
     documentRepository.save(document);
   }
 
   @Override
   public Document findById(UUID uuid) {
-  return documentRepository
-    .findById(uuid)
-    .orElseThrow(() -> new ObjectNotFoundException("Documento não encontrado"));
+    return documentRepository
+        .findById(uuid)
+        .orElseThrow(() -> new ObjectNotFoundException("Documento não encontrado"));
   }
 
   @Override
@@ -53,7 +57,5 @@ public class ClientDocumentServiceImpl implements ClientDocumentService {
   }
 
   @Override
-  public void delete(UUID uuid) {
-
-  }
+  public void delete(UUID uuid) {}
 }

@@ -12,14 +12,13 @@ import com.br.zamp.security.annotation.CrudPermissionType;
 import com.br.zamp.service.EntryService;
 import jakarta.validation.Valid;
 import jakarta.validation.ValidationException;
+import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.UUID;
 
 @RequiredArgsConstructor
 @RestController
@@ -36,7 +35,8 @@ public class EntryController {
   private final EntryMapper mapper;
 
   @PostMapping
-  public ResponseEntity<ReadAndUpdateEntryDTO> create(@PathVariable UUID accountId, @Valid @RequestBody CreateEntryDTO dto) {
+  public ResponseEntity<ReadAndUpdateEntryDTO> create(
+      @PathVariable UUID accountId, @Valid @RequestBody CreateEntryDTO dto) {
     Entry mapped = mapper.createDTOToEntity(dto, accountId);
     Entry created = service.create(mapped);
     ReadAndUpdateEntryDTO response = mapper.toReadAndUpdateDTO(created);
@@ -44,11 +44,16 @@ public class EntryController {
   }
 
   @PutMapping("/{id}")
-  public ResponseEntity<?> update(@PathVariable UUID accountId, @Valid @RequestBody ReadAndUpdateEntryDTO dto, @PathVariable UUID id) {
+  public ResponseEntity<?> update(
+      @PathVariable UUID accountId,
+      @Valid @RequestBody ReadAndUpdateEntryDTO dto,
+      @PathVariable UUID id) {
     Entry found = service.findById(id);
 
     if (!found.getId().equals(accountId)) {
-      throw new ValidationException("Houve um erro ao tentar atualizar o registro: a conta financeira não coincide com a recebida na requisição atual.");
+      throw new ValidationException(
+          "Houve um erro ao tentar atualizar o registro: a conta financeira não coincide com a"
+              + " recebida na requisição atual.");
     }
 
     mapper.readAndUpdateDTOToEntity(dto, found);
@@ -66,9 +71,7 @@ public class EntryController {
 
   @GetMapping
   ResponseEntity<CustomPage<ReadAndUpdateEntryDTO>> findAll(
-    @PathVariable UUID accountId,
-    Pageable pageable
-  ) {
+      @PathVariable UUID accountId, Pageable pageable) {
     Page<Entry> entities = service.findAll(pageable, accountId);
     Page<ReadAndUpdateEntryDTO> page = entities.map(mapper::toReadAndUpdateDTO);
     CustomPage<ReadAndUpdateEntryDTO> response = new CustomPage<>(page);

@@ -9,7 +9,8 @@ import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
 
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.WARN)
-public interface CompanyMapper extends BaseMapper<Company, CreateCompanyDTO, ReadAndUpdateCompanyDTO> {
+public interface CompanyMapper
+    extends BaseMapper<Company, CreateCompanyDTO, ReadAndUpdateCompanyDTO> {
   CompanyMapper INSTANCE = Mappers.getMapper(CompanyMapper.class);
 
   @Mapping(target = "id", ignore = true)

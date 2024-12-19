@@ -22,5 +22,6 @@ import org.springframework.web.bind.annotation.RestController;
   @CrudPermissionType(permission = Permission.READ_ALL_BUILDINGS, method = CrudMethod.READ_ALL),
   @CrudPermissionType(permission = Permission.DELETE_BUILDINGS, method = CrudMethod.DELETE)
 })
-public class BuildingController extends CrudController<Building, CreateBuildingDTO, ReadAndUpdateBuildingDTO, BuildingSpecification> {
-}
+public class BuildingController
+    extends CrudController<
+        Building, CreateBuildingDTO, ReadAndUpdateBuildingDTO, BuildingSpecification> {}

@@ -1,4 +1,3 @@
 package com.br.zamp.dto.document;
 
-public record ReadAndUpdateDocumentDTO() {
-}
+public record ReadAndUpdateDocumentDTO() {}

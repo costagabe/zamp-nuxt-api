@@ -3,6 +3,7 @@ package com.br.zamp.controller.auth;
 import com.br.zamp.security.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.time.Duration;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -13,8 +14,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
-
-import java.time.Duration;
 
 @RestController
 @RequestMapping("auth")
@@ -36,12 +35,13 @@ public class AuthenticationController {
 
   @GetMapping("/logout")
   public ResponseEntity<?> logout(HttpServletResponse response) {
-    ResponseCookie cookie = ResponseCookie.from("accessToken", "")
-      .httpOnly(true)
-      .secure(false)
-      .path("/")
-      .maxAge(Duration.ofDays(1))
-      .build();
+    ResponseCookie cookie =
+        ResponseCookie.from("accessToken", "")
+            .httpOnly(true)
+            .secure(false)
+            .path("/")
+            .maxAge(Duration.ofDays(1))
+            .build();
 
     response.addHeader(HttpHeaders.SET_COOKIE, cookie.toString());
 
@@ -49,13 +49,11 @@ public class AuthenticationController {
   }
 
   @PostMapping
-  public ResponseEntity<?> login(@RequestBody AuthDTO.LoginRequest userLogin, HttpServletResponse response) {
+  public ResponseEntity<?> login(
+      @RequestBody AuthDTO.LoginRequest userLogin, HttpServletResponse response) {
     Authentication authentication =
-      authenticationManager
-        .authenticate(new UsernamePasswordAuthenticationToken(
-          userLogin.username(),
-          userLogin.password())
-        );
+        authenticationManager.authenticate(
+            new UsernamePasswordAuthenticationToken(userLogin.username(), userLogin.password()));
 
     SecurityContextHolder.getContext().setAuthentication(authentication);
 
@@ -65,12 +63,13 @@ public class AuthenticationController {
 
     AuthDTO.Response responseDTO = new AuthDTO.Response("User logged in successfully", token);
 
-    ResponseCookie cookie = ResponseCookie.from("accessToken", token)
-      .httpOnly(true)
-      .secure(false)
-      .path("/")
-      .maxAge(Duration.ofDays(1))
-      .build();
+    ResponseCookie cookie =
+        ResponseCookie.from("accessToken", token)
+            .httpOnly(true)
+            .secure(false)
+            .path("/")
+            .maxAge(Duration.ofDays(1))
+            .build();
 
     response.addHeader(HttpHeaders.SET_COOKIE, cookie.toString());
 

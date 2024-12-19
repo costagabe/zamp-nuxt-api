@@ -15,8 +15,7 @@ import org.hibernate.annotations.SQLRestriction;
 public class Document extends Base {
   private String name;
 
-  @ManyToOne
-  private Client client;
+  @ManyToOne private Client client;
 
   @Enumerated(EnumType.STRING)
   private DocumentType type;

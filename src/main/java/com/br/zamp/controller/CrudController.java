@@ -5,6 +5,7 @@ import com.br.zamp.dto.utils.CustomPage;
 import com.br.zamp.mapper.BaseMapper;
 import com.br.zamp.service.CrudService;
 import jakarta.validation.Valid;
+import java.util.UUID;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -14,10 +15,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.UUID;
-
 @Setter(onMethod_ = @Autowired)
-public abstract class CrudController<Entity extends Base, CreateDTO, ReadAndUpdateDTO, SpecQuery extends Specification<Entity>> {
+public abstract class CrudController<
+    Entity extends Base, CreateDTO, ReadAndUpdateDTO, SpecQuery extends Specification<Entity>> {
 
   protected CrudService<Entity> service;
   protected BaseMapper<Entity, CreateDTO, ReadAndUpdateDTO> dtoMapper;
@@ -46,10 +46,7 @@ public abstract class CrudController<Entity extends Base, CreateDTO, ReadAndUpda
   }
 
   @GetMapping
-  ResponseEntity<CustomPage<ReadAndUpdateDTO>> findAllBySpec(
-    SpecQuery spec,
-    Pageable pageable
-  ) {
+  ResponseEntity<CustomPage<ReadAndUpdateDTO>> findAllBySpec(SpecQuery spec, Pageable pageable) {
     Page<Entity> entities = service.findAll(spec, pageable);
     Page<ReadAndUpdateDTO> page = entities.map(dtoMapper::toReadAndUpdateDTO);
     CustomPage<ReadAndUpdateDTO> response = new CustomPage<>(page);
@@ -61,5 +58,4 @@ public abstract class CrudController<Entity extends Base, CreateDTO, ReadAndUpda
     service.delete(id);
     return ResponseEntity.noContent().build();
   }
-
 }

@@ -1,6 +1,5 @@
 package com.br.zamp.exceptions;
 
-
 import lombok.Getter;
 
 @Getter

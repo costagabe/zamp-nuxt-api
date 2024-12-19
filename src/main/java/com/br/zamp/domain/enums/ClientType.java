@@ -11,5 +11,4 @@ public enum ClientType {
   ;
 
   private final String name;
-
 }

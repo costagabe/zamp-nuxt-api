@@ -2,11 +2,10 @@ package com.br.zamp.domain;
 
 import com.br.zamp.config.AuditListener;
 import jakarta.persistence.*;
-import lombok.Data;
-
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.UUID;
+import lombok.Data;
 
 @MappedSuperclass
 @Data
@@ -26,8 +25,5 @@ public class Base implements Serializable {
   private int version = 1;
   private boolean isDeleted = false;
 
-  public void beforeUpdate() {
-
-  }
-  
+  public void beforeUpdate() {}
 }

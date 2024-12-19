@@ -19,5 +19,4 @@ import org.springframework.data.jpa.domain.Specification;
   @Spec(path = "type", params = "type", spec = In.class),
   @Spec(path = "code", spec = Like.class)
 })
-public interface AccountSpecification extends Specification<Account> {
-}
+public interface AccountSpecification extends Specification<Account> {}

@@ -7,15 +7,14 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreRemove;
 import jakarta.persistence.PreUpdate;
+import java.time.LocalDateTime;
+import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Scope;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
-
-import java.time.LocalDateTime;
-import java.util.UUID;
 
 @Component
 @Scope("prototype")
@@ -60,7 +59,8 @@ public class AuditListener {
       return;
     }
     String className = StringUtil.toCamelCase(entity.getClass().getSimpleName());
-    JpaRepository<T, UUID> repository = applicationContext.getBean(className + "Repository", JpaRepository.class);
+    JpaRepository<T, UUID> repository =
+        applicationContext.getBean(className + "Repository", JpaRepository.class);
     EntityManager entityManager = applicationContext.getBean(EntityManager.class);
 
     AuthenticatedUser auth = applicationContext.getBean(AuthenticatedUser.class);

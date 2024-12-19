@@ -8,6 +8,7 @@ import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
 
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.WARN)
-public interface AddressMapper extends BaseMapper<Address, CreateAddressDTO, ReadAndUpdateAddressDTO> {
+public interface AddressMapper
+    extends BaseMapper<Address, CreateAddressDTO, ReadAndUpdateAddressDTO> {
   AddressMapper INSTANCE = Mappers.getMapper(AddressMapper.class);
 }

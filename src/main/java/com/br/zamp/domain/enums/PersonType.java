@@ -4,12 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @AllArgsConstructor
-public@Getter
- enum PersonType {
+public @Getter enum PersonType {
   PF("Pessoa Física"),
   PJ("Pessoa Jurídica"),
   ;
 
   private final String name;
-
 }

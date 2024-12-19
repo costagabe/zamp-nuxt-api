@@ -2,6 +2,7 @@ package com.br.zamp.security;
 
 import com.br.zamp.domain.User;
 import com.br.zamp.repository.UserRepository;
+import java.util.UUID;
 import lombok.Getter;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
@@ -10,8 +11,6 @@ import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.WebApplicationContext;
-
-import java.util.UUID;
 
 @Component
 @Scope(value = WebApplicationContext.SCOPE_REQUEST, proxyMode = ScopedProxyMode.TARGET_CLASS)
@@ -22,7 +21,8 @@ public class AuthenticatedUser {
   private final Integer maxLevel;
 
   public AuthenticatedUser(UserRepository userRepository) {
-    JwtAuthenticationToken jwtAuth = (JwtAuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
+    JwtAuthenticationToken jwtAuth =
+        (JwtAuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
     Jwt jwt = (Jwt) jwtAuth.getPrincipal();
     this.userId = UUID.fromString(jwt.getClaims().get("id").toString());
     this.maxLevel = ((Long) jwt.getClaims().get("maxLevel")).intValue();
@@ -37,5 +37,4 @@ public class AuthenticatedUser {
     String email = SecurityContextHolder.getContext().getAuthentication().getName();
     return userRepository.findByEmail(email).orElseThrow();
   }
-
 }

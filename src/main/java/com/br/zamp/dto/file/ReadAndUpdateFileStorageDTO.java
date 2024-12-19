@@ -1,4 +1,3 @@
 package com.br.zamp.dto.file;
 
-public record ReadAndUpdateFileStorageDTO() {
-}
+public record ReadAndUpdateFileStorageDTO() {}

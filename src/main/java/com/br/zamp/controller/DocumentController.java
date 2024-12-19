@@ -22,5 +22,6 @@ import org.springframework.web.bind.annotation.RestController;
   @CrudPermissionType(permission = Permission.READ_ALL_DOCUMENTS, method = CrudMethod.READ_ALL),
   @CrudPermissionType(permission = Permission.DELETE_DOCUMENTS, method = CrudMethod.DELETE)
 })
-public class DocumentController extends CrudController<Document, CreateDocumentDTO, ReadAndUpdateDocumentDTO, DocumentSpecification> {
-}
+public class DocumentController
+    extends CrudController<
+        Document, CreateDocumentDTO, ReadAndUpdateDocumentDTO, DocumentSpecification> {}

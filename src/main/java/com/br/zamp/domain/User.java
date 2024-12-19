@@ -1,11 +1,12 @@
 package com.br.zamp.domain;
 
-
 import com.br.zamp.domain.enums.UserSituation;
 import com.br.zamp.enums.Permission;
 import com.br.zamp.enums.PermissionType;
 import com.br.zamp.security.UserAuthAuthority;
 import jakarta.persistence.*;
+import java.util.*;
+import java.util.stream.Collectors;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.SQLDelete;
@@ -13,10 +14,9 @@ import org.hibernate.annotations.SQLRestriction;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
-import java.util.*;
-import java.util.stream.Collectors;
-
-@EqualsAndHashCode(callSuper = true, exclude = {"userProfiles"})
+@EqualsAndHashCode(
+    callSuper = true,
+    exclude = {"userProfiles"})
 @Entity
 @Table(name = "users")
 @Data
@@ -40,20 +40,22 @@ public class User extends Base {
   private Set<Company> companies = new HashSet<>();
 
   public UserProfile getMaxUserProfileLevel() {
-    return userProfiles.stream().max(Comparator.comparing(UserProfile::getLevel)).orElse(new UserProfile());
+    return userProfiles.stream()
+        .max(Comparator.comparing(UserProfile::getLevel))
+        .orElse(new UserProfile());
   }
 
   public Set<UserAuthAuthority> fetchAndFlattenAuthorities() {
-    return userProfiles
-      .stream()
-      .map(up -> new UserAuthAuthority(up.getName().toUpperCase()))
-      .collect(Collectors.toSet());
+    return userProfiles.stream()
+        .map(up -> new UserAuthAuthority(up.getName().toUpperCase()))
+        .collect(Collectors.toSet());
   }
 
   public Set<Permission> fetchAndFlattenPermissions() {
     Set<Permission> permissions = getPermissionsFromUserProfile();
 
-    var hasAllPermission = permissions.stream().anyMatch(permission -> permission == Permission.ALL);
+    var hasAllPermission =
+        permissions.stream().anyMatch(permission -> permission == Permission.ALL);
 
     Set<Permission> ret = new HashSet<>(permissions);
 
@@ -68,16 +70,21 @@ public class User extends Base {
     Set<Permission> permissions = fetchAndFlattenPermissions();
     Set<GrantedAuthority> ret = new HashSet<>(permissions);
 
-    ret.add(new SimpleGrantedAuthority(String.format("LEVEL_%s", Optional.ofNullable(getMaxUserProfileLevel()).map(UserProfile::getLevel).orElse(0))));
+    ret.add(
+        new SimpleGrantedAuthority(
+            String.format(
+                "LEVEL_%s",
+                Optional.ofNullable(getMaxUserProfileLevel())
+                    .map(UserProfile::getLevel)
+                    .orElse(0))));
 
     return ret;
   }
 
   private Set<Permission> getPermissionsFromUserProfile() {
-    return userProfiles
-      .stream()
-      .flatMap(userProfile -> userProfile.getPermissions().stream())
-      .collect(Collectors.toSet());
+    return userProfiles.stream()
+        .flatMap(userProfile -> userProfile.getPermissions().stream())
+        .collect(Collectors.toSet());
   }
 
   public Set<Permission> getUserMenus() {
@@ -86,18 +93,24 @@ public class User extends Base {
     Set<Permission> ret = new HashSet<>(permissions);
 
     return ret.stream()
-      .filter(permission -> permission.getType().equals(PermissionType.MENU))
-      .collect(Collectors.toSet());
+        .filter(permission -> permission.getType().equals(PermissionType.MENU))
+        .collect(Collectors.toSet());
   }
 
   @Override
   public String toString() {
-    return "User{" +
-      "name='" + name + '\'' +
-      ", email='" + email + '\'' +
-      ", password='" + password + '\'' +
-      ", situation=" + situation +
-      '}';
+    return "User{"
+        + "name='"
+        + name
+        + '\''
+        + ", email='"
+        + email
+        + '\''
+        + ", password='"
+        + password
+        + '\''
+        + ", situation="
+        + situation
+        + '}';
   }
-
 }

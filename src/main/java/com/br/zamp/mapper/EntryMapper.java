@@ -5,17 +5,17 @@ import com.br.zamp.domain.Entry;
 import com.br.zamp.dto.entry.CreateEntryDTO;
 import com.br.zamp.dto.entry.ReadAndUpdateEntryDTO;
 import com.br.zamp.service.AccountService;
+import java.time.LocalDate;
+import java.util.UUID;
 import lombok.Setter;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.time.LocalDate;
-import java.util.UUID;
-
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.WARN)
-public abstract class EntryMapper implements BaseMapper<Entry, CreateEntryDTO, ReadAndUpdateEntryDTO> {
+public abstract class EntryMapper
+    implements BaseMapper<Entry, CreateEntryDTO, ReadAndUpdateEntryDTO> {
   @Setter(onMethod_ = @Autowired)
   AccountService accountService;
 

@@ -4,6 +4,8 @@ import com.br.zamp.security.AuthUser;
 import com.br.zamp.security.JpaUserDetailsService;
 import com.nimbusds.jose.util.Pair;
 import jakarta.servlet.http.HttpServletRequest;
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AccountExpiredException;
 import org.springframework.security.authentication.AuthenticationDetailsSource;
@@ -11,11 +13,9 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import java.nio.charset.StandardCharsets;
-import java.util.Base64;
-
 @RequiredArgsConstructor
-public class CustomAuthenticationDetailsSource implements AuthenticationDetailsSource<HttpServletRequest, Object> {
+public class CustomAuthenticationDetailsSource
+    implements AuthenticationDetailsSource<HttpServletRequest, Object> {
 
   private final JpaUserDetailsService customUserDetailsService;
   private final PasswordEncoder passwordEncoder;

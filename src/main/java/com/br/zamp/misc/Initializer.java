@@ -9,11 +9,10 @@ import com.br.zamp.repository.CompanyRepository;
 import com.br.zamp.repository.ParameterRepository;
 import com.br.zamp.repository.UserProfileRepository;
 import com.br.zamp.repository.UserRepository;
+import java.util.HashSet;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
-
-import java.util.HashSet;
 
 @RequiredArgsConstructor
 @Component
@@ -53,7 +52,6 @@ public class Initializer {
     user4.setSituation(UserSituation.INACTIVE);
     user4.setUserProfiles(new HashSet<>());
 
-
     userRepository.save(user);
     userRepository.save(user2);
     userRepository.save(user3);
@@ -78,7 +76,6 @@ public class Initializer {
     user2.getUserProfiles().add(p);
     user4.getUserProfiles().add(p);
 
-
     userProfileRepository.save(p);
     userProfileRepository.save(p2);
 
@@ -86,9 +83,7 @@ public class Initializer {
     userRepository.save(user2);
     userRepository.save(user4);
 
-
     c.getUsers().add(user);
     c.getUsers().add(user2);
   }
-
 }

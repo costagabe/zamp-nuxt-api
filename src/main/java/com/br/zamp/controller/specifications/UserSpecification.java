@@ -6,10 +6,5 @@ import net.kaczmarzyk.spring.data.jpa.web.annotation.Or;
 import net.kaczmarzyk.spring.data.jpa.web.annotation.Spec;
 import org.springframework.data.jpa.domain.Specification;
 
-
-@Or({
-  @Spec(path = "name", spec = Like.class),
-  @Spec(path = "email", spec = Like.class)
-})
-public interface UserSpecification extends Specification<User> {
-}
+@Or({@Spec(path = "name", spec = Like.class), @Spec(path = "email", spec = Like.class)})
+public interface UserSpecification extends Specification<User> {}

@@ -1,4 +1,3 @@
 package com.br.zamp.dto.parameter;
 
-public record CreateParameterDTO() {
-}
+public record CreateParameterDTO() {}

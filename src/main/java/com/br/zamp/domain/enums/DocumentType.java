@@ -7,8 +7,7 @@ import lombok.RequiredArgsConstructor;
 public enum DocumentType {
   BUILDING("Imóvel"),
   RENT("Aluguel"),
-  PERSON("Pessoa"
-  );
+  PERSON("Pessoa");
 
   private final String description;
 }

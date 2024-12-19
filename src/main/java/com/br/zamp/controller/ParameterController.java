@@ -22,5 +22,6 @@ import org.springframework.web.bind.annotation.RestController;
   @CrudPermissionType(permission = Permission.READ_ALL_PARAMETERS, method = CrudMethod.READ_ALL),
   @CrudPermissionType(permission = Permission.DELETE_PARAMETERS, method = CrudMethod.DELETE)
 })
-public class ParameterController extends CrudController<Parameter, CreateParameterDTO, ReadAndUpdateParameterDTO, ParameterSpecification> {
-}
+public class ParameterController
+    extends CrudController<
+        Parameter, CreateParameterDTO, ReadAndUpdateParameterDTO, ParameterSpecification> {}

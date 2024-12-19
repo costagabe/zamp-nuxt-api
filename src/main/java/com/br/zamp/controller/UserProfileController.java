@@ -12,14 +12,13 @@ import com.br.zamp.security.annotation.CrudMethod;
 import com.br.zamp.security.annotation.CrudPermission;
 import com.br.zamp.security.annotation.CrudPermissionType;
 import com.br.zamp.service.UserProfileService;
+import java.util.Set;
+import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.Set;
-import java.util.UUID;
 
 @RequiredArgsConstructor
 @RestController
@@ -31,7 +30,9 @@ import java.util.UUID;
   @CrudPermissionType(permission = Permission.READ_ALL_USER_PROFILES, method = CrudMethod.READ_ALL),
   @CrudPermissionType(permission = Permission.DELETE_USER_PROFILES, method = CrudMethod.DELETE)
 })
-public class UserProfileController extends CrudController<UserProfile, CreateUserProfileDTO, ReadAndUpdateUserProfileDTO, UserProfileSpecification> {
+public class UserProfileController
+    extends CrudController<
+        UserProfile, CreateUserProfileDTO, ReadAndUpdateUserProfileDTO, UserProfileSpecification> {
 
   private final UserProfileService userProfileService;
   private final AuthenticatedUser auth;

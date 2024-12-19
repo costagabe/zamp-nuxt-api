@@ -7,7 +7,8 @@ import org.springframework.security.config.annotation.web.configurers.HttpBasicC
 import org.springframework.security.web.AuthenticationEntryPoint;
 
 @RequiredArgsConstructor
-public class CustomBasicHttpAuthConfigurer implements Customizer<HttpBasicConfigurer<HttpSecurity>> {
+public class CustomBasicHttpAuthConfigurer
+    implements Customizer<HttpBasicConfigurer<HttpSecurity>> {
 
   private final CustomAuthenticationDetailsSource customAuthenticationDetailsSource;
   private final AuthenticationEntryPoint customAuthenticationEntryPoint;
@@ -15,8 +16,7 @@ public class CustomBasicHttpAuthConfigurer implements Customizer<HttpBasicConfig
   @Override
   public void customize(HttpBasicConfigurer<HttpSecurity> config) {
     config
-      .authenticationDetailsSource(customAuthenticationDetailsSource)
-      .authenticationEntryPoint(customAuthenticationEntryPoint);
+        .authenticationDetailsSource(customAuthenticationDetailsSource)
+        .authenticationEntryPoint(customAuthenticationEntryPoint);
   }
-
 }

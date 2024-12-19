@@ -7,18 +7,17 @@ import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.WARN)
-public abstract class UserProfileMapper implements BaseMapper<UserProfile, CreateUserProfileDTO, ReadAndUpdateUserProfileDTO> {
+public abstract class UserProfileMapper
+    implements BaseMapper<UserProfile, CreateUserProfileDTO, ReadAndUpdateUserProfileDTO> {
   @Override
   public ReadAndUpdateUserProfileDTO toReadAndUpdateDTO(UserProfile profile) {
 
     return new ReadAndUpdateUserProfileDTO(
-      profile.getId(),
-      profile.getOriginalName(),
-      profile.getLevel(),
-      profile.getPermissions()
-        .stream()
-        .map(Enum::toString)
-        .collect(java.util.stream.Collectors.toSet())
-    );
+        profile.getId(),
+        profile.getOriginalName(),
+        profile.getLevel(),
+        profile.getPermissions().stream()
+            .map(Enum::toString)
+            .collect(java.util.stream.Collectors.toSet()));
   }
 }

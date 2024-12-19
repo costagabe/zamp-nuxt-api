@@ -10,14 +10,13 @@ import com.br.zamp.security.annotation.CrudMethod;
 import com.br.zamp.security.annotation.CrudPermission;
 import com.br.zamp.security.annotation.CrudPermissionType;
 import com.br.zamp.service.AccountService;
+import java.util.Set;
+import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.Set;
-import java.util.UUID;
 
 @RequiredArgsConstructor
 @RestController
@@ -29,7 +28,9 @@ import java.util.UUID;
   @CrudPermissionType(permission = Permission.READ_ALL_ACCOUNTS, method = CrudMethod.READ_ALL),
   @CrudPermissionType(permission = Permission.DELETE_ACCOUNTS, method = CrudMethod.DELETE)
 })
-public class AccountController extends CrudController<Account, CreateAccountDTO, ReadAndUpdateAccountDTO, AccountSpecification> {
+public class AccountController
+    extends CrudController<
+        Account, CreateAccountDTO, ReadAndUpdateAccountDTO, AccountSpecification> {
   private final AccountService accountService;
 
   @GetMapping("/select-list")

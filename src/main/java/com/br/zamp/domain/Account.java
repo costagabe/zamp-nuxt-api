@@ -2,12 +2,11 @@ package com.br.zamp.domain;
 
 import com.br.zamp.domain.enums.AccountType;
 import jakarta.persistence.*;
+import java.util.Set;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.SQLRestriction;
-
-import java.util.Set;
 
 @EqualsAndHashCode(callSuper = true)
 @Entity
@@ -17,8 +16,10 @@ import java.util.Set;
 public class Account extends Base {
   private String name;
   private String code;
+
   @Enumerated(EnumType.STRING)
   private AccountType type;
+
   private Float balance;
 
   @ManyToMany(mappedBy = "accounts")
@@ -26,5 +27,4 @@ public class Account extends Base {
 
   @OneToMany(mappedBy = "financialAccount")
   private Set<Entry> entries;
-
 }

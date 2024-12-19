@@ -11,6 +11,4 @@ public enum AccountType {
   FINANCIAL_ACCOUNT("Conta financeira"),
   ;
   private final String name;
-
-
 }

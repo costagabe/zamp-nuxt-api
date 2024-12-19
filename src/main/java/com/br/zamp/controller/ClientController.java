@@ -1,6 +1,5 @@
 package com.br.zamp.controller;
 
-
 import com.br.zamp.controller.specifications.ClientSpecification;
 import com.br.zamp.domain.Client;
 import com.br.zamp.dto.client.CreateClientDTO;
@@ -23,5 +22,5 @@ import org.springframework.web.bind.annotation.RestController;
   @CrudPermissionType(permission = Permission.READ_ALL_CLIENTS, method = CrudMethod.READ_ALL),
   @CrudPermissionType(permission = Permission.DELETE_CLIENTS, method = CrudMethod.DELETE)
 })
-public class ClientController extends CrudController<Client, CreateClientDTO, ReadAndUpdateClientDTO, ClientSpecification> {
-}
+public class ClientController
+    extends CrudController<Client, CreateClientDTO, ReadAndUpdateClientDTO, ClientSpecification> {}

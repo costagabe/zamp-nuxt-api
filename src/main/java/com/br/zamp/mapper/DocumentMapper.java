@@ -8,6 +8,7 @@ import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
 
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.WARN)
-public interface DocumentMapper extends BaseMapper<Document, CreateDocumentDTO, ReadAndUpdateDocumentDTO> {
+public interface DocumentMapper
+    extends BaseMapper<Document, CreateDocumentDTO, ReadAndUpdateDocumentDTO> {
   DocumentMapper INSTANCE = Mappers.getMapper(DocumentMapper.class);
 }

@@ -4,7 +4,6 @@ import com.br.zamp.config.dto.SelectOption;
 import com.br.zamp.domain.User;
 import com.br.zamp.domain.UserProfile;
 import com.br.zamp.dto.permission.PermissionDTO;
-
 import java.util.Set;
 import java.util.UUID;
 

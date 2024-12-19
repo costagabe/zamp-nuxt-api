@@ -8,6 +8,7 @@ import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
 
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.WARN)
-public interface ParameterMapper extends BaseMapper<Parameter, CreateParameterDTO, ReadAndUpdateParameterDTO> {
+public interface ParameterMapper
+    extends BaseMapper<Parameter, CreateParameterDTO, ReadAndUpdateParameterDTO> {
   ParameterMapper INSTANCE = Mappers.getMapper(ParameterMapper.class);
 }

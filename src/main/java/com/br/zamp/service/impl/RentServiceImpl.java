@@ -4,13 +4,12 @@ import com.br.zamp.domain.Rent;
 import com.br.zamp.exceptions.ObjectNotFoundException;
 import com.br.zamp.repository.RentRepository;
 import com.br.zamp.service.RentService;
+import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
-
-import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -30,8 +29,9 @@ public class RentServiceImpl implements RentService {
 
   @Override
   public Rent findById(UUID uuid) {
-    return repository.findById(uuid)
-      .orElseThrow(() -> new ObjectNotFoundException("Não encontrado (Rent)."));
+    return repository
+        .findById(uuid)
+        .orElseThrow(() -> new ObjectNotFoundException("Não encontrado (Rent)."));
   }
 
   @Override

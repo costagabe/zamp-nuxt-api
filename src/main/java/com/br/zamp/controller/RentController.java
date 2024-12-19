@@ -22,5 +22,5 @@ import org.springframework.web.bind.annotation.RestController;
   @CrudPermissionType(permission = Permission.READ_ALL_RENTS, method = CrudMethod.READ_ALL),
   @CrudPermissionType(permission = Permission.DELETE_RENTS, method = CrudMethod.DELETE)
 })
-public class RentController extends CrudController<Rent, CreateRentDTO, ReadAndUpdateRentDTO, RentSpecification> {
-}
+public class RentController
+    extends CrudController<Rent, CreateRentDTO, ReadAndUpdateRentDTO, RentSpecification> {}

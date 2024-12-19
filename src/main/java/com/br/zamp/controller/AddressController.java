@@ -22,5 +22,6 @@ import org.springframework.web.bind.annotation.RestController;
   @CrudPermissionType(permission = Permission.READ_ALL_ADDRESSES, method = CrudMethod.READ_ALL),
   @CrudPermissionType(permission = Permission.DELETE_ADDRESSES, method = CrudMethod.DELETE)
 })
-public class AddressController extends CrudController<Address, CreateAddressDTO, ReadAndUpdateAddressDTO, AddressSpecification> {
-}
+public class AddressController
+    extends CrudController<
+        Address, CreateAddressDTO, ReadAndUpdateAddressDTO, AddressSpecification> {}

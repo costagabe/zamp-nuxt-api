@@ -9,13 +9,12 @@ import com.br.zamp.security.AuthenticatedUser;
 import com.br.zamp.security.annotation.CrudMethod;
 import com.br.zamp.security.annotation.CrudPermission;
 import com.br.zamp.security.annotation.CrudPermissionType;
+import java.util.Set;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.Set;
 
 @RequiredArgsConstructor
 @RestController
@@ -27,7 +26,8 @@ import java.util.Set;
   @CrudPermissionType(permission = Permission.READ_ALL_USERS, method = CrudMethod.READ_ALL),
   @CrudPermissionType(permission = Permission.DELETE_USERS, method = CrudMethod.DELETE)
 })
-public class UserController extends CrudController<User, CreateUserDTO, ReadAndUpdateUserDTO, UserSpecification> {
+public class UserController
+    extends CrudController<User, CreateUserDTO, ReadAndUpdateUserDTO, UserSpecification> {
 
   private final AuthenticatedUser authenticatedUser;
 
@@ -35,5 +35,4 @@ public class UserController extends CrudController<User, CreateUserDTO, ReadAndU
   public ResponseEntity<Set<Permission>> getUserMenus() {
     return ResponseEntity.ok(authenticatedUser.getUser().getUserMenus());
   }
-
 }

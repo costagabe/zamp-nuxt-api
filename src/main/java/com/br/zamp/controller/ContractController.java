@@ -22,5 +22,6 @@ import org.springframework.web.bind.annotation.RestController;
   @CrudPermissionType(permission = Permission.READ_ALL_CONTRACTS, method = CrudMethod.READ_ALL),
   @CrudPermissionType(permission = Permission.DELETE_CONTRACTS, method = CrudMethod.DELETE)
 })
-public class ContractController extends CrudController<Contract, CreateContractDTO, ReadAndUpdateContractDTO, ContractSpecification> {
-}
+public class ContractController
+    extends CrudController<
+        Contract, CreateContractDTO, ReadAndUpdateContractDTO, ContractSpecification> {}

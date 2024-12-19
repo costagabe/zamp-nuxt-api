@@ -22,5 +22,6 @@ import org.springframework.web.bind.annotation.RestController;
   @CrudPermissionType(permission = Permission.READ_ALL_FILE_STORAGES, method = CrudMethod.READ_ALL),
   @CrudPermissionType(permission = Permission.DELETE_FILE_STORAGES, method = CrudMethod.DELETE)
 })
-public class FileStorageController extends CrudController<FileStorage, CreateFileStorageDTO, ReadAndUpdateFileStorageDTO, FileStorageSpecification> {
-}
+public class FileStorageController
+    extends CrudController<
+        FileStorage, CreateFileStorageDTO, ReadAndUpdateFileStorageDTO, FileStorageSpecification> {}

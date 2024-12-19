@@ -4,7 +4,6 @@ import lombok.Getter;
 
 @Getter
 public enum Profile {
-
   ADMIN(1, "ROLE_ADMIN"),
   EMPLOYEE(2, "ROLE_EMPLOYEE");
 
@@ -30,5 +29,4 @@ public enum Profile {
 
     throw new IllegalArgumentException("Id inválido: " + cod);
   }
-
 }

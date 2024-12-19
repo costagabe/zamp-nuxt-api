@@ -12,5 +12,4 @@ public class ZampApplication {
   public static void main(String[] args) {
     SpringApplication.run(ZampApplication.class, args);
   }
-
 }

@@ -4,13 +4,12 @@ import com.br.zamp.domain.FileStorage;
 import com.br.zamp.exceptions.ObjectNotFoundException;
 import com.br.zamp.repository.FileStorageRepository;
 import com.br.zamp.service.FileStorageService;
+import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
-
-import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -30,8 +29,9 @@ public class FileStorageServiceImpl implements FileStorageService {
 
   @Override
   public FileStorage findById(UUID uuid) {
-    return repository.findById(uuid)
-      .orElseThrow(() -> new ObjectNotFoundException("Não encontrado (FileStorage)."));
+    return repository
+        .findById(uuid)
+        .orElseThrow(() -> new ObjectNotFoundException("Não encontrado (FileStorage)."));
   }
 
   @Override

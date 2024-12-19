@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 
-
 @AllArgsConstructor
 @Getter
 public enum Permission implements GrantedAuthority {
@@ -102,7 +101,6 @@ public enum Permission implements GrantedAuthority {
   ACCOUNTS_MENU("Menu de contas do livro caixa", PermissionType.MENU),
   ENTRIES_MENU("Menu de lançamentos do livro caixa", PermissionType.MENU),
   CLIENTS_MENU("Menu de clientes", PermissionType.MENU),
-
   ;
   private final String description;
   private final PermissionType type;

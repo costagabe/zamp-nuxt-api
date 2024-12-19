@@ -1,10 +1,9 @@
 package com.br.zamp.exceptions;
 
-import lombok.Getter;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.Getter;
 
 @Getter
 public class ValidationException extends RuntimeException {

@@ -1,15 +1,14 @@
 package com.br.zamp.security;
 
+import java.time.Instant;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.stream.Collectors;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.jwt.JwtClaimsSet;
 import org.springframework.security.oauth2.jwt.JwtEncoder;
 import org.springframework.security.oauth2.jwt.JwtEncoderParameters;
 import org.springframework.stereotype.Service;
-
-import java.time.Instant;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @Service
 public class JwtService {
@@ -26,24 +25,22 @@ public class JwtService {
     Set<GrantedAuthority> rolesAndPermissions = new HashSet<>(user.getAuthorities());
     rolesAndPermissions.addAll(user.getPermissions());
 
-    String scope = rolesAndPermissions.stream()
-      .map(GrantedAuthority::getAuthority)
-      .collect(Collectors
-        .joining(" "));
+    String scope =
+        rolesAndPermissions.stream()
+            .map(GrantedAuthority::getAuthority)
+            .collect(Collectors.joining(" "));
 
-    JwtClaimsSet claims = JwtClaimsSet.builder()
-      .issuer("spring-security-jwt")
-      .issuedAt(now)
-      .expiresAt(now.plusSeconds(expiry))
-      .subject(user.getUsername())
-      .claim("id", user.getUser().getId())
-      .claim("maxLevel", user.getUser().getMaxUserProfileLevel().getLevel())
-      .claim("scope", scope)
-      .build();
+    JwtClaimsSet claims =
+        JwtClaimsSet.builder()
+            .issuer("spring-security-jwt")
+            .issuedAt(now)
+            .expiresAt(now.plusSeconds(expiry))
+            .subject(user.getUsername())
+            .claim("id", user.getUser().getId())
+            .claim("maxLevel", user.getUser().getMaxUserProfileLevel().getLevel())
+            .claim("scope", scope)
+            .build();
 
-    return encoder.encode(
-        JwtEncoderParameters.from(claims))
-      .getTokenValue();
+    return encoder.encode(JwtEncoderParameters.from(claims)).getTokenValue();
   }
-
 }

@@ -8,6 +8,7 @@ import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
 
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.WARN)
-public interface FileStorageMapper extends BaseMapper<FileStorage, CreateFileStorageDTO, ReadAndUpdateFileStorageDTO> {
+public interface FileStorageMapper
+    extends BaseMapper<FileStorage, CreateFileStorageDTO, ReadAndUpdateFileStorageDTO> {
   FileStorageMapper INSTANCE = Mappers.getMapper(FileStorageMapper.class);
 }

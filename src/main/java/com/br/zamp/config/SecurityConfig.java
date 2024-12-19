@@ -11,6 +11,8 @@ import com.nimbusds.jose.jwk.RSAKey;
 import com.nimbusds.jose.jwk.source.ImmutableJWKSet;
 import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
+import java.security.interfaces.RSAPrivateKey;
+import java.security.interfaces.RSAPublicKey;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -39,9 +41,6 @@ import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.access.channel.ChannelProcessingFilter;
 
-import java.security.interfaces.RSAPrivateKey;
-import java.security.interfaces.RSAPublicKey;
-
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
@@ -56,37 +55,40 @@ public class SecurityConfig {
 
   @Value("${jwt.public.key}")
   private RSAPublicKey publicKey;
+
   @Value("${jwt.private.key}")
   private RSAPrivateKey privateKey;
 
   @Bean
   SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-    http
-      .csrf(AbstractHttpConfigurer::disable)
-//        .cors(AbstractHttpConfigurer::disable)
-      .headers(httpSecurityHeadersConfigurer -> httpSecurityHeadersConfigurer
-        .frameOptions(HeadersConfigurer.FrameOptionsConfig::disable)
-      )
-      .authorizeHttpRequests(auth -> auth
-        .requestMatchers("/h2-console/**").permitAll()
-        .requestMatchers("/auth/**").permitAll()
-        .anyRequest().authenticated()
-      )
-      .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-      .addFilterBefore(jwtAuthenticationFilter, ChannelProcessingFilter.class)
-      .oauth2ResourceServer(conf -> conf
-        .jwt(jwt -> jwt.decoder(jwtDecoder()))
-      )
-      .exceptionHandling(ex -> ex.authenticationEntryPoint(customAuthenticationEntryPoint()))
-      .userDetailsService(userDetailsService)
-      .httpBasic(Customizer.withDefaults());
+    http.csrf(AbstractHttpConfigurer::disable)
+        //        .cors(AbstractHttpConfigurer::disable)
+        .headers(
+            httpSecurityHeadersConfigurer ->
+                httpSecurityHeadersConfigurer.frameOptions(
+                    HeadersConfigurer.FrameOptionsConfig::disable))
+        .authorizeHttpRequests(
+            auth ->
+                auth.requestMatchers("/h2-console/**")
+                    .permitAll()
+                    .requestMatchers("/auth/**")
+                    .permitAll()
+                    .anyRequest()
+                    .authenticated())
+        .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+        .addFilterBefore(jwtAuthenticationFilter, ChannelProcessingFilter.class)
+        .oauth2ResourceServer(conf -> conf.jwt(jwt -> jwt.decoder(jwtDecoder())))
+        .exceptionHandling(ex -> ex.authenticationEntryPoint(customAuthenticationEntryPoint()))
+        .userDetailsService(userDetailsService)
+        .httpBasic(Customizer.withDefaults());
     return http.build();
   }
 
   @Bean
   public JwtAuthenticationConverter jwtAuthenticationConverter() {
 
-    JwtGrantedAuthoritiesConverter grantedAuthoritiesConverter = new JwtGrantedAuthoritiesConverter();
+    JwtGrantedAuthoritiesConverter grantedAuthoritiesConverter =
+        new JwtGrantedAuthoritiesConverter();
     grantedAuthoritiesConverter.setAuthorityPrefix("");
 
     JwtAuthenticationConverter authConverter = new JwtAuthenticationConverter();
@@ -114,7 +116,8 @@ public class SecurityConfig {
 
   @Bean
   public Customizer<HttpBasicConfigurer<HttpSecurity>> customBasicHttpAuthConfigurer() {
-    return new CustomBasicHttpAuthConfigurer(customAuthenticationDetailsSource(), customAuthenticationEntryPoint());
+    return new CustomBasicHttpAuthConfigurer(
+        customAuthenticationDetailsSource(), customAuthenticationEntryPoint());
   }
 
   @Bean

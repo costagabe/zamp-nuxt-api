@@ -7,13 +7,12 @@ import com.br.zamp.exceptions.ProfileLevelException;
 import com.br.zamp.repository.UserRepository;
 import com.br.zamp.security.AuthenticatedUser;
 import com.br.zamp.service.UserService;
+import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
-
-import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -24,7 +23,8 @@ public class UserServiceImpl implements UserService {
   @Override
   public User create(User user) {
     if (userRepository.findByEmail(user.getEmail()).isPresent()) {
-      throw new DuplicatedObjectException("Erro ao criar usuário.", "email", "Já existe um usuário com teste e-mail.");
+      throw new DuplicatedObjectException(
+          "Erro ao criar usuário.", "email", "Já existe um usuário com teste e-mail.");
     }
     return userRepository.save(user);
   }
@@ -38,8 +38,9 @@ public class UserServiceImpl implements UserService {
 
   @Override
   public User findById(UUID uuid) {
-    return userRepository.findById(uuid)
-      .orElseThrow(() -> new ObjectNotFoundException("Usuário não encontrado."));
+    return userRepository
+        .findById(uuid)
+        .orElseThrow(() -> new ObjectNotFoundException("Usuário não encontrado."));
   }
 
   @Override
