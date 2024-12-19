@@ -1,9 +1,10 @@
 package com.br.zamp.domain.enums;
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 
 @AllArgsConstructor
-public enum UserType {
+public @Getter enum UserType {
   ADMIN("ROLE_ADMIN"),
   CUSTOMER("ROLE_CUSTOMER");
 
