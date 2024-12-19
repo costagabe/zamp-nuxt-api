@@ -1,5 +1,6 @@
 package com.br.zamp.domain.enums;
 
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
